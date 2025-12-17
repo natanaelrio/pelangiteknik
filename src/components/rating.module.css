@@ -1,0 +1,69 @@
+.container {
+    display: flex;
+    justify-content: center;
+    font-size: var(--font1);
+    letter-spacing: 1px;
+}
+
+.kotakdalam {
+    width: calc(var(--max-width) + 60px);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.kotak {
+    width: calc(var(--max-width)/2);
+    padding: 20px;
+    background-color: #f6f8fa;
+    margin: 10px;
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.kotak:hover {
+    transition: all ease 0.3s;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -4px rgba(0, 0, 0, .1);
+}
+
+.bawah {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.name {
+    font-weight: 700;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.qoute {
+    font-size: 25px;
+    color: var(--colormain);
+    font-weight: 400;
+}
+
+
+
+@media only screen and (max-width: 1140px) {
+
+    .container {
+        font-size: calc(var(--font1) - 3px);
+    }
+
+    .kotakdalam {
+        width: 100%;
+    }
+
+    .kotak {
+        width: 100%;
+        padding: 30px;
+        margin: 10px 30px;
+    }
+}

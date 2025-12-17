@@ -1,0 +1,69 @@
+.fullScreen {
+    position: fixed;
+    inset: 0;
+    background: var(--colormain);
+    z-index: 9998;
+    opacity: 0.9;
+}
+
+
+.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    width: 400px;
+    object-fit: contain;
+    z-index: 9999;
+    animation: pulseZoom 2.5s ease-in-out infinite;
+}
+
+.text {
+    position: fixed;
+    top: calc(50% + 70px);
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--colormain);
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 9999;
+    animation: fadeText 2.5s ease-in-out infinite;
+}
+
+/* 🔁 Efek kedip + zoom halus */
+@keyframes pulseZoom {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+}
+
+/* ✨ Teks juga bisa ikut kedip halus */
+@keyframes fadeText {
+    0%, 100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+@media only screen and (max-width: 700px) {
+
+    .spinner {
+        width: 250px;
+    }
+
+}

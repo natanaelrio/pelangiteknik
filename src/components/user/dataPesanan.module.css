@@ -1,0 +1,217 @@
+.container {
+    display: flex;
+    justify-content: center;
+    color: var(--colorthrid);
+    font-size: var(--font1);
+    font-weight: 500;
+}
+
+.dalamcontainer {
+    width: var(--max-width);
+    background-color: var(--colorsekunder);
+    padding: 30px;
+}
+
+.atassendiri {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.atassendiri .kiri {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--colorthrid);
+    height: 40px;
+    color: var(--colorsekunder);
+    padding: 0 18px;
+    border-radius: 7px;
+}
+
+
+.atassendiri .text {
+    font-size: 21px;
+    font-weight: 1000;
+}
+
+.atassendiri .kiri:hover {
+    font-weight: 700;
+}
+
+.atassendiri .kanan {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.atassendiri .kanan:hover {
+    font-weight: 500;
+    color: var(--colormain);
+}
+
+.judulatas {
+    margin-bottom: 20px;
+    font-weight: 1000;
+}
+
+.listorder {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 10px;
+}
+
+.gambarnote {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    opacity: 0.1;
+}
+
+.isinya {
+    z-index: 12;
+}
+
+.kotak {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--colorbggreyutama);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    position: relative;
+}
+
+.kotak:hover {
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.kotak .atas {
+    display: flex;
+    gap: 20px;
+}
+
+.kotak .atas .gambar {
+    min-width: 100px;
+    height: 100px;
+    background-color: var(--colorsekunder);
+    border-radius: var(--border-radius);
+}
+
+.kotak .atas .text .judul {
+    font-weight: 700;
+}
+
+.kotak .bawah {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.kotak .bawah .kiri {
+    display: flex;
+    align-items: center;
+}
+
+.kotak .kanan .status {
+    margin-bottom: 20px;
+}
+
+.kotak .bawah .status {
+    background-color: var(--colorthrid);
+    color: var(--colorsekunder);
+    padding: 3px 10px;
+    border-radius: var(--border-radius);
+}
+
+.kotak .bawah .kiri .harga {
+    font-weight: 700;
+    color: var(--colorwa);
+}
+
+
+.footernota {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.lacakResi {
+    background-color: var(--colormain);
+    color: var(--colorsekunder);
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.lacakResi:hover {
+    background-color: var(--hovercolormain);
+}
+
+.downloadNota {
+    background-color: var(--colormain);
+    color: var(--colorsekunder);
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.downloadNota:hover {
+    background-color: var(--hovercolormain);
+}
+
+
+
+.notfound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 100px 30px;
+    gap: 10px;
+}
+
+.notfound button {
+    background-color: var(--colormain);
+    color: var(--colorsekunder);
+    height: 50px;
+    padding: 0 18px;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.notfound button:hover {
+    background-color: var(--hovercolormain);
+}
+
+
+@media only screen and (max-width: 480px) {
+
+    .dalamcontainer {
+        width: 100%;
+    }
+
+
+    .container {
+        font-size: var(--font1mobile);
+    }
+
+    .dalamcontainer {
+        padding: 20px;
+    }
+
+    .listorder {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 10px;
+    }
+
+}

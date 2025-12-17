@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.dalamcontainer {
+    width: var(--max-width);
+    padding: 0 20px;
+}
+
+.dalamcontainer button {
+    width: 100%;
+    padding: 20px;
+    font-weight: 700;
+    font-size: var(--font1);
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -4px rgba(0, 0, 0, .1);
+    background-color: var(--colorsekunder);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.dalamcontainer button:hover {
+    transition: all ease 0.3s;
+    font-weight: 1000;
+    background: var(--colormain);
+    color: var(--colorsekunder);
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .dalamcontainer {
+        width: 100vw;
+        padding: 0 20px;
+    }
+}

@@ -1,0 +1,99 @@
+/* MELAYANG */
+.melayang {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    background-color: var(--colorthrid);
+    opacity: 0.7;
+    width: 100%;
+    height: 100dvh;
+    z-index: 999;
+}
+
+.isimelayang {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: var(--colorbggreyutama);
+    width: 100%;
+    height: 500px;
+    z-index: 9991;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.isimelayangdalam {
+    margin: 0 auto;
+    background-color: var(--colorbggreyutama);
+    width: var(--max-width);
+}
+
+.dalamkontainer {
+    width: var(--max-width);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-gap: 5px;
+    gap: 5px;
+    padding: 10px;
+}
+
+.kotak {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--colorsekunder);
+    justify-content: center;
+    align-items: center;
+    color: var(--colorthrid);
+    font-size: var(--font1);
+    padding: 15px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.kotak:hover {
+    transition: all ease 0.2s;
+    box-shadow: 0px 0px 0px 5px var(--colormain);
+    -webkit-box-shadow: 0px 0px 0px 5px var(--colormain);
+    -moz-box-shadow: 0px 0px 0px 5px var(--colormain);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.kotak img {
+    object-fit: contain;
+}
+
+@media only screen and (max-width: 1080px) {
+    .isimelayangdalam {
+        width: 100%;
+    }
+
+    .dalamkontainer {
+        width: 100%;
+    }
+}
+
+
+@media only screen and (max-width: 767px) {
+    .isimelayangdalam {
+        min-height: 80dvh;
+    }
+
+    .kotak {
+        font-size: var(--font1mobile);
+    }
+
+}
+
+
+
+@media only screen and (max-width: 480px) {
+
+    .dalamkontainer {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+
+
+}

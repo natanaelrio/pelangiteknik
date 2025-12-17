@@ -1,0 +1,114 @@
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--colorsekunder);
+    color: var(--colorthrid);
+}
+
+.dalamkontainer {
+    width: 1400px;
+}
+
+.banner {
+    display: flex;
+    gap: 30px;
+}
+
+.gambar {
+    width: 50%;
+    height: 400px;
+    position: absolute;
+    right: 0;
+    /* background-color: red; */
+}
+
+.gambar img {
+    width: 100%;
+    height: 100%;
+    /* position: absolute; */
+    /* object-fit: contain; */
+    /* height: auto; */
+    border-radius: 0 0 0 20px;
+}
+
+.banner .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 550px;
+    height: 400px;
+    padding: 20px;
+}
+
+.banner .judul {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+.banner .desc {
+    font-weight: 500;
+    font-size: var(--font1)
+}
+
+
+
+@media only screen and (max-width: 1000px) {
+
+    .banner {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 20px;
+    }
+
+    .banner .gambar {
+        width: 100%;
+    }
+
+    .gambar {
+        position: inherit;
+        height: auto;
+    }
+
+
+    .gambar img {
+        height: auto;
+    }
+
+    .banner .text {
+        width: 100%;
+        height: auto;
+    }
+
+    .banner .gambar img {
+        width: 100%;
+        object-position: center;
+        object-fit: contain;
+    }
+
+    .banner .judul {
+        font-size: 1.5rem;
+    }
+
+    .banner .text {
+        width: 100%;
+    }
+}
+
+
+@media only screen and (max-width: 480px) {
+
+    .gambar img {
+        border-radius: 0 0 0 0;
+    }
+
+    .banner .judul {
+        font-size: 1rem;
+    }
+
+    .banner .desc {
+        font-size: var(--font1mobile);
+    }
+}

@@ -1,0 +1,297 @@
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: black;
+    font-size: 16px;
+}
+
+.judul {
+    color: var(--colorsekunder);
+    font-size: 40px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.gambar {
+    width: 1800px;
+    height: 700px;
+    position: relative;
+}
+
+.gambar img {
+    background-color: var(--colorbggreyutama);
+    width: 100%;
+    height: 700px;
+    object-fit: cover;
+    object-position: 0% 40%;
+}
+
+.mask {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    height: 700px;
+    width: 1800px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.7) 65%, rgba(0, 0, 0, 0));
+}
+
+.tulisan {
+    z-index: 11;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 700px;
+    width: 1000px;
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    justify-content: flex-end;
+    line-height: 1.5;
+}
+
+.tulisan .isi {
+    width: 600px;
+    margin-top: -100px;
+}
+
+
+.tulisan .desc {
+    color: var(--colorsekunder);
+}
+
+.containerbawah {
+    color: var(--colorsekunder);
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 30px 0;
+}
+
+.containerbawah .gambarbawah {
+    width: 500px;
+    height: 500px;
+    border-radius: 7px;
+}
+
+.containerbawah .gambarbawah img {
+    width: 500px;
+    height: 500px;
+    border-radius: 7px;
+    object-fit: cover;
+}
+
+
+.containerbawah .text {
+    width: 500px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+}
+
+.containerbawah .text {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.containerbawah .text .desc {
+    line-height: 1.5;
+}
+
+.containerbawah .text .desc ol {
+    padding-left: 20px;
+}
+
+.containerbawah .text .desc li {
+    padding: 10px 0;
+}
+
+
+.containerkotak {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-gap: 10px;
+    gap: 20px;
+    padding: 30px 20px;
+    width: 98vw;
+}
+
+.containerkotak .kotakgambar {
+    width: 100%;
+    height: 300px;
+    background-color: var(--colorbggreyutama);
+    border-radius: 7px;
+}
+
+.containerkotak .kotakgambar img {
+    width: 100%;
+    height: 300px;
+    border-radius: 7px;
+    object-fit: cover;
+}
+
+.download {
+    background-color: var(--colorbggreyutama);
+    width: fit-content;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    color: var(--colorthrid);
+    font-weight: 700;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.download:hover {
+    background-color: var(--colorbggrey);
+    color: var(--colorsekunder);
+}
+
+.map {
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 1800px) {
+    .gambar {
+        width: 100%;
+        height: 700px;
+        position: relative;
+    }
+
+    .gambar img {
+        width: 100%;
+        height: 700px;
+        object-fit: cover;
+        object-position: 0% 40%;
+    }
+
+    .mask {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        height: 700px;
+        width: 100%;
+    }
+
+    .containerbawah {
+        color: var(--colorsekunder);
+        width: 100%;
+        padding: 30px;
+    }
+}
+
+
+
+@media only screen and (max-width: 1000px) {
+    .tulisan {
+        width: 100%
+    }
+
+    .tulisan .isi {
+        width: 100%
+    }
+
+
+    .containerbawah .gambarbawah {
+        width: 300px;
+        height: 300px;
+        border-radius: 7px;
+    }
+
+    .containerbawah .gambarbawah img {
+        width: 300px;
+        height: 300px;
+        border-radius: 7px;
+    }
+
+    .containerkotak {
+        width: 100%;
+    }
+
+    .containerkotak {
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        width: 100%;
+    }
+
+}
+
+
+
+@media only screen and (max-width: 767px) {
+
+    .tulisan .isi {
+        margin-top: 0 !important;
+    }
+
+    .gambar {
+        height: auto;
+    }
+
+    .gambarasli {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .gambarasli .gradient {
+        position: absolute;
+        background: linear-gradient(0deg, #181818 0, hsla(0, 0%, 9%, .987) 1.62%, hsla(0, 0%, 9%, .951) 3.1%, hsla(0, 0%, 9%, .896) 4.5%, hsla(0, 0%, 9%, .825) 5.8%, hsla(0, 0%, 9%, .741) 7.06%, hsla(0, 0%, 9%, .648) 8.24%, hsla(0, 0%, 9%, .55) 9.42%, hsla(0, 0%, 9%, .45) 10.58%, hsla(0, 0%, 9%, .352) 11.76%, hsla(0, 0%, 9%, .259) 12.94%, hsla(0, 0%, 9%, .175) 14.2%, hsla(0, 0%, 9%, .104) 15.5%, hsla(0, 0%, 9%, .049) 16.9%, hsla(0, 0%, 9%, .013) 18.38%, hsla(0, 0%, 9%, 0) 20%);
+        content: "";
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    .gambar img {
+        height: auto;
+        object-fit: contain;
+        object-position: center
+    }
+
+    .mask {
+        height: auto;
+        width: 1800px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    }
+
+    .tulisan {
+        position: unset;
+        height: auto;
+        width: 100%;
+    }
+
+    .tulisan .isi {
+        width: 100%;
+    }
+
+    .containerbawah {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .containerbawah .gambarbawah {
+        width: 100%;
+        height: 300px;
+    }
+
+    .containerbawah .gambarbawah img {
+        width: 100%;
+        height: 300px;
+        object-fit: contain;
+    }
+
+    .containerbawah .text {
+        width: 100%;
+    }
+
+}

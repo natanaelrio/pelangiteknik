@@ -1,0 +1,259 @@
+.container {
+    display: flex;
+    justify-content: center;
+    font-size: calc(var(--font1) - 4px);
+    overflow-x: hidden;
+}
+
+.container a:hover {
+    background: var(--hovercolormain);
+    width: fit-content;
+}
+
+.container .atas {
+    width: 100vw;
+    background-color: var(--colorthrid);
+    color: var(--colorsekunder);
+    display: flex;
+    justify-content: center;
+}
+
+.container .atasatas {
+    padding: 50px 30px;
+    background-color: var(--colorthrid);
+    width: var(--max-width);
+}
+
+.container .help {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.container .tombol {
+    width: 100%;
+    display: grid;
+    grid-column: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.container .tombol button {
+    text-transform: uppercase;
+    height: 40px;
+    padding: 0 24px;
+    font-weight: 700;
+    background-color: var(--colormain);
+    color: var(--colorsekunder);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+}
+
+
+.container .tombol button:hover {
+    transition: all ease 0.2s;
+    background: var(--hovercolormain)
+}
+
+.container .tombol .satu {
+    grid-area: 1/1/1/2;
+}
+
+.container .tombol .dua {
+    grid-area: 1/2/1/3;
+}
+
+.container .tombol .tiga {
+    grid-area: 1/3/1/4;
+}
+
+.container .tombol .empat {
+    grid-area: 1/4/1/5;
+}
+
+.container .garis {
+    height: 2px;
+    width: 100%;
+    background-color: var(--colorbggrey);
+    margin-bottom: 30px;
+}
+
+.container .list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 100px;
+}
+
+.container .list .produkkategori {
+    grid-area: 1/1/1/2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container .list .pusatbantuan {
+    grid-area: 1/2/1/3;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+
+
+.container .list .pusatbantuan .sosmed {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.container .list .alamat {
+    grid-area: 1/3/1/4;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container .list .alamat .listalamat {
+    display: flex;
+    align-items: center;
+}
+
+.container .list .ikon {
+    display: flex;
+    align-items: center;
+    padding: 5px 5px 5px 0;
+}
+
+
+.container .bawah {
+    width: 100vw;
+    background-color: var(--colorbggrey);
+    color: var(--colorgrey);
+    display: flex;
+    justify-content: center;
+}
+
+.container .bawahbawah {
+    padding: 20px;
+    background-color: var(--colorbggrey);
+    width: var(--max-width);
+}
+
+.judul {
+    font-size: var(--font1);
+    margin: 10px 0;
+    font-weight: 700;
+}
+
+
+.footerSection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footerSection img {
+    object-fit: contain;
+}
+
+.duavendor {
+    display: flex;
+    gap: 15px;
+}
+
+.duavendor img {
+    object-fit: contain;
+}
+
+@media only screen and (max-width: 767px) {
+
+    .container .tombol .satu {
+        grid-area: 1/1/1/2;
+    }
+
+    .container .tombol .dua {
+        grid-area: 1/2/1/3;
+    }
+
+    .container .tombol .tiga {
+        grid-area: 2/1/3/2;
+    }
+
+    .container .tombol .empat {
+        grid-area: 2/2/3/3;
+    }
+
+    .container .help {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+
+    .container .list {
+        gap: 30px;
+    }
+
+    .container .list .produkkategori {
+        grid-area: 1/1/1/2;
+    }
+
+    .container .list .pusatbantuan {
+        grid-area: 1/2/1/3;
+    }
+
+    .container .list .alamat {
+        grid-area: 2/1/3/4;
+    }
+
+}
+
+@media only screen and (max-width: 480px) {
+
+
+    .container .tombol .satu {
+        grid-area: 1/1/1/3;
+    }
+
+    .container .tombol .dua {
+        grid-area: 2/1/3/3;
+    }
+
+    .container .tombol .tiga {
+        grid-area: 3/1/4/3;
+    }
+
+    .container .tombol .empat {
+        grid-area: 4/1/5/3;
+    }
+
+    .container .help {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+
+    .container .list {
+        gap: 20px;
+    }
+
+    .container .list .produkkategori {
+        grid-area: 1/1/1/4;
+    }
+
+    .container .list .pusatbantuan {
+        grid-area: 2/1/3/4;
+    }
+
+    .container .list .alamat {
+        grid-area: 3/1/4/4;
+    }
+
+}

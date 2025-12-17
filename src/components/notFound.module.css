@@ -1,0 +1,128 @@
+.container {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.dalamcontainer {
+    width: var(--max-width);
+    overflow: hidden;
+}
+
+.bg1 {
+    overflow: hidden;
+    font-size: 1200px;
+    position: absolute;
+    top: -374px;
+    z-index: -1;
+    font-weight: 1000;
+    opacity: 0.1;
+    transform: rotate(15deg);
+}
+
+.bg2 {
+    overflow: hidden;
+    font-size: 1000px;
+    transform: rotate(15deg);
+    position: absolute;
+    right: 0;
+    z-index: -1;
+    font-weight: 1000;
+    opacity: 0.1;
+}
+
+.bg3 {
+    overflow: hidden;
+    font-size: 1000px;
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    font-weight: 1000;
+    transform: rotate(15deg);
+    opacity: 0.1;
+}
+
+.kotak {
+    min-height: 500px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.emot {
+    font-size: 150px;
+}
+
+.text1 {
+    font-weight: 1000;
+    font-size: 50px;
+}
+
+.text2 {
+    text-align: center;
+}
+
+.kotak button {
+    height: 50px !important;
+    padding: 0 18px;
+    background-color: var(--colormain);
+    color: var(--colorsekunder);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.kotak button:hover {
+    background-color: var(--hovercolormain);
+}
+
+
+@media only screen and (max-width: 767px) {
+
+    .text1 {
+        font-size: 30px;
+    }
+
+    .text2 {
+        font-size: 20px;
+    }
+
+    .kotak button {
+        height: 50px !important;
+        padding: 0 18px;
+        background-color: var(--colormain);
+        color: var(--colorsekunder);
+        border-radius: var(--border-radius);
+        cursor: pointer;
+    }
+
+}
+
+@media only screen and (max-width: 480px) {
+
+    .emot {
+        font-size: 70px;
+    }
+
+    .text1 {
+        font-size: 20px;
+    }
+
+    .text2 {
+        font-size: 14px;
+    }
+
+    .kotak button {
+        height: 50px !important;
+        padding: 0 18px;
+        background-color: var(--colormain);
+        color: var(--colorsekunder);
+        border-radius: var(--border-radius);
+        cursor: pointer;
+    }
+
+}

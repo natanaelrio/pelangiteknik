@@ -1,0 +1,148 @@
+/* ======================= */
+/* FORM SEARCH UTAMA       */
+/* ======================= */
+.form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 500px;
+    max-width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 24px;
+    padding: 10px 18px;
+    background-color: #fff;
+}
+
+
+
+.icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    color: #555;
+}
+
+.form input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+    padding-left: 4px;
+    background-color: transparent;
+}
+
+.form input:focus {
+    outline: none;
+}
+
+.form input::placeholder {
+    color: #999;
+    font-size: 14px;
+    opacity: 1;
+    font-weight: 700;
+}
+
+/* Tombol mobile & close */
+.mobile {
+    display: none;
+}
+
+.close {
+    display: none;
+    color: var(--colorsekunder);
+    font-weight: 700;
+}
+
+/* ======================= */
+/* REKOMENDASI DROPDOWN    */
+/* ======================= */
+.recommendations {
+    margin-top: 6px;
+    padding: 8px 0;
+    list-style: none;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    max-width: 500px;
+    width: 100%;
+    position: absolute;
+    z-index: 50;
+}
+
+.recommendations span {
+    color: #555;
+    font-size: 14px;
+    padding: 25px 16px;
+}
+
+.recommendations ul {
+    list-style: none;
+}
+
+.recommendations li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    font-weight: 700;
+    transition: background 0.2s;
+}
+
+.recommendations li:hover {
+    background-color: #f0f0f0;
+}
+
+/* ======================= */
+/* RESPONSIVE MOBILE       */
+/* ======================= */
+
+@media only screen and (max-width: 1100px) {
+    .form {
+        width: 100%;
+        max-width: 100%;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+
+    .recommendations {
+        display: none;
+    }
+
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: flex;
+        font-size: 20px;
+        align-items: center;
+        background-color: white;
+    }
+
+    .icon {
+        display: none;
+    }
+
+    .close {
+        display: block;
+    }
+
+    .form {
+        max-width: 100%;
+        width: 100%;
+    }
+}
