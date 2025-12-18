@@ -67,7 +67,7 @@ export default async function RootLayout({ children }) {
         ></script>
       </head> */}
       <head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon2.ico" />
       </head>
       <GoogleTagManager gtmId="GTM-N8N4T4Z8" />
       {/* <GoogleTagManager gtmId="AW-17593657597" /> */}
