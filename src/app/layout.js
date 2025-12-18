@@ -18,10 +18,11 @@ export const metadata = {
   description: "Pelangi Teknik Indonesia",
   verification: {
     google: "Ox3ZUbaizkQC5onzknoa0XtYTvmj6rRFGhNs__Lq2gE",
-  },
-  icons: {
-    icon: '/favicon.ico',
-  },
+  }
+  // ,
+  // icons: {
+  //   icon: '/favicon.ico',
+  // },
 };
 
 export default async function RootLayout({ children }) {
