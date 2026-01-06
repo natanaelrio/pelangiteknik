@@ -477,7 +477,6 @@ export default function FormData({ data, dataBank, email, idCart, cities, provin
             // nota_url: resPaperID?.data?.pdf_url_short || '',
         })), ...OngkosKirimDataBase]
 
-
         let resPaperID;
 
 
