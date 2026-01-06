@@ -3,8 +3,6 @@ import { getToken } from 'next-auth/jwt'
 import { Unslugify } from "./utils/unSlugify"
 import { Slugify } from "./utils/slugify"
 import { UnslugifyMerek } from "./utils/unSlugifyMerek"
-import { GetCart } from "./controllers/cart"
-import { HandleNotifikasiPerson } from "./service/handleNotifikasiWA"
 
 export async function middleware(request) {
     const url = request.nextUrl
