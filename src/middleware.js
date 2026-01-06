@@ -16,17 +16,14 @@ export async function middleware(request) {
     // await HandleNotifikasiPerson(`6285938552576@c.us`, `🚀 ada kunjungan ${url.href}`)
 
     const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
-    const { pathname } = request.nextUrl;
+    const { pathname } = request.nextUrl
 
-    const dataCart = await GetCart(token?.id || ''); // untuk ngecek apakah token valid atau tidak
-    if (request.nextUrl.pathname.startsWith('/cart'))
-        if (!token || dataCart.length === 0) {
-            return NextResponse.redirect(new URL('/', request.url))
-        }
-    if (request.nextUrl.pathname.startsWith('/order'))
-        if (!token || dataCart.length === 0) {
-            return NextResponse.redirect(new URL('/', request.url))
-        }
+    if (
+        (pathname.startsWith('/cart') || pathname.startsWith('/order')) &&
+        !token
+    ) {
+        return NextResponse.redirect(new URL('/', request.url))
+    }
 
     // if (request.nextUrl.pathname.startsWith('/product/')) {
     //     const slug = pathname.replace("/product/", "");
@@ -306,5 +303,5 @@ export async function middleware(request) {
 
 }
 export const config = {
-    matcher: ['/', '/category/:path*', '/category/:path', '/shop', '/product/:path*', '/search/:path*', '/cart/:path*'],
+    matcher: ['/', '/category/:path*', '/category/:path', '/shop', '/product/:path*', '/search/:path*', '/cart/:path*', '/order/:path*'],
 }
