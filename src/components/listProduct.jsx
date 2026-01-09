@@ -16,6 +16,7 @@ import { useRouter } from 'nextjs-toploader/app';
 import { useRouter as useRouterReal } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 import { usePathname } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 export default function ListProduct({ Listdata, FilterCategory, Lfilter, Fillter, textSearch, angka, loadmore }) {
     const { width } = useWindowDimensions()
@@ -61,6 +62,7 @@ export default function ListProduct({ Listdata, FilterCategory, Lfilter, Fillter
         } catch (err) {
             setIsLoading(false)
             console.log(err);
+            toast.error('Terjadi Kesalahan, Silahkan Coba Lagi')
         }
 
         // process.env.NODE_ENV === 'production' && trackEvent("Lead", {

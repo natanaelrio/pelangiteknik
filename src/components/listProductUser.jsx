@@ -18,6 +18,8 @@ import JudulPencarian from './judulPencarian'
 import { Slugify } from '@/utils/slugify'
 import { UnslugifyMerek } from '@/utils/unSlugifyMerek'
 import { sendGAEventL } from '@/lib/ga'
+import toast from 'react-hot-toast'
+import { GetProductClient } from '@/controllers/userClient'
 
 export default function ListProductUser({ angka, Lfilter, res, t, q }) {
 
@@ -73,7 +75,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
         setIsLoading(true)
         try {
             setIsLoading(true)
-            const dataku = await GetProduct(e.slugProduct)
+            const dataku = await GetProductClient(e.slugProduct)
             const { trackEvent } = await import('@/utils/facebookPixel');
             process.env.NODE_ENV === 'production' && trackEvent("InitiateCheckout", {
                 content_ids: [dataku[0]?.slugProduct],
@@ -88,6 +90,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
         } catch (err) {
             setIsLoading(false)
             console.log(err);
+            toast.error('Terjadi Kesalahan, Silahkan Coba Lagi')
         }
     }
 
