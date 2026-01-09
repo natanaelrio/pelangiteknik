@@ -77,6 +77,24 @@ export const GetNumberSalesForm = async (page) => {
     }
 }
 
+export const GetProductClient = async (id) => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/p/product?id=${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `${process.env.NEXT_PUBLIC_SECREET}`
+            },
+            cache: 'no-store'
+        });
+        const data = await res.json()
+        return data.data
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 // export const GetPriceOngkir = async (e) => {
 //     try {
 //         const res = await fetch(`https://api.rajaongkir.com/starter/cost`, {

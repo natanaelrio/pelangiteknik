@@ -38,6 +38,8 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
 
     const setIsPenawaran = useStore((state) => state.setIsPenawaran)
     const setDataPenawaran = useStore((state) => state.setDataPenawaran)
+    const isLoading = useStore((state) => state.isLoading)
+    const setIsLoading = useStore((state) => state.setIsLoading)
 
 
     const [data, setData] = useState([])
@@ -68,9 +70,25 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
     }
 
     const HandlePenawaran = async (e) => {
-        const dataku = await GetProduct(e.slugProduct)
-        setDataPenawaran(dataku[0])
-        setIsPenawaran()
+        setIsLoading(true)
+        try {
+            setIsLoading(true)
+            const dataku = await GetProduct(e.slugProduct)
+            const { trackEvent } = await import('@/utils/facebookPixel');
+            process.env.NODE_ENV === 'production' && trackEvent("InitiateCheckout", {
+                content_ids: [dataku[0]?.slugProduct],
+                content_type: dataku[0]?.user?.categoryProductUtama?.category + " - " + dataku[0]?.user.category,
+                value: parseFloat(dataku[0]?.productPriceFinal),
+                currency: 'IDR',
+                num_items: 1
+            });
+            setIsLoading(false)
+            setDataPenawaran(dataku[0])
+            setIsPenawaran()
+        } catch (err) {
+            setIsLoading(false)
+            console.log(err);
+        }
     }
 
     const HandleLoadMore = () => {
@@ -197,8 +215,9 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                                     </Link>
                                                 }
                                                 <div className={styles.bawahdetail}>
-                                                    <div className={styles.penawaran} onClick={() => HandlePenawaran(data)} >
-                                                        <MdOutlineSimCardDownload /> &nbsp;Surat Penawaran</div>
+                                                    <button disabled={isLoading} className={styles.penawaran} onClick={() => HandlePenawaran(data)} >
+                                                        <MdOutlineSimCardDownload /> &nbsp;{isLoading ? "Loading..." : "Surat Penawaran"}
+                                                    </button>
                                                     <div className={styles.penawaran}><Link href={`/product/${data?.slugProduct}`}>Detail Product </Link></div>
                                                 </div>
                                             </div>

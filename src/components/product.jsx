@@ -377,7 +377,7 @@ export default function Product({ data, season }) {
                                 <div className={styles.slide1}>
 
                                     {season ? <button disabled={isLoading} onClick={handleBeliSekarang}>
-                                        {isLoading ? <BeatLoader color='white' /> : 'Beli Sekarang'}
+                                        {isLoading ? <BeatLoader color='white' /> : 'Tambah Keranjang'}
                                     </button> : <button disabled={isLoading} onClick={handleBeliSekarangLogin}>
                                         {isLoading ? <BeatLoader color='white' /> : 'Beli Sekarang'}
                                     </button>}
