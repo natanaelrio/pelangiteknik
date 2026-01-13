@@ -301,5 +301,5 @@ export async function middleware(request) {
 
 }
 export const config = {
-    matcher: ['/', '/category/:path*', '/category/:path', '/shop', '/product/:path*', '/search/:path*', '/cart/:path*', '/order/:path*'],
+    matcher: ['/', '/category/:path*', '/category/:path', '/shop', '/product/:path*', '/blog/:path*', '/search/:path*', '/cart/:path*', '/order/:path*'],
 }
