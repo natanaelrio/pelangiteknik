@@ -18,7 +18,9 @@ export default function HeaderFooter({ children, data, ListSearch }) {
   const pathname = usePathname()
   const whatsapp =
     // (pathname !== "/product" && pathname.startsWith("/product/")) ||
-    pathname.startsWith("/cart/") ||  pathname.startsWith("/cart")
+    pathname.startsWith("/cart/") || pathname.startsWith("/cart")
+  console.log('Dev: @natanaelriowijaya');
+
   return (
     <>
       <main className={styles.container} >

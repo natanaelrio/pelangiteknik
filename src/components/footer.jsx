@@ -177,7 +177,7 @@ export default function Footer({ data }) {
         </div>
         <div className={styles.bawah}>
           <div className={styles.bawahbawah}>
-            E-Commerce Pelangi Teknik Indonesia © 2024 EPTI All rights reserved.
+            E-Commerce Pelangi Teknik Indonesia © 2026 EPTI All rights reserved.
           </div>
         </div>
       </footer >

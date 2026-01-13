@@ -1,12 +1,11 @@
+'use client';
 import styles from '@/components/productHeaderMelayang.module.css'
 import Image from 'next/image';
 import { useRouter } from 'nextjs-toploader/app';
 import { useStore } from "@/zustand/zustand";
-import { useLockBodyScroll } from "@uidotdev/usehooks";
 import { useEffect, useRef } from 'react';
 
 export default function ProductHeaderMelayang({ data }) {
-    useLockBodyScroll();
     const router = useRouter()
     const navRef = useRef(null);
 

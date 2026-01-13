@@ -16,7 +16,6 @@ import { Slugify } from "@/utils/slugify"
 import TanggalGA from "@/utils/TanggalGA"
 import HandleKonversiWA from "@/utils/HandleKonversiWA"
 import toast from "react-hot-toast"
-// import LoginPage from "./loginPage"
 
 export default function Header({ data, tombolwa, ListSearch }) {
   const setIsLogin = useStore((state) => state.setIsLogin)
@@ -33,7 +32,6 @@ export default function Header({ data, tombolwa, ListSearch }) {
   const Tanggal = TanggalGA()
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
   const setIsLoadingWA = useStore((state) => state.setIsLoadingWA)
   const isLoadingWA = useStore((state) => state.isLoadingWA)
 
@@ -42,7 +40,8 @@ export default function Header({ data, tombolwa, ListSearch }) {
   }, [])
 
   const HandlePilihProduct = () => {
-    setProductMelayangHeader(true)
+    // setProductMelayangHeader(true)
+    setIsMobileMenuOpenPencarian(false)
   }
 
   const handleWhatsapp = async () => {
@@ -273,8 +272,10 @@ export default function Header({ data, tombolwa, ListSearch }) {
               <div className={styles.about}>List Product</div>
             </Link>
 
-            <div className={styles.text1} onClick={HandlePilihProduct}>
-              Kategori
+            <div className={styles.text1}>
+              <Link href={'/category'}>
+                Kategori
+              </Link>
             </div>
             {/* 
             <Link href="/blog" className={styles.text1}><div className={styles.about}>Blog</div></Link>
@@ -330,7 +331,7 @@ export default function Header({ data, tombolwa, ListSearch }) {
         {isMobileMenuOpen && (
           <div className={styles.mobileMenu} ref={navRefMobile}>
             <Link onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} href="/product" className={styles.mobileItem}>LIST PRODUK</Link>
-            <div className={styles.mobileItem} onClick={HandlePilihProduct}>KATEGORI</div>
+            <Link onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} href="/category"><div className={styles.mobileItem} >KATEGORI</div></Link>
             <Link onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} href="/blog" className={styles.mobileItem}>BLOG</Link>
             <Link onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} href="/about" className={styles.mobileItem}>TENTANG KAMI</Link>
             {!session ? null : (
