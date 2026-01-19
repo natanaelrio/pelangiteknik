@@ -18,7 +18,7 @@ import { useSearchParams } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 import toast from 'react-hot-toast'
 
-export default function ListProduct({ Listdata, FilterCategory, Lfilter, Fillter, textSearch, angka, loadmore }) {
+export default function ListProduct({ bestProduk, Listdata, FilterCategory, Lfilter, Fillter, textSearch, angka, loadmore }) {
     const { width } = useWindowDimensions()
     const router = useRouter()
     const routerReal = useRouterReal()
@@ -164,7 +164,7 @@ export default function ListProduct({ Listdata, FilterCategory, Lfilter, Fillter
                                                         // priority
                                                         >
                                                         </Image>
-                                                        {
+                                                        {!bestProduk &&
                                                             <>
                                                                 <div className={styles.typemerek}>
                                                                     <span className={`${styles.fMerek} ${merekClass[namaMerek?.toLowerCase()] || ''

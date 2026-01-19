@@ -2,14 +2,13 @@ export function Unslugify(input) {
     if (!input && input !== 0) return '';
 
     return String(input)
-        // Hilangkan karakter aneh selain huruf, angka, dan tanda hubung
-        .replace(/[^a-z0-9-]/gi, ' ')
-        // Ganti tanda hubung atau underscore jadi spasi
-        .replace(/[-_]+/g, ' ')
-        // Hilangkan spasi berlebih
+        // Izinkan huruf, angka, spasi, dan tanda hubung
+        .replace(/[^a-z0-9-\s]/gi, ' ')
+        // Rapikan spasi berlebih (tanpa menghilangkan "-")
+        .replace(/\s+/g, ' ')
         .trim()
-        // Kapital di setiap kata
+        // Kapital di setiap kata (tetap aman untuk kata ber-strip)
         .replace(/\b\w/g, (char) => char.toUpperCase())
-        // Ubah semua variasi 'kva' (huruf besar/kecil campur) menjadi 'KVA'
-        .replace(/\bkva\b/gi, 'KVA');
+        // Standarkan KVA
+        .replace(/\bKva\b|\bkva\b|\bKvA\b|\bKV A\b/gi, 'KVA');
 }

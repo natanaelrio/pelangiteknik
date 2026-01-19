@@ -53,7 +53,7 @@ export default async function Home() {
       <Hpo />
 
       <Judul judul="Best Product" />
-      <ListProduct Listdata={dataListProductBest} Lfilter={false} angka={true} />
+      <ListProduct bestProduk={true} Listdata={dataListProductBest} Lfilter={false} angka={true} />
 
       <Judul judul="List Product" />
       <ListProduct
