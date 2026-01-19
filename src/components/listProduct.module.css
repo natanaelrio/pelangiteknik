@@ -27,8 +27,8 @@
     font-size: 12px;
     font-weight: 600;
     color: #ffffff;
-    background-color: var(--colorsekunder);
-    color: var(--colorthrid);
+    background-color: var(--colorthrid);
+    color: var(--colorsekunder);
 }
 
 .fMerek {
@@ -37,8 +37,8 @@
     font-size: 12px;
     font-weight: 600;
     color: #ffffff;
-    background-color: var(--colorsekunder);
-    color: var(--colorthrid);
+    background-color: var(--colorthrid);
+    color: var(--colorsekunder);
 }
 
 /* Brand */
