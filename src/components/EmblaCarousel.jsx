@@ -11,7 +11,7 @@ import {
 } from '@/components/EmblaCarouselArrowButtons'
 import { TikTokEmbed, YouTubeEmbed } from 'react-social-media-embed'
 
-const EmblaCarousel = ({ productName, e, yt }) => {
+const EmblaCarousel = ({ productName, e, yt, type }) => {
     const videoYT = [
         {
             "youtube_id": yt, // YouTube video ID
@@ -127,12 +127,12 @@ const EmblaCarousel = ({ productName, e, yt }) => {
                 <div className={styles.emblaViewport} ref={emblaMainRef}>
                     <div className={styles.emblaContainer}>
                         {data?.map((item, i) => {
-
                             const isLastSlide = i === data.length - 1
                             return (
                                 <div className={styles.emblaSlide} key={i}>
                                     <div className={styles.emblaSlideNumber}>
                                         <div className={styles.gambaratas}>
+                                            {type && <span className={styles.type}>{type.toUpperCase()}</span>}
                                             {item.youtube_id ? (
                                                 <YouTubeEmbed url={item.youtube_id} width={'100%'} height={400} />
                                             ) : item.secure_url ? (

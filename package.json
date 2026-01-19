@@ -11,7 +11,7 @@
   },
   "author": "natanaelriowijaya",
   "dependencies": {
-    "@next/third-parties": "^15.0.1",
+    "@next/third-parties": "^16.1.2",
     "@prisma/client": "^5.21.1",
     "@uidotdev/usehooks": "^2.4.1",
     "cloudinary": "^2.4.0",

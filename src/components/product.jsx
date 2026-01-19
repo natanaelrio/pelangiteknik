@@ -292,7 +292,7 @@ export default function Product({ data, season }) {
                                         </div>
                                     </div>
                                 </div>
-                                <EmblaCarousel productName={data?.productName} e={GabungDataGambar} yt={data.urlYoutube} />
+                                <EmblaCarousel type={data?.productType} productName={data?.productName} e={GabungDataGambar} yt={data.urlYoutube} />
 
                                 {/* <ShortsYoutube id={'Rm3x_2CeeBw'} /> */}
                             </div>
@@ -344,7 +344,6 @@ export default function Product({ data, season }) {
                                     <FaShareAlt size={20} />
                                 </div>
                             </div>
-
                             <h1 className={styles.judul}>
                                 {data?.productName}
                             </h1>
