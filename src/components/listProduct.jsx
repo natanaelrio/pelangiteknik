@@ -169,7 +169,7 @@ export default function ListProduct({ Listdata, FilterCategory, Lfilter, Fillter
                                                                 <div className={styles.typemerek}>
                                                                     <span className={`${styles.fMerek} ${merekClass[namaMerek?.toLowerCase()] || ''
                                                                         }`}
-                                                                    >{namaMerek}</span>
+                                                                    >{typeMerek.toUpperCase()}</span>
                                                                     {/* <span className={styles.type}>{typeMerek}</span> */}
                                                                 </div>
                                                             </>

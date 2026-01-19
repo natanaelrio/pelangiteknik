@@ -194,7 +194,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                         console.log(data);
 
                                         const namaMerek = data?.fMerek?.[0]?.name.toUpperCase();
-                                        const typeMerek = data?.productType
+                                        const typeMerek = data?.productType.toUpperCase()
                                         return (
                                             <div key={i} className={styles.kotak}>
                                                 <div>
@@ -217,7 +217,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                                                     <div className={styles.typemerek}>
                                                                         <span className={`${styles.fMerek} ${merekClass[namaMerek?.toLowerCase()] || ''
                                                                             }`}
-                                                                        >{namaMerek}</span>
+                                                                        >{typeMerek}</span>
                                                                         {/* <span className={styles.type}>{typeMerek}</span> */}
                                                                     </div>
                                                                 </>
