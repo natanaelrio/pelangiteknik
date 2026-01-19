@@ -11,7 +11,7 @@ import {
 } from '@/components/EmblaCarouselArrowButtons'
 import { TikTokEmbed, YouTubeEmbed } from 'react-social-media-embed'
 
-const EmblaCarousel = ({ productName, e, yt, type }) => {
+const EmblaCarousel = ({ productName, e, yt, type, fMerek }) => {
     const videoYT = [
         {
             "youtube_id": yt, // YouTube video ID
@@ -68,6 +68,16 @@ const EmblaCarousel = ({ productName, e, yt, type }) => {
     const handleMouseLeave = () => {
         setZoomStyle({ transform: "scale(1)" })
     }
+
+    const merekClass = {
+        'montoya': styles.montoya,
+        'faw vw': styles.fawvw,
+        'champion': styles.champion,
+        'tsuzumi japan': styles.tsuzumi,
+        'isuzu': styles.isuzu,
+        'hidemitsu': styles.hidemitsu,
+        'isuzu tsuzumi': styles.isuzutsuzumi,
+    };
 
     return (
         <div className={styles.atasswipper}>
@@ -132,7 +142,16 @@ const EmblaCarousel = ({ productName, e, yt, type }) => {
                                 <div className={styles.emblaSlide} key={i}>
                                     <div className={styles.emblaSlideNumber}>
                                         <div className={styles.gambaratas}>
-                                            {type && <span className={styles.type}>{type.toUpperCase()}</span>}
+                                            {type && fMerek &&
+                                                <>
+                                                    <div className={styles.typemerek}>
+                                                        <span className={`${styles.fMerek} ${merekClass[fMerek[0]?.name?.toLowerCase()] || ''
+                                                            }`}
+                                                        >{fMerek[0]?.name.toUpperCase()}</span>
+                                                        <span className={styles.type}>{type.toUpperCase()}</span>
+                                                    </div>
+                                                </>
+                                            }
                                             {item.youtube_id ? (
                                                 <YouTubeEmbed url={item.youtube_id} width={'100%'} height={400} />
                                             ) : item.secure_url ? (

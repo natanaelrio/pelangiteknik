@@ -131,6 +131,16 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
         router.push(`${pathname}?${params.toString()}`, { scroll: false });
     };
 
+    const merekClass = {
+        'montoya': styles.montoya,
+        'faw vw': styles.fawvw,
+        'champion': styles.champion,
+        'tsuzumi japan': styles.tsuzumi,
+        'isuzu': styles.isuzu,
+        'hidemitsu': styles.hidemitsu,
+        'isuzu tsuzumi': styles.isuzutsuzumi,
+    };
+
     return (
         <>
             <div className={styles.container}>
@@ -181,6 +191,10 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                             <div className={styles.grid}>
                                 {data?.length ?
                                     data?.map((data, i) => {
+                                        console.log(data);
+
+                                        const namaMerek = data?.fMerek?.[0]?.name.toUpperCase();
+                                        const typeMerek = data?.productType
                                         return (
                                             <div key={i} className={styles.kotak}>
                                                 <div>
@@ -198,7 +212,16 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                                             // priority
                                                             >
                                                             </Image>
-
+                                                            {
+                                                                <>
+                                                                    <div className={styles.typemerek}>
+                                                                        <span className={`${styles.fMerek} ${merekClass[namaMerek?.toLowerCase()] || ''
+                                                                            }`}
+                                                                        >{namaMerek}</span>
+                                                                        {/* <span className={styles.type}>{typeMerek}</span> */}
+                                                                    </div>
+                                                                </>
+                                                            }
                                                         </div>
                                                         <div className={styles.name}>
                                                             {data?.productName}

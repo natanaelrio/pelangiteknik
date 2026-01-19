@@ -261,7 +261,7 @@ export default function Product({ data, season }) {
     };
 
 
-
+    console.log(data);
 
     return (
         <>
@@ -292,7 +292,7 @@ export default function Product({ data, season }) {
                                         </div>
                                     </div>
                                 </div>
-                                <EmblaCarousel type={data?.productType} productName={data?.productName} e={GabungDataGambar} yt={data.urlYoutube} />
+                                <EmblaCarousel fMerek={data.fMerek} type={data?.productType} productName={data?.productName} e={GabungDataGambar} yt={data.urlYoutube} />
 
                                 {/* <ShortsYoutube id={'Rm3x_2CeeBw'} /> */}
                             </div>

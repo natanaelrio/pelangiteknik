@@ -12,17 +12,69 @@
     position: relative;
 }
 
-.gambaratas .type {
+.gambaratas .typemerek {
     position: absolute;
     top: 5px;
     left: 10px;
-    font-size: 14px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.type {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
     font-weight: 600;
-    color: var(--colorthrid);
-    z-index: 10000;
+    color: #ffffff;
     background-color: var(--colorsekunder);
-    padding: 5px 10px;
-    border-radius: var(--border-radius);
+    color: var(--colorthrid);
+}
+
+.fMerek {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: var(--colorsekunder);
+    color: var(--colorthrid);
+}
+
+/* Brand */
+.montoya {
+    background: #F26B1D;
+    color: #ffffff;
+}
+
+.fawvw {
+    background: #3452a5;
+    color: #ffffff;
+}
+
+.champion {
+    background: #f1c232;
+    color: #000000;
+}
+
+.tsuzumi {
+    background: #C4161C;
+    color: #ffffff;
+}
+
+.isuzu {
+    background: #ec5138;
+    color: #ffffff;
+}
+
+.hidemitsu {
+    background: #0000ff;
+    color: #ffffff;
+}
+
+.isuzutsuzumi {
+    background: #fe6144;
+    color: #ffffff;
 }
 
 .gambaratas img {
