@@ -222,6 +222,7 @@ export default function Header({ data, tombolwa, ListSearch }) {
       </div> */}
       {/* Tombol WhatsApp */}
       {Boolean(tombolwa) && (
+
         <button
           disabled={isLoadingWA}
           className={styles.tombolwa}
@@ -229,12 +230,15 @@ export default function Header({ data, tombolwa, ListSearch }) {
           onClick={handleWhatsapp}>
           <div className={styles.tombolwadalam}>
             <Image src={`${process.env.NEXT_PUBLIC_URL}/whatsapp.webp`} height={25} width={25} alt="logo" />
-            <span>{isLoadingWA ? 'Loading...' : 'WhatsApp'}</span>
+            <div className={styles.wakuy}>
+              <span className={styles.wadiskon}>Diskon 3%</span>
+              <span>{isLoadingWA ? 'Loading...' : 'WhatsApp'}</span>
+            </div>
           </div>
         </button>
       )}
 
-      {visible &&
+      {/* {visible &&
         <div className={styles.banner}>
           <div className={styles.bannerContent}>
             <span className={styles.text}>
@@ -247,7 +251,7 @@ export default function Header({ data, tombolwa, ListSearch }) {
               ✕
             </button>
           </div>
-        </div>}
+        </div>} */}
       <div className={styles.atas}>
         <div className={styles.container}>
           {/* MOBILE MENU ICON */}

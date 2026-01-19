@@ -11,6 +11,9 @@ export default function ProductBeliMobile({ data, HandlePenawaran, handleBeliSek
 
     return (
         <div className={styles.container}>
+            <div className={styles.diskon}>
+                Diskon 3%, Chat WA
+            </div>
             <div className={styles.atas}>
                 <div className={styles.harga}>
                     {price} / barang
