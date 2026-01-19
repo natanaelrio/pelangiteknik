@@ -191,8 +191,6 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                             <div className={styles.grid}>
                                 {data?.length ?
                                     data?.map((data, i) => {
-                                        console.log(data);
-
                                         const namaMerek = data?.fMerek?.[0]?.name.toUpperCase();
                                         const typeMerek = data?.productType.toUpperCase()
                                         return (
