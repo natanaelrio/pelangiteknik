@@ -85,13 +85,13 @@ ${productDetail && `- Link: ${url}` || Header && `- Link: ${process.env.NEXT_PUB
 
 
     const encodedMessage = productDetail && encodeURIComponent(
-        `Halo ${NumberSales?.name}, saya butuh bantuan lebih lanjut mengenai product: ${productDetail.productName}
+        `Halo ${NumberSales?.name}, saya butuh bantuan lebih lanjut mengenai product dan diskon 3%nya: ${productDetail.productName}
 
         Link: ${url}`
     ) || fromDataVoucher && encodeURIComponent(
         `Halo ${NumberSales?.name}, saya butuh bantuan mengenai voucher/diskon dari website pelangiteknik.com`
     ) || Header && encodeURIComponent(
-        `Halo ${NumberSales?.name}, saya butuh bantuan lebih lanjut mengenai produk: ${Header.q ? Unslugify(Header.q) : 'Pelangi Teknik'}
+        `Halo ${NumberSales?.name}, saya butuh bantuan lebih lanjut mengenai produk dan diskon 3%nya: ${Header.q ? Unslugify(Header.q) : 'Pelangi Teknik'}
 
         Link: ${process.env.NEXT_PUBLIC_URL}${Header?.pathName}${Header.q ? `?q=${Header.q}` : ''}`
     );
