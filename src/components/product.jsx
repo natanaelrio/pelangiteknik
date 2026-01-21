@@ -23,6 +23,7 @@ import { Slugify } from '@/utils/slugify';
 import { sendGAEventL } from '@/lib/ga';
 import HandleKonversiWA from '@/utils/HandleKonversiWA';
 import Image from 'next/image';
+import ProductTags from './productTags';
 
 export default function Product({ data, season }) {
     // console.log(season);
@@ -260,9 +261,6 @@ export default function Product({ data, season }) {
         }
     };
 
-
-    console.log(data);
-
     return (
         <>
             <div className={styles.container}>
@@ -452,7 +450,7 @@ export default function Product({ data, season }) {
                     </div>
 
                     <div className={styles.bawah}>
-                        <div className={styles.bawahjudul}>
+                        {/* <div className={styles.bawahjudul}>
                             <div
                                 className={styles.detailjudul}
                                 style={pilihan == 'detail' ? { background: 'var(--colorthrid)', color: 'var(--colorsekunder)', fontWeight: '700' } : {}}
@@ -470,10 +468,11 @@ export default function Product({ data, season }) {
                                 Specs
                                 {pilihan == 'specs' && <div className={styles.ikon}><FaCaretUp size={30} color='var(--colorbggreyutama)' /></div>}
                             </div>
-                        </div>
+                        </div> */}
                         <div className={styles.bawahpilihan}>
-                            {pilihan == 'detail' && <ProductDetail data={data?.descProduct} dataTag={data?.tagProduct} />}
-                            {pilihan == 'specs' && <ProductSpecs data={data?.spekNew} />}
+                            <ProductDetail data={data?.descProduct} />
+                            <ProductSpecs data={data?.spekNew} />
+                            <ProductTags dataTag={data?.tagProduct} />
                         </div>
                     </div>
                     {!isIntersecting &&

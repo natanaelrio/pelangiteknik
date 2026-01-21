@@ -290,6 +290,7 @@
 .kategory .tulisan {
     /* background-color: var(--colorbggreyutama); */
     font-weight: 500;
+    text-transform: capitalize;
     /* padding: 0 5px; */
     /* border-radius: var(--border-radius); */
 }
