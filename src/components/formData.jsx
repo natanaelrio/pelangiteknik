@@ -271,7 +271,7 @@ export default function FormData({ data, dataBank, email, idCart, cities, provin
         //     .max(200, 'Must be 20 characters or less')
         //     .required('*'),
         number: Yup.number()
-            .max(9999999999999, 'Must be 20 characters or less')
+            .max(99999999999999, 'Must be 20 characters or less')
             .required('*Belum diisi'),
         postalCode: Yup.number()
             .max(99999999, 'Must be 20 characters or less')
