@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { CiFilter } from "react-icons/ci";
 import Link from 'next/link';
 import LoadingList from '@/components/skleton/loadingList'
-import { GetProduct } from '@/controllers/userNew'
+import { GetProduct, GetSearchServerElasticSearch } from '@/controllers/userNew'
 import { IoIosArrowDropright } from "react-icons/io";
 import { MdOutlineSimCardDownload } from "react-icons/md";
 import { useStore } from "@/zustand/zustand";
@@ -142,6 +142,15 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
         'isuzu tsuzumi': styles.isuzutsuzumi,
     };
 
+    const [test, setTest] = useState(false)
+    const a = async () => {
+        setTest(true)
+        const b = await GetSearchServerElasticSearch(t, 7, m, q)
+        setTest(false)
+
+        console.log('cekdataDalammm', b);
+    }
+
     return (
         <>
             <div className={styles.container}>
@@ -154,6 +163,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                             <div className={styles.filter}>
                                 <span style={{ visibility: 'hidden' }}>d</span>
                                 <div className={styles.dalamfilter}>
+                                    <button onClick={a}>{test ? 'Loading...' : 'TsuzumiJapan'}</button>
                                     <div className={styles.judul} onClick={handleKategori}>
                                         <div className={styles.text}>Merek</div>
                                         <div className={styles.icon}><CiFilter /></div>
