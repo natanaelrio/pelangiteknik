@@ -20,6 +20,7 @@ import { UnslugifyMerek } from '@/utils/unSlugifyMerek'
 import { sendGAEventL } from '@/lib/ga'
 import toast from 'react-hot-toast'
 import { GetProductClient } from '@/controllers/userClient'
+import { Unslugify } from '@/utils/unSlugify'
 
 export default function ListProductUser({ angka, Lfilter, res, t, q }) {
 
@@ -159,7 +160,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
             <div className={styles.container}>
                 <div className={styles.dalamkontainer} style={Lfilter ? { margin: '30px 0', padding: '0 30px' } : { margin: 0 }}>
                     {pathname == '/product' || pathname == '/shop' && <JudulPencarian judul={decodeURIComponent(m)} />}
-                    {q && <JudulPencarian judul={decodeURIComponent(q)} />}
+                    {q && <JudulPencarian judul={Unslugify(q)} />}
                     {/* {tag && <JudulPencarian judul={decodeURIComponent(tag)} />} */}
                     <div className={styles.bawah} >
                         {Lfilter &&
