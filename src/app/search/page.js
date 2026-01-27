@@ -61,8 +61,6 @@ export default async function Page({ params, searchParams }) {
 
     const res = await GetSearchServerElasticSearch(t, 7, m, q);
 
-    console.log(res);
-
     res?.data?.data?.length && await redis
         .multi()
         .zadd("search:index", Date.now(), q)
