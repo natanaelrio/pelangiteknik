@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { CiFilter } from "react-icons/ci";
 import Link from 'next/link';
 import LoadingList from '@/components/skleton/loadingList'
-import { GetProduct, GetSearchServerElasticSearch } from '@/controllers/userNew'
+import { GetProduct } from '@/controllers/userNew'
 import { IoIosArrowDropright } from "react-icons/io";
 import { MdOutlineSimCardDownload } from "react-icons/md";
 import { useStore } from "@/zustand/zustand";
@@ -21,7 +21,9 @@ import { sendGAEventL } from '@/lib/ga'
 import toast from 'react-hot-toast'
 import { GetProductClient } from '@/controllers/userClient'
 
-export default function ListProductUser({ angka, Lfilter, t, q }) {
+export default function ListProductUser({ angka, Lfilter, res, t, q }) {
+
+    console.log('cekdata', res);
 
     const { width } = useWindowDimensions()
     const searchParams = useSearchParams()
@@ -47,24 +49,14 @@ export default function ListProductUser({ angka, Lfilter, t, q }) {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [filterMerek, setFilterMerek] = useState([])
-    const [res, setRes] = useState(null)
+
     useEffect(() => {
         setLoading(false)
-        try {
-            const fetchDataShop = async () => {
-                const res = await GetSearchServerElasticSearch(t, 7, m, q);
-                setRes(res)
-                baseCategory == '/category/' && setData(res?.data?.listProducts || [])
-                pathname == '/search' && setData(res?.data?.data || [])
-                pathname == '/product' && setData(res?.data?.data || [])
-                setFilterMerek(res?.dataPreviewMerek || [])
-            }
-            fetchDataShop()
-        }
-        catch (e) {
-            console.log(e)
-        }
-    }, [t, m, q])
+        baseCategory == '/category/' && setData(res?.data?.listProducts || [])
+        pathname == '/search' && setData(res?.data?.data || [])
+        pathname == '/product' && setData(res?.data?.data || [])
+        setFilterMerek(res?.dataPreviewMerek || [])
+    }, [res])
 
     useEffect(() => {
         process.env.NODE_ENV === 'production' && sendGAEventL("search_view", {
