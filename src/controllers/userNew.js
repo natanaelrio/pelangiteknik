@@ -76,7 +76,7 @@ export const GetSearchServer = async (page, take, m, search) => {
 }
 export const GetSearchServerElasticSearch = async (page, take, m, search) => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/elasticSearch/elasticSearchUser?page=${page ? page : 1}&limit=${take}&m=${m ? m : 'undefined'}&query=${search ? search : ''}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/elasticSearch/elasticSearchUser?page=${page ? page : 1}&limit=${take}&m=${m ? m : 'undefined'}&query=${search ? search : ''}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
