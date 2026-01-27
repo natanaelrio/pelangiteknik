@@ -27,9 +27,7 @@ export const GetSearchServerElasticSearch = async (page, take, m, search) => {
                 'Content-Type': 'application/json',
                 'Authorization': `${process.env.NEXT_PUBLIC_SECREET}`
             },
-            next: {
-                revalidate: 0
-            }
+            cache: 'no-store'
         });
         const data = await res.json()
         return data
