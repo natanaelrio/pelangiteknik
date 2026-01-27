@@ -21,9 +21,7 @@ import { sendGAEventL } from '@/lib/ga'
 import toast from 'react-hot-toast'
 import { GetProductClient } from '@/controllers/userClient'
 
-export default function ListProductUser({ angka, Lfilter, res, t, q }) {
-
-    console.log('cekdata', res);
+export default function ListProductUser({ angka, Lfilter, t, q }) {
 
     const { width } = useWindowDimensions()
     const searchParams = useSearchParams()
@@ -50,13 +48,26 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
     const [loading, setLoading] = useState(false)
     const [filterMerek, setFilterMerek] = useState([])
 
+    const [res, setRes] = useState(null)
     useEffect(() => {
-        setLoading(false)
-        baseCategory == '/category/' && setData(res?.data?.listProducts || [])
-        pathname == '/search' && setData(res?.data?.data || [])
-        pathname == '/product' && setData(res?.data?.data || [])
-        setFilterMerek(res?.dataPreviewMerek || [])
-    }, [res])
+        try {
+            const fetchDataShop = async () => {
+                setLoading(false)
+                const dataCari = await GetSearchServerElasticSearch(t, 7, m, q)
+                console.log(dataCari)
+                setRes(dataCari)
+                baseCategory == '/category/' && setData(dataCari?.data?.listProducts || [])
+                pathname == '/search' && setData(dataCari?.data?.data || [])
+                pathname == '/product' && setData(dataCari?.data?.data || [])
+                setFilterMerek(dataCari?.dataPreviewMerek || [])
+            }
+            fetchDataShop()
+        }
+        catch (e) {
+            console.log(e)
+        }
+
+    }, [t, m, q, res])
 
     useEffect(() => {
         process.env.NODE_ENV === 'production' && sendGAEventL("search_view", {
@@ -142,15 +153,6 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
         'isuzu tsuzumi': styles.isuzutsuzumi,
     };
 
-    const [test, setTest] = useState(false)
-    const a = async () => {
-        setTest(true)
-        const b = await GetSearchServerElasticSearch(t, 7, m, q)
-        setTest(false)
-
-        console.log('cekdataDalammm', b);
-    }
-
     return (
         <>
             <div className={styles.container}>
@@ -163,7 +165,6 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                             <div className={styles.filter}>
                                 <span style={{ visibility: 'hidden' }}>d</span>
                                 <div className={styles.dalamfilter}>
-                                    <button onClick={a}>{test ? 'Loading...' : 'TsuzumiJapan'}</button>
                                     <div className={styles.judul} onClick={handleKategori}>
                                         <div className={styles.text}>Merek</div>
                                         <div className={styles.icon}><CiFilter /></div>
