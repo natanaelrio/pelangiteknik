@@ -14,14 +14,23 @@ export default async function Page({ params, searchParams }) {
     const q = '';
     const t = Number(searchParams.t) || 1;
     const m = UnslugifyMerek(searchParams.m);
-
     const normalize = s => s?.replace(/^\s+/, '') || "";
     const normalizedQuery = normalize(q);
-    const res = await GetSearchServerElasticSearch(t, 7, m, q);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/elasticSearch/elasticSearchUser?page=${t}&limit=${7}&m=${m ? m : 'undefined'}&query=${q ? q : ''}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${process.env.NEXT_PUBLIC_SECREET}`
+        },
+        next: {
+            revalidate: 0
+        }
+    });
+    const data = await res.json()
 
     return (
         <ListProductUser
-            res={res}
+            res={data}
             q={q}
             m={m}
             t={t}
