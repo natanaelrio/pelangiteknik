@@ -63,7 +63,7 @@ export default async function Page({ params, searchParams }) {
 
     res?.data?.data?.length && await redis
         .multi()
-        .zadd("search:index", Date.now(), q)
+        .zadd("search:index", Date.now(), Unslugify(q))
         .expire("search:index", RedisSatuHari())
         .exec();
 
