@@ -138,96 +138,95 @@ export async function middleware(request) {
             return;
         }
     }
-    if (pathname.startsWith('/search')) {
-        const searchParams = request.nextUrl.searchParams;
+    // if (pathname.startsWith('/search')) {
+    //     const searchParams = request.nextUrl.searchParams;
 
-        // langsung trim setiap param agar aman
-        const srsltid = searchParams.get("srsltid")?.trim() || "";
-        const q = Unslugify(searchParams.get("q"))?.trim() || "";
-        const search = searchParams.get("search")?.trim() || "";
-        const tag = searchParams.get("tag")?.trim() || "";
-        const m = UnslugifyMerek(searchParams.get("m"))?.trim() || "";
-        const t = searchParams.get("t")?.trim() || "";
-        const take = searchParams.get("take")?.trim() || "";
+    //     // langsung trim setiap param agar aman
+    //     const srsltid = searchParams.get("srsltid")?.trim() || "";
+    //     const q = Unslugify(searchParams.get("q"))?.trim() || "";
+    //     const search = searchParams.get("search")?.trim() || "";
+    //     const tag = searchParams.get("tag")?.trim() || "";
+    //     const m = UnslugifyMerek(searchParams.get("m"))?.trim() || "";
+    //     const t = searchParams.get("t")?.trim() || "";
+    //     const take = searchParams.get("take")?.trim() || "";
 
-        // hanya boleh param ini
-        const allowedParams = ["search", "q", "tag", "m", "t", "take", 'srsltid'];
-        const keys = [...searchParams.keys()];
-        const adaQueryTidakValid = keys.some(k => !allowedParams.includes(k));
+    //     // hanya boleh param ini
+    //     const allowedParams = ["search", "q", "tag", "m", "t", "take", 'srsltid'];
+    //     const keys = [...searchParams.keys()];
+    //     const adaQueryTidakValid = keys.some(k => !allowedParams.includes(k));
 
-        if (adaQueryTidakValid) {
-            return NextResponse.redirect(new URL('/contact', request.url));
-        }
+    //     if (adaQueryTidakValid) {
+    //         return NextResponse.redirect(new URL('/contact', request.url));
+    //     }
 
+    //     // kalau hanya ada tag → jadikan q
+    //     if (tag && !q) {
+    //         url.searchParams.delete('tag');
+    //         url.searchParams.set('q', Slugify(tag));
+    //         return NextResponse.redirect(url, 301);
+    //     }
 
-        // kalau hanya ada tag → jadikan q
-        if (tag && !q) {
-            url.searchParams.delete('tag');
-            url.searchParams.set('q', Slugify(tag));
-            return NextResponse.redirect(url, 301);
-        }
+    //     // kalau hanya ada search → jadikan q
+    //     if (search && !q) {
+    //         url.searchParams.delete('search');
+    //         url.searchParams.set('q', Slugify(search));
+    //         return NextResponse.redirect(url, 301);
+    //     }
 
-        // kalau hanya ada search → jadikan q
-        if (search && !q) {
-            url.searchParams.delete('search');
-            url.searchParams.set('q', Slugify(search));
-            return NextResponse.redirect(url, 301);
-        }
+    //     if (tag && !q) {
+    //         url.searchParams.delete('tag');
+    //         url.searchParams.set('q', Slugify(tag));
+    //         return NextResponse.redirect(url, 301);
+    //     }
+    //     if (take && !t) {
+    //         url.searchParams.delete('take');
+    //         url.searchParams.set('t', Slugify(take));
+    //         return NextResponse.redirect(url, 301);
+    //     }
+    //     // kalau hanya ada search → jadikan q
+    //     if (t > 5) {
+    //         url.searchParams.set('t', 5);
+    //         return NextResponse.redirect(url, 301);
+    //     }
 
-        if (tag && !q) {
-            url.searchParams.delete('tag');
-            url.searchParams.set('q', Slugify(tag));
-            return NextResponse.redirect(url, 301);
-        }
-        if (take && !t) {
-            url.searchParams.delete('take');
-            url.searchParams.set('t', Slugify(take));
-            return NextResponse.redirect(url, 301);
-        }
-        // kalau hanya ada search → jadikan q
-        if (t > 5) {
-            url.searchParams.set('t', 5);
-            return NextResponse.redirect(url, 301);
-        }
+    //     // kalau ada salah satu (q atau tag atau m) → cek API
+    //     if (q || m) {
+    //         try {
+    //             const res = await fetch(
+    //                 `${process.env.NEXT_PUBLIC_URL_API}/api/p/SProduct?page=1&take=1&m=${m || 'undefined'}&search=${q || ''}&tag=${tag || ''}`,
+    //                 {
+    //                     method: 'GET',
+    //                     headers: {
+    //                         'Content-Type': 'application/json',
+    //                         'Authorization': `${process.env.NEXT_PUBLIC_SECREET}`
+    //                     },
+    //                     next: { revalidate: 0 }
+    //                 }
+    //             );
 
-        // kalau ada salah satu (q atau tag atau m) → cek API
-        if (q || m) {
-            try {
-                const res = await fetch(
-                    `${process.env.NEXT_PUBLIC_URL_API}/api/p/SProduct?page=1&take=1&m=${m || 'undefined'}&search=${q || ''}&tag=${tag || ''}`,
-                    {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `${process.env.NEXT_PUBLIC_SECREET}`
-                        },
-                        next: { revalidate: 0 }
-                    }
-                );
+    //             const json = await res.json();
+    //             const kategori = json?.data || [];
 
-                const json = await res.json();
-                const kategori = json?.data || [];
+    //             if (kategori.length === 0) {
+    //                 return NextResponse.redirect(new URL('/contact', request.url));
+    //             }
+    //         } catch (err) {
+    //             console.error("Gagal ambil kategori:", err);
+    //         }
+    //     } else {
+    //         // tidak ada query sama sekali → redirect
+    //         return NextResponse.redirect(new URL('/contact', request.url));
+    //     }
 
-                if (kategori.length === 0) {
-                    return NextResponse.redirect(new URL('/contact', request.url));
-                }
-            } catch (err) {
-                console.error("Gagal ambil kategori:", err);
-            }
-        } else {
-            // tidak ada query sama sekali → redirect
-            return NextResponse.redirect(new URL('/contact', request.url));
-        }
+    //     if (m === null) {
+    //         return;
+    //     }
+    //     if (m === '') {
+    //         return;
+    //     }
 
-        if (m === null) {
-            return;
-        }
-        if (m === '') {
-            return;
-        }
-
-        // return NextResponse.next()
-    }
+    //     // return NextResponse.next()
+    // }
 
     // if (pathname.startsWith('/shop') || pathname.startsWith('/product')) {
     //     const searchParams = request.nextUrl.searchParams;

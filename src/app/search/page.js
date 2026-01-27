@@ -55,7 +55,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
 }
 
 export default async function Page({ params, searchParams }) {
-    const q = Unslugify(searchParams.q);
+    const q = searchParams.q;
     const t = Number(searchParams.t) || 1;
     const m = UnslugifyMerek(searchParams.m);
 
