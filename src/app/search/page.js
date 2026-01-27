@@ -1,4 +1,4 @@
-import { GetSearchServer, GetSearchServerElasticSearch } from "@/controllers/userNew";
+import { GetSearchServerElasticSearch } from "@/controllers/userNewC";
 import ListProductUser from "@/components/listProductUser";
 import redis from "@/lib/redis";
 import { RedisSatuHari } from "@/utils/RedisSatuHari";

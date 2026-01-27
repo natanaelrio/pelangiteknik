@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { CiFilter } from "react-icons/ci";
 import Link from 'next/link';
 import LoadingList from '@/components/skleton/loadingList'
-import { GetProduct, GetSearchServerElasticSearch } from '@/controllers/userNew'
+import { GetSearchServerElasticSearch } from '@/controllers/userNewC'
 import { IoIosArrowDropright } from "react-icons/io";
 import { MdOutlineSimCardDownload } from "react-icons/md";
 import { useStore } from "@/zustand/zustand";

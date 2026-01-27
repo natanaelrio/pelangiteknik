@@ -1,5 +1,5 @@
 import ListProductUser from "@/components/listProductUser";
-import { GetSearchServerElasticSearch } from "@/controllers/userNew";
+import { GetSearchServerElasticSearch } from "@/controllers/userNewC";
 import { UnslugifyMerek } from "@/utils/unSlugifyMerek";
 export const dynamic = 'force-dynamic'
 
