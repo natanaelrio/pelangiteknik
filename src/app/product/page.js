@@ -15,8 +15,13 @@ export default async function Page({ params, searchParams }) {
 
     const normalize = s => s?.replace(/^\s+/, '') || "";
     const normalizedQuery = normalize(q);
-    const res = await GetSearchServerElasticSearch(t, 7, m, q);
-
+    let res = [];
+    try {
+        const data = await GetSearchServerElasticSearch(t, 7, m, q);
+        res = data || [];
+    } catch (err) {
+        console.error(err);
+    }
     return (
         <ListProductUser
             res={res}
