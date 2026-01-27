@@ -1,6 +1,6 @@
 import ListProductUser from "@/components/listProductUser";
 import redis from "@/lib/redis";
-import { GetSearchServer } from "@/controllers/userNew";
+import { GetSearchServer, GetSearchServerElasticSearch } from "@/controllers/userNew";
 import { RedisSatuHari } from "@/utils/RedisSatuHari";
 import { UnslugifyMerek } from "@/utils/unSlugifyMerek";
 export const dynamic = 'force-dynamic'
@@ -17,17 +17,7 @@ export default async function Page({ params, searchParams }) {
 
     const normalize = s => s?.replace(/^\s+/, '') || "";
     const normalizedQuery = normalize(q);
-    const cacheKey = `search:${normalizedQuery}:m:${m || 'All'}:t:${t || 1}`;
-
-    const cached = await redis.get(cacheKey);
-    const res = cached
-        ? JSON.parse(cached)
-        : await (async () => {
-            const fresh = await GetSearchServer(t, 7, m, q);
-            await redis.set(cacheKey, JSON.stringify(fresh), "EX", RedisSatuHari()); // TTL 1 hari
-            return fresh;
-        })();
-
+    const res = await GetSearchServerElasticSearch(t, 7, m, q);
 
     return (
         <ListProductUser

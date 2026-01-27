@@ -51,11 +51,10 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
     useEffect(() => {
         setLoading(false)
         baseCategory == '/category/' && setData(res?.data?.listProducts || [])
-        pathname == '/search' && setData(res?.data || [])
-        pathname == '/product' && setData(res?.data || [])
+        pathname == '/search' && setData(res?.data?.data || [])
+        pathname == '/product' && setData(res?.data?.data || [])
         setFilterMerek(res?.dataPreviewMerek || [])
     }, [res])
-
 
     useEffect(() => {
         process.env.NODE_ENV === 'production' && sendGAEventL("search_view", {
@@ -174,7 +173,8 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                                                 className={styles.checkbox}
                                                                 onChange={(e) => HandleFillter('idM', data?.name, e.target.checked)}
                                                             />
-                                                            <span className={styles.text}>{(data?.name)}{`(${data._count.Merek})`} </span>
+                                                            {/* <span className={styles.text}>{(data?.name)}{`(${data._count.Merek})`} </span> */}
+                                                            <span className={styles.text}>{(data?.name)} </span>
                                                         </label>
                                                     </div>
                                                 );
@@ -199,7 +199,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                                     <Link href={`/product/${data?.slugProduct}`}>
                                                         <div className={styles.gambarbawah}>
                                                             <Image
-                                                                src={data?.imageProductUtama?.secure_url}
+                                                                src={data?.imageProductUtama.secure_url || data?.imageProductUtama}
                                                                 alt={data?.productName}
                                                                 width={250}
                                                                 height={250}

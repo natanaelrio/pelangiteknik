@@ -1,4 +1,4 @@
-import { GetSearchServer } from "@/controllers/userNew";
+import { GetSearchServer, GetSearchServerElasticSearch } from "@/controllers/userNew";
 import ListProductUser from "@/components/listProductUser";
 import redis from "@/lib/redis";
 import { RedisSatuHari } from "@/utils/RedisSatuHari";
@@ -13,18 +13,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
     const m = searchParams.m;
     const canonicalUrl = `${process.env.NEXT_PUBLIC_URL}/search?q=${q}`;
 
-    const normalizedQuery = Unslugify(q);
-    const cacheKey = `searchMeta:${normalizedQuery}:m:${m || 'All'}:t:${t || 1}`;
-
-    const cached = await redis.get(cacheKey);
-
-    const aw = cached
-        ? JSON.parse(cached)
-        : await (async () => {
-            const result = await GetSearchServer(1, 1, m, q);
-            await redis.set(cacheKey, JSON.stringify(result), "EX", RedisSatuHari()); // simpan 1 hari
-            return result;
-        })();
+    const aw = await GetSearchServerElasticSearch(t, 7, m, q);
 
     const date = new Date();
     const months = [
@@ -34,8 +23,8 @@ export async function generateMetadata({ params, searchParams }, parent) {
     const currentMonth = months[date.getMonth()];
     const currentYear = date.getFullYear();
 
-    const images = aw?.data
-        ?.map((item) => item?.imageProductUtama?.secure_url)
+    const images = aw?.data.data
+        ?.map((item) => item?.imageProductUtama?.secure_url || item?.imageProductUtama)
         ?.filter(Boolean) || [];
 
     const title = `Jual ${Unslugify(q)}${m ? ' ' + Unslugify(m) : ''} - Kualitas Terbaik, Harga Spesial ${currentMonth} ${currentYear} & Garansi Resmi - Pelangi Teknik`;
@@ -70,21 +59,13 @@ export default async function Page({ params, searchParams }) {
     const t = Number(searchParams.t) || 1;
     const m = UnslugifyMerek(searchParams.m);
 
-    const cacheKey = `search:${q}:m:${m || 'All'}:t:${t || 1}`;
+    const res = await GetSearchServerElasticSearch(t, 7, m, q);
 
-    const cached = await redis.get(cacheKey);
-    const res = cached
-        ? JSON.parse(cached)
-        : await (async () => {
-            const fresh = await GetSearchServer(t, 7, m, q);
-            fresh?.data?.length && await redis
-                .multi()
-                .zadd("search:index", Date.now(), q)
-                .expire("search:index", RedisSatuHari())
-                .exec();
-            await redis.set(cacheKey, JSON.stringify(fresh), "EX", RedisSatuHari()); // TTL 10 menit
-            return fresh;
-        })();
+    res?.data?.data?.length && await redis
+        .multi()
+        .zadd("search:index", Date.now(), q)
+        .expire("search:index", RedisSatuHari())
+        .exec();
 
     const date = new Date();
     const months = [
@@ -94,12 +75,12 @@ export default async function Page({ params, searchParams }) {
     const currentMonth = months[date.getMonth()];
     const currentYear = date.getFullYear();
 
-    const image = res?.data?.map((item) => item?.imageProductUtama?.secure_url)
+    const image = res?.data?.data?.map((item) => item?.imageProductUtama)
     const title = `Jual ${q}${m ? ' ' + m : ''} - Kualitas Terbaik, Harga Spesial ${currentMonth} ${currentYear} & Garansi Resmi - Pelangi Teknik`;
     const description = `Temukan berbagai pilihan ${q} di Pelangi Teknik. Kami menyediakan berbagai produk dan layanan terbaik sesuai kebutuhan Anda.`;
 
     return (
-        res?.data?.length ?
+        res?.data?.data?.length ?
             <>
                 <head>
                     <script
