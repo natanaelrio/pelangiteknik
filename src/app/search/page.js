@@ -54,39 +54,67 @@ export async function generateMetadata({ params, searchParams }, parent) {
     };
 }
 
-export default async function Page({ searchParams }) {
-    const q = searchParams.q || '';
+export default async function Page({ params, searchParams }) {
+    const q = Unslugify(searchParams.q);
     const t = Number(searchParams.t) || 1;
-    const m = UnslugifyMerek(searchParams.m || '');
+    const m = UnslugifyMerek(searchParams.m);
 
-    const normalizedQuery = q.trim();
+    const res = await GetSearchServerElasticSearch(t, 7, m, q);
 
-    const url = `${process.env.NEXT_PUBLIC_URL}/api/elasticSearch/elasticSearchUser?page=${t}&limit=7&m=${encodeURIComponent(m || 'undefined')}&query=${encodeURIComponent(q)}`;
+    console.log(res);
 
-    let data = [];
-    try {
-        const res = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': process.env.NEXT_PUBLIC_SECREET || ''
-            },
-            next: { revalidate: 0 }
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        data = await res.json();
-    } catch (err) {
-        console.error('Fetch error:', err);
-    }
+    res?.data?.data?.length && await redis
+        .multi()
+        .zadd("search:index", Date.now(), q)
+        .expire("search:index", RedisSatuHari())
+        .exec();
+
+    const date = new Date();
+    const months = [
+        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    ];
+    const currentMonth = months[date.getMonth()];
+    const currentYear = date.getFullYear();
+
+    const image = res?.data?.data?.map((item) => item?.imageProductUtama)
+    const title = `Jual ${q}${m ? ' ' + m : ''} - Kualitas Terbaik, Harga Spesial ${currentMonth} ${currentYear} & Garansi Resmi - Pelangi Teknik`;
+    const description = `Temukan berbagai pilihan ${q} di Pelangi Teknik. Kami menyediakan berbagai produk dan layanan terbaik sesuai kebutuhan Anda.`;
 
     return (
-        <ListProductUser
-            res={data}
-            q={q}
-            m={m}
-            t={t}
-            kataKunci={normalizedQuery}
-            Lfilter={true}
-        />
+        res?.data?.data?.length ?
+            <>
+                <head>
+                    <script
+                        id="product-schema"
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{
+                            __html: JSON.stringify({
+                                "@context": "https://schema.org",
+                                "@type": "Product",
+                                "name": title,
+                                "image": image,
+                                "description": description,
+
+                                // // ⭐⭐⭐⭐⭐ Rating Bintang 5
+                                // "aggregateRating": {
+                                //     "@type": "AggregateRating",
+                                //     "ratingValue": "5",
+                                //     "reviewCount": String(res?.totalMaxProduct || 17),  // wajib ada, minimal 1
+                                // },
+                            }),
+                        }}
+                    />
+                </head>
+                <ListProductUser
+                    res={res}
+                    q={q}
+                    m={m}
+                    t={t}
+                    kataKunci={q}
+                    Lfilter={true}
+                />
+            </>
+            : <NotFoundSearch q={q} />
     );
 }

@@ -166,7 +166,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                             {filterMerek?.map((data, i) => {
                                                 if (!data?.name) return null; // Sembunyikan jika nama kosong
                                                 return (
-                                                    <div style={data._count.Merek == 0 ? { display: 'none' } : { display: 'flex' }} className={styles.list} key={i} onClick={(e) => HandleFillter('idM', data?.name)}>
+                                                    <div style={data?._count.Merek == 0 ? { display: 'none' } : { display: 'flex' }} className={styles.list} key={i} onClick={(e) => HandleFillter('idM', data?.name)}>
                                                         <label className={styles.checkboxLabel}>
                                                             <input
                                                                 type="checkbox"
