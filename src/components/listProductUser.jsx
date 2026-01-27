@@ -67,7 +67,7 @@ export default function ListProductUser({ angka, Lfilter, t, q }) {
             console.log(e)
         }
 
-    }, [t, m, q, res])
+    }, [t, m, q])
 
     useEffect(() => {
         process.env.NODE_ENV === 'production' && sendGAEventL("search_view", {
