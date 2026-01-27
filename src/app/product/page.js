@@ -1,7 +1,6 @@
 import ListProductUser from "@/components/listProductUser";
 import redis from "@/lib/redis";
 import { GetSearchServer, GetSearchServerElasticSearch } from "@/controllers/userNew";
-import { RedisSatuHari } from "@/utils/RedisSatuHari";
 import { UnslugifyMerek } from "@/utils/unSlugifyMerek";
 export const dynamic = 'force-dynamic'
 
@@ -19,17 +18,14 @@ export default async function Page({ params, searchParams }) {
     const normalizedQuery = normalize(q);
     const res = await GetSearchServerElasticSearch(t, 7, m, q);
 
-    console.log(res);
-
     return (
-        JSON.stringify(res)
-        // <ListProductUser
-        //     res={res}
-        //     q={q}
-        //     m={m}
-        //     t={t}
-        //     kataKunci={normalizedQuery}
-        //     Lfilter={true}
-        // />
+        <ListProductUser
+            res={res}
+            q={q}
+            m={m}
+            t={t}
+            kataKunci={normalizedQuery}
+            Lfilter={true}
+        />
     );
 }
