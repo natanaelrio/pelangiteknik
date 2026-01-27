@@ -20,14 +20,18 @@ import { UnslugifyMerek } from '@/utils/unSlugifyMerek'
 import { sendGAEventL } from '@/lib/ga'
 import toast from 'react-hot-toast'
 import { GetProductClient } from '@/controllers/userClient'
+import { Unslugify } from '@/utils/unSlugify'
 
-export default function ListProductUser({ angka, Lfilter, t, q }) {
+export default function ListProductUser({ angka, Lfilter }) {
 
     const { width } = useWindowDimensions()
     const searchParams = useSearchParams()
     const pathname = usePathname()
     const router = useRouter()
-    const m = searchParams.get('m')
+    const q = Unslugify(searchParams.get('q'));
+    const t = Number(searchParams.get('t')) || 1;
+    const m = UnslugifyMerek(searchParams.get('m'));
+
     const kondisiLebar = width <= 1000
 
     const match = pathname.match(/^\/category\//);
