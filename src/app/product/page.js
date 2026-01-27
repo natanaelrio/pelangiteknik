@@ -22,7 +22,7 @@ export default async function Page({ params, searchParams }) {
     console.log(res);
 
     return (
-        <>Okeee</>
+        JSON.stringify(res)
         // <ListProductUser
         //     res={res}
         //     q={q}
