@@ -1,4 +1,4 @@
-import { GetSearchServerElasticSearch } from "@/controllers/userNewC";
+import { GetSearchServer, GetSearchServerElasticSearch } from "@/controllers/userNew";
 import ListProductUser from "@/components/listProductUser";
 import redis from "@/lib/redis";
 import { RedisSatuHari } from "@/utils/RedisSatuHari";
@@ -105,7 +105,7 @@ export default async function Page({ params, searchParams }) {
                     />
                 </head>
                 <ListProductUser
-                    res={res}
+                    res={res || []}
                     q={q}
                     m={m}
                     t={t}

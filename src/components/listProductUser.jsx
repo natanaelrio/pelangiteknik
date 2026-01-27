@@ -20,18 +20,14 @@ import { UnslugifyMerek } from '@/utils/unSlugifyMerek'
 import { sendGAEventL } from '@/lib/ga'
 import toast from 'react-hot-toast'
 import { GetProductClient } from '@/controllers/userClient'
-import { Unslugify } from '@/utils/unSlugify'
 
-export default function ListProductUser({ angka, Lfilter }) {
+export default function ListProductUser({ angka, Lfilter, res, t, q }) {
 
     const { width } = useWindowDimensions()
     const searchParams = useSearchParams()
     const pathname = usePathname()
     const router = useRouter()
-    const q = Unslugify(searchParams.get('q'));
-    const t = Number(searchParams.get('t')) || 1;
-    const m = UnslugifyMerek(searchParams.get('m'));
-
+    const m = searchParams.get('m')
     const kondisiLebar = width <= 1000
 
     const match = pathname.match(/^\/category\//);
@@ -52,18 +48,19 @@ export default function ListProductUser({ angka, Lfilter }) {
     const [loading, setLoading] = useState(false)
     const [filterMerek, setFilterMerek] = useState([])
 
-    const [res, setRes] = useState(null)
     useEffect(() => {
         try {
+            // const fetchDataFilter = async () => {
+            //     const res = await GetFilterProduct()
+            //     setDataFilterMerek(res)
+            // }
+            // fetchDataFilter()
             const fetchDataShop = async () => {
                 setLoading(false)
-                const dataCari = await GetSearchServerElasticSearch(t, 7, m, q)
-                console.log(dataCari)
-                setRes(dataCari)
-                baseCategory == '/category/' && setData(dataCari?.data?.listProducts || [])
-                pathname == '/search' && setData(dataCari?.data?.data || [])
-                pathname == '/product' && setData(dataCari?.data?.data || [])
-                setFilterMerek(dataCari?.dataPreviewMerek || [])
+                baseCategory == '/category/' && setData(res?.data?.listProducts || [])
+                pathname == '/search' && setData(res?.data?.data || [])
+                pathname == '/product' && setData(res?.data?.data || [])
+                setFilterMerek(res?.dataPreviewMerek || [])
             }
             fetchDataShop()
         }
@@ -71,7 +68,7 @@ export default function ListProductUser({ angka, Lfilter }) {
             console.log(e)
         }
 
-    }, [t, m, q])
+    }, [res])
 
     useEffect(() => {
         process.env.NODE_ENV === 'production' && sendGAEventL("search_view", {
