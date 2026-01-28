@@ -129,10 +129,10 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
         return () => observer.disconnect();
     }, [loading, t]);
 
-
+    const PAGE = 7
     const HandleLoadMore = () => {
         if (loading) return;
-        if (pathname === "/search" && t >= 10) return;
+        if (pathname === "/search" && PAGE * t > res?.totalMaxProduct) return;
 
         setLoading(true);
 
@@ -177,6 +177,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
         'hidemitsu': styles.hidemitsu,
         'isuzu tsuzumi': styles.isuzutsuzumi,
     };
+
 
     return (
         <>
@@ -288,7 +289,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                     : <LoadingList />}
 
                                 {Boolean(data?.length) &&
-                                    pathname == '/search' && Number(t) >= 10 || res?.totalMaxProduct <= 7 ||
+                                    pathname == '/search' && PAGE * t > res?.totalMaxProduct ||
                                     baseCategory == '/category/' && res?.data?._count?.listProducts < res?.totalProduct ||
                                     pathname == '/product' && res?.totalMaxProduct < res?.totalProduct
                                     ? <div className={styles.kotak} onClick={HandleTop}>
