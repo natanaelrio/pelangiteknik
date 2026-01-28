@@ -187,11 +187,10 @@ export async function middleware(request) {
             return NextResponse.redirect(url, 301);
         }
         // kalau hanya ada search → jadikan q
-        if (t > 5) {
-            url.searchParams.set('t', 5);
+        if (t > 10) {
+            url.searchParams.set('t', 10);
             return NextResponse.redirect(url, 301);
         }
-
         // kalau ada salah satu (q atau tag atau m) → cek API
         // if (q || m) {
         //     try {

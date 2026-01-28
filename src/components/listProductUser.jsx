@@ -3,7 +3,7 @@ import styles from '@/components/listProduct.module.css'
 import convertToRupiah from '@/utils/ConvertRupiah'
 import useWindowDimensions from '@/utils/getWindowDimensions'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CiFilter } from "react-icons/ci";
 import Link from 'next/link';
 import LoadingList from '@/components/skleton/loadingList'
@@ -108,12 +108,35 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
         }
     }
 
+
+    const bottomRef = useRef(null);
+    useEffect(() => {
+        if (loading) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    HandleLoadMore();
+                }
+            },
+            { threshold: 1 }
+        );
+
+        if (bottomRef.current) {
+            observer.observe(bottomRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [loading, t]);
+
+
     const HandleLoadMore = () => {
-        if (pathname == '/search' && t >= 5) return;
+        if (loading) return;
+        if (pathname === "/search" && t >= 10) return;
+
+        setLoading(true);
 
         const newTake = t + 1;
-        setLoading(true);
-        // setTake(newTake);
 
         const currentUrl = new URL(window.location.href);
         currentUrl.searchParams.set("t", newTake);
@@ -263,8 +286,9 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                         )
                                     })
                                     : <LoadingList />}
+
                                 {Boolean(data?.length) &&
-                                    pathname == '/search' && Number(t) >= 5 || res?.totalMaxProduct <= 7 ||
+                                    pathname == '/search' && Number(t) >= 10 || res?.totalMaxProduct <= 7 ||
                                     baseCategory == '/category/' && res?.data?._count?.listProducts < res?.totalProduct ||
                                     pathname == '/product' && res?.totalMaxProduct < res?.totalProduct
                                     ? <div className={styles.kotak} onClick={HandleTop}>
@@ -289,6 +313,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                     </div>
                                 }
                             </div>
+                            <div ref={bottomRef} className="h-10"></div>
                         </div>
                     </div>
                 </div>
