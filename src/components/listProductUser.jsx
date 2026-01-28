@@ -214,7 +214,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                                     <Link href={`/product/${data?.slugProduct}`}>
                                                         <div className={styles.gambarbawah}>
                                                             <Image
-                                                                src={data?.imageProductUtama.secure_url || data?.imageProductUtama}
+                                                                src={data?.imageProductUtama?.secure_url || data?.imageProductUtama || `${process.env.NEXT_PUBLIC_URL}/notfoundicon.jpg`}
                                                                 alt={data?.productName}
                                                                 width={250}
                                                                 height={250}
