@@ -126,10 +126,10 @@ export async function middleware(request) {
             return NextResponse.redirect(url, 301);
         }
         // kalau hanya ada search → jadikan q
-        // if (t > 5) {
-        //     url.searchParams.set('t', 5);
-        //     return NextResponse.redirect(url, 301);
-        // }
+        if (t > 10) {
+            url.searchParams.set('t', 10);
+            return NextResponse.redirect(url, 301);
+        }
 
         if (m === null) {
             return;

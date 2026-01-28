@@ -133,6 +133,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
     const HandleLoadMore = () => {
         if (loading) return;
         if (pathname === "/search" && PAGE * t > res?.totalMaxProduct) return;
+        if (pathname === "/product" && PAGE * t > PAGE * 9) return;
 
         setLoading(true);
 
@@ -291,7 +292,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                 {Boolean(data?.length) &&
                                     pathname == '/search' && PAGE * t > res?.totalMaxProduct ||
                                     baseCategory == '/category/' && res?.data?._count?.listProducts < res?.totalProduct ||
-                                    pathname == '/product' && res?.totalMaxProduct < res?.totalProduct
+                                    pathname == '/product' && PAGE * 9
                                     ? <div className={styles.kotak} onClick={HandleTop}>
                                         <div className={styles.loadmore}>
                                             <div style={{ transform: 'rotate(-95deg)' }}>
