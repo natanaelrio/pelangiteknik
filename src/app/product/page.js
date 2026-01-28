@@ -1,7 +1,5 @@
 import ListProductUser from "@/components/listProductUser";
-import redis from "@/lib/redis";
-import { GetSearchServer, GetSearchServerElasticSearch } from "@/controllers/userNew";
-import { RedisSatuHari } from "@/utils/RedisSatuHari";
+import { GetSearchServerElasticSearch } from "@/controllers/userNew";
 import { UnslugifyMerek } from "@/utils/unSlugifyMerek";
 export const dynamic = 'force-dynamic'
 
