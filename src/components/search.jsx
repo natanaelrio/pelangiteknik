@@ -15,12 +15,9 @@ export default function Search({ ListSearch }) {
     const router2 = useRouter2();
     const setSearchTermClose = useStore((state) => state.setSearchTermClose);
     const setSearchTerm = useStore((state) => state.setSearchTerm);
-    const searchTerm = useStore((state) => state.searchTerm);
     const setIsMobileMenuOpenPencarian = useStore((state) => state.setIsMobileMenuOpenPencarian);
     const [cari, setCari] = useState('');
     const [showRecommendations, setShowRecommendations] = useState(false);
-
-    console.log(searchTerm);
 
     // Data dummy rekomendasi
     const recommendations = ListSearch || [
