@@ -133,6 +133,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
     const HandleLoadMore = () => {
         if (loading) return;
         if (pathname === "/search" && PAGE * t > res?.totalMaxProduct) return;
+        if (baseCategory == '/category/' && PAGE * t > res?.data?._count?.listProducts) return;
         if (pathname === "/product" && PAGE * t > PAGE * 9) return;
 
         setLoading(true);
