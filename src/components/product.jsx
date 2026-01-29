@@ -261,6 +261,21 @@ export default function Product({ data, season }) {
         }
     };
 
+    const ADMIN_EMAILS = [
+        "it.pt.pelangiteknikindonesia@gmail.com",
+        "pelangiteknik06@gmail.com",
+        "Belanjamesinonline168@gmail.com",
+        "sales01pelangiteknikindonesia@gmail.com"
+    ]
+
+    const isAdmin = ADMIN_EMAILS.includes(
+        season?.user?.email?.toLowerCase()
+    )
+
+    const handleEditProdukAdmin = () => {
+        router.push(`${process.env.NEXT_PUBLIC_URL_API}/${data?.slugProduct}`)
+    }
+
     return (
         <>
             <div className={styles.container}>
@@ -345,6 +360,11 @@ export default function Product({ data, season }) {
                             <h1 className={styles.judul}>
                                 {data?.productName}
                             </h1>
+                            {isAdmin && (
+                                <div onClick={() => handleEditProdukAdmin()} className={styles.editproduct}>
+                                    Edit Product
+                                </div>)
+                            }
 
                             <div className={styles.pricedanstock}>
                                 <div className={styles.price}>
