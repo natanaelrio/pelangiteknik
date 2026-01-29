@@ -261,8 +261,11 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                                                 </>
                                                             }
                                                         </div>
-                                                        <div className={styles.name}>
-                                                            {data?.productName}
+                                                        <div className={styles.name}
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: data?.highlight?.productName || data?.productName
+                                                            }}
+                                                        >
                                                         </div>
 
                                                         <div className={styles.price}>

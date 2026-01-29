@@ -11,6 +11,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { useEffect } from "react";
 
 export default function Search({ ListSearch }) {
+
     const router = useRouter();
     const router2 = useRouter2();
     const setSearchTermClose = useStore((state) => state.setSearchTermClose);
