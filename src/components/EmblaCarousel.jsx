@@ -141,17 +141,18 @@ const EmblaCarousel = ({ productName, e, yt, type, fMerek }) => {
                             return (
                                 <div className={styles.emblaSlide} key={i}>
                                     <div className={styles.emblaSlideNumber}>
+                                        {type && fMerek &&
+                                            <>
+                                                <div className={styles.typemerek}>
+                                                    <span className={`${styles.fMerek} ${merekClass[fMerek[0]?.name?.toLowerCase()] || ''
+                                                        }`}
+                                                    >{fMerek[0]?.name.toUpperCase()}</span>
+                                                    <span className={styles.type}>{type.toUpperCase()}</span>
+                                                </div>
+                                            </>
+                                        }
                                         <div className={styles.gambaratas}>
-                                            {type && fMerek &&
-                                                <>
-                                                    <div className={styles.typemerek}>
-                                                        <span className={`${styles.fMerek} ${merekClass[fMerek[0]?.name?.toLowerCase()] || ''
-                                                            }`}
-                                                        >{fMerek[0]?.name.toUpperCase()}</span>
-                                                        <span className={styles.type}>{type.toUpperCase()}</span>
-                                                    </div>
-                                                </>
-                                            }
+
                                             {item.youtube_id ? (
                                                 <YouTubeEmbed url={item.youtube_id} width={'100%'} height={400} />
                                             ) : item.secure_url ? (

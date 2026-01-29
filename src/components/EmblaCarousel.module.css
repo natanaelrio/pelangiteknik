@@ -12,7 +12,7 @@
     position: relative;
 }
 
-.gambaratas .typemerek {
+.typemerek {
     position: absolute;
     top: 5px;
     left: 10px;
@@ -139,6 +139,7 @@
     user-select: none;
     /* width: 400px; */
     height: 400px;
+    position: relative;
 }
 
 .emblaThumbs {
@@ -406,19 +407,19 @@
     }
 
     .gambaratas {
-        width: 100%;
-        height: auto;
+        width: 80%;
+        height: -webkit-fill-available;
     }
 
     .gambaratas img {
-        width: 100%;
-        height: auto;
+        width: 80%;
+        height: -webkit-fill-available;
         object-fit: contain;
     }
 
     .emblaSlideNumber {
         width: 100%;
-        height: fit-content;
+        height: -webkit-fill-available;
     }
 
     .emblaSlideNumber {

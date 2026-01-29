@@ -16,10 +16,13 @@ import { Slugify } from "@/utils/slugify"
 import TanggalGA from "@/utils/TanggalGA"
 import HandleKonversiWA from "@/utils/HandleKonversiWA"
 import toast from "react-hot-toast"
+import { useRouter } from 'nextjs-toploader/app';
 
 export default function Header({ data, tombolwa, ListSearch }) {
   const setIsLogin = useStore((state) => state.setIsLogin)
   const { data: session, status } = useSession()
+
+  const router = useRouter()
 
   const pathName = usePathname()
   const searchParams = useSearchParams();
@@ -120,107 +123,22 @@ export default function Header({ data, tombolwa, ListSearch }) {
   const shuffledColors = [...colors].sort(() => Math.random() - 0.5);
 
   const [visible, setVisible] = useState(true);
+
+
+
+  const scrollRef = useRef(null)
+
+  const scroll = (direction) => {
+    if (!scrollRef.current) return
+    const distance = 200
+    scrollRef.current.scrollBy({
+      left: direction === 'right' ? distance : -distance,
+      behavior: 'smooth',
+    })
+  }
   return (
     <header className={styles.header}>
-      {/* <LoginPage /> */}
-      {/* <div className={styles.bannerWrapper}>
-        <div className={styles.marquee}>
-          <div className={styles.marqueeGroup}>
-            {ListSearch?.map((item, idx) => {
-              const randomBorderColor = shuffledColors[idx % shuffledColors.length];
 
-              return (
-                <span key={idx}>
-                  <Link
-                    href={`/search?q=${Slugify(item)}`}
-                    className={styles.rekomendasiItem2}
-                  >
-                    <button
-                      style={{
-                        border: `2px solid ${randomBorderColor}`,
-                        borderRadius: '8px',
-                        padding: '6px 12px',
-                        background: 'transparent',
-                        color: randomBorderColor,
-                        cursor: 'pointer',
-                        transition: '0.3s ease',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.background = randomBorderColor;
-                        e.target.style.color = '#fff';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.background = 'transparent';
-                        e.target.style.color = randomBorderColor;
-                      }}
-                    >
-                      {item} <FaSearch
-                        onMouseEnter={(e) => {
-                          e.target.style.background = randomBorderColor;
-                          e.target.style.color = '#fff';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.target.style.background = 'transparent';
-                          e.target.style.color = randomBorderColor;
-                        }}
-                        color={randomBorderColor} />
-                    </button>
-                  </Link>
-                </span>
-              );
-            })}
-
-          </div>
-          <div className={styles.marqueeGroup}>
-            {ListSearch?.map((item, idx) => {
-              const randomBorderColor = shuffledColors[idx % shuffledColors.length];
-
-              return (
-                <span key={idx}>
-                  <Link
-                    href={`/search?q=${Slugify(item)}`}
-                    className={styles.rekomendasiItem2}
-                  >
-                    <button
-                      style={{
-                        border: `2px solid ${randomBorderColor}`,
-                        borderRadius: '8px',
-                        padding: '6px 12px',
-                        background: 'transparent',
-                        color: randomBorderColor,
-                        cursor: 'pointer',
-                        transition: '0.3s ease',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.background = randomBorderColor;
-                        e.target.style.color = '#fff';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.background = 'transparent';
-                        e.target.style.color = randomBorderColor;
-                      }}
-                    >
-                      {item} <FaSearch
-                        onMouseEnter={(e) => {
-                          e.target.style.background = randomBorderColor;
-                          e.target.style.color = '#fff';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.target.style.background = 'transparent';
-                          e.target.style.color = randomBorderColor;
-                        }}
-                        color={randomBorderColor}
-                      />
-                    </button>
-                  </Link>
-                </span>
-              );
-            })}
-
-          </div>
-        </div>
-      </div> */}
-      {/* Tombol WhatsApp */}
       {Boolean(tombolwa) && (
 
         <button
@@ -238,20 +156,6 @@ export default function Header({ data, tombolwa, ListSearch }) {
         </button>
       )}
 
-      {/* {visible &&
-        <div className={styles.banner}>
-          <div className={styles.bannerContent}>
-            <span className={styles.text}>
-              Dapatkan voucher 3%, tanpa batas minimal pembelian!
-            </span>
-
-
-            <button disabled={isLoadingWA} className={styles.btn} onClick={handleWhatsappVoucher}>{isLoadingWA ? 'Loading...' : 'Hub Sales'}</button>
-            <button className={styles.close} onClick={() => setVisible(false)}>
-              ✕
-            </button>
-          </div>
-        </div>} */}
       <div className={styles.atas}>
         <div className={styles.container}>
           {/* MOBILE MENU ICON */}
@@ -272,7 +176,7 @@ export default function Header({ data, tombolwa, ListSearch }) {
                 <Image src={`${process.env.NEXT_PUBLIC_URL}/logo2.svg`} height={80} width={180} alt="logo" />
               </div>
             </Link>
-            <Link href="/product" className={styles.text3}>
+            {/* <Link href="/product" className={styles.text3}>
               <div className={styles.about}>List Product</div>
             </Link>
 
@@ -280,7 +184,7 @@ export default function Header({ data, tombolwa, ListSearch }) {
               <Link href={'/category'}>
                 Kategori
               </Link>
-            </div>
+            </div> */}
             {/* 
             <Link href="/blog" className={styles.text1}><div className={styles.about}>Blog</div></Link>
             <Link href="/about" className={styles.text3}><div className={styles.about}>Tentang Kami</div></Link> */}
@@ -330,6 +234,37 @@ export default function Header({ data, tombolwa, ListSearch }) {
             {isMobileMenuOpenPencarian ? <FaTimes size={27} /> : <FaSearch size={27} />}
           </div>
         </div>
+
+
+        <div className={styles.header2}>
+          <div className={styles.containerlayangan}>
+            <button
+              className={`${styles.arrow} ${styles.left}`}
+              onClick={() => scroll('left')}
+            >
+              ‹
+            </button>
+
+            <div ref={scrollRef} className={styles.layangan}>
+              {data?.map((item, i) => (
+                <button
+                  key={i}
+                  onClick={() => router.push(`/category/${item?.slugCategory}`)}
+                >
+                  {item?.category}
+                </button>
+              ))}
+            </div>
+
+            <button
+              className={`${styles.arrow} ${styles.right}`}
+              onClick={() => scroll('right')}
+            >
+              ›
+            </button>
+          </div>
+        </div>
+
 
         {/* MENU MOBILE */}
         {isMobileMenuOpen && (
@@ -413,6 +348,6 @@ export default function Header({ data, tombolwa, ListSearch }) {
       </div>
 
 
-    </header>
+    </header >
   )
 }
