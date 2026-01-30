@@ -3,6 +3,7 @@ import { getToken } from 'next-auth/jwt'
 import { Unslugify } from "./utils/unSlugify"
 import { Slugify } from "./utils/slugify"
 import { UnslugifyMerek } from "./utils/unSlugifyMerek"
+import { GetSearchServerElasticSearch } from "./controllers/userNew"
 
 export async function middleware(request) {
     const url = request.nextUrl
@@ -192,33 +193,31 @@ export async function middleware(request) {
             return NextResponse.redirect(url, 301);
         }
         // kalau ada salah satu (q atau tag atau m) → cek API
-        // if (q || m) {
-        //     try {
-        //         const res = await fetch(
-        //             `${process.env.NEXT_PUBLIC_URL_API}/api/p/SProduct?page=1&take=1&m=${m || 'undefined'}&search=${q || ''}&tag=${tag || ''}`,
-        //             {
-        //                 method: 'GET',
-        //                 headers: {
-        //                     'Content-Type': 'application/json',
-        //                     'Authorization': `${process.env.NEXT_PUBLIC_SECREET}`
-        //                 },
-        //                 next: { revalidate: 0 }
-        //             }
-        //         );
+        if (q || m) {
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/elasticSearch/elasticSearchUser?page=${t ? t : 1}&limit=${7}&m=${m ? m : 'undefined'}&query=${searchParams.get("q") ? searchParams.get("q") : ''}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `${process.env.NEXT_PUBLIC_SECREET}`
+                    },
+                    next: {
+                        revalidate: 0
+                    }
+                });
+                const data = await res.json();
+                const kategori = data?.data?.data || [];
 
-        //         const json = await res.json();
-        //         const kategori = json?.data || [];
-
-        //         if (kategori.length === 0) {
-        //             return NextResponse.redirect(new URL('/contact', request.url));
-        //         }
-        //     } catch (err) {
-        //         console.error("Gagal ambil kategori:", err);
-        //     }
-        // } else {
-        //     // tidak ada query sama sekali → redirect
-        //     return NextResponse.redirect(new URL('/contact', request.url));
-        // }
+                if (kategori.length === 0) {
+                    return NextResponse.redirect(new URL('/contact', request.url));
+                }
+            } catch (err) {
+                console.error("Gagal ambil kategori:", err);
+            }
+        } else {
+            // tidak ada query sama sekali → redirect
+            return NextResponse.redirect(new URL('/contact', request.url));
+        }
 
         if (m === null) {
             return;
