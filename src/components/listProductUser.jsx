@@ -228,19 +228,19 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                         }
                         <div className={styles.listproduct}>
                             <div className={styles.searchInfo}>
-                                {res.suggest[0] ? (
+                                {res?.suggest[0] ? (
                                     <>
                                         tidak dapat menemukan hasil untuk{" "}
                                         <b className={styles.keyword}>"{Unslugify(q)}"</b>.
                                         <br />
                                         Menampilkan hasil untuk{" "}
-                                        <b className={styles.suggest}>"<h1 className={styles.inlineH1}> {res.suggest[0]}</h1>" </b>
+                                        <b className={styles.suggest}>"<h1 className={styles.inlineH1}> {res?.suggest[0]}</h1>" </b>
                                         {baseCategory === '/category/' && res?.totalProduct >= res?.data?._count?.listProducts ? baseCategory === '/category/' && res?.data?._count?.listProducts : baseCategory === '/category/' && res?.totalProduct}{pathname === '/search' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/search' && res?.totalMaxProduct : pathname === '/search' && res?.totalProduct}{pathname === '/product' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/product' && res?.totalMaxProduct : pathname === '/product' && res?.totalProduct} dari {baseCategory == '/category/' && res?.data?._count?.listProducts || pathname == '/product' && res?.totalMaxProduct || pathname == '/search' && res?.totalMaxProduct}
                                     </>
                                 ) : (
                                     <>
                                         Menampilkan hasil untuk{" "}
-                                        <b className={styles.keyword}>"<h1 className={styles.inlineH1}>{Unslugify(q) }</h1>"</b> {baseCategory === '/category/' && res?.totalProduct >= res?.data?._count?.listProducts ? baseCategory === '/category/' && res?.data?._count?.listProducts : baseCategory === '/category/' && res?.totalProduct}{pathname === '/search' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/search' && res?.totalMaxProduct : pathname === '/search' && res?.totalProduct}{pathname === '/product' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/product' && res?.totalMaxProduct : pathname === '/product' && res?.totalProduct} dari {baseCategory == '/category/' && res?.data?._count?.listProducts || pathname == '/product' && res?.totalMaxProduct || pathname == '/search' && res?.totalMaxProduct}
+                                        <b className={styles.keyword}>"<h1 className={styles.inlineH1}>{Unslugify(q)}</h1>"</b> {baseCategory === '/category/' && res?.totalProduct >= res?.data?._count?.listProducts ? baseCategory === '/category/' && res?.data?._count?.listProducts : baseCategory === '/category/' && res?.totalProduct}{pathname === '/search' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/search' && res?.totalMaxProduct : pathname === '/search' && res?.totalProduct}{pathname === '/product' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/product' && res?.totalMaxProduct : pathname === '/product' && res?.totalProduct} dari {baseCategory == '/category/' && res?.data?._count?.listProducts || pathname == '/product' && res?.totalMaxProduct || pathname == '/search' && res?.totalMaxProduct}
                                     </>
                                 )}
                             </div>
