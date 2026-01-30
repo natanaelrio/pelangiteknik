@@ -286,6 +286,14 @@ export async function middleware(request) {
     //     }
     // }
 
+    // if (pathname.startsWith('/product/')) {
+    //     const slug = pathname.split('/')[2];
+
+    //     console.log('Slug:', slug);
+
+    //     return NextResponse.redirect(new URL('/', request.url), 301);
+    // }
+
     if (request.nextUrl.pathname.startsWith('/category')) {
         const searchParams = request.nextUrl.searchParams;
         const take = searchParams.get("take")?.trim() || "";

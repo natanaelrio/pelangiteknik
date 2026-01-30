@@ -27,8 +27,8 @@ export async function generateMetadata({ params, searchParams }, parent) {
         ?.map((item) => item?.imageProductUtama?.secure_url || item?.imageProductUtama)
         ?.filter(Boolean) || [];
 
-    const title = `Jual ${Unslugify(q)}${m ? ' ' + Unslugify(m) : ''} - Kualitas Terbaik, Harga Spesial ${currentMonth} ${currentYear} & Garansi Resmi - Pelangi Teknik`;
-    const description = `Temukan berbagai pilihan ${Unslugify(q)} di Pelangi Teknik. Kami menyediakan berbagai produk dan layanan terbaik sesuai kebutuhan Anda.`;
+    const title = `Jual ${Unslugify(aw.suggest[0])}${m ? ' ' + Unslugify(m) : ''} - Kualitas Terbaik, Harga Spesial ${currentMonth} ${currentYear} & Garansi Resmi - Pelangi Teknik`;
+    const description = `Temukan berbagai pilihan ${Unslugify(aw.suggest[0])} di Pelangi Teknik. Kami menyediakan berbagai produk dan layanan terbaik sesuai kebutuhan Anda.`;
 
     return {
         title,

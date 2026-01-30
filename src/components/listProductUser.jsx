@@ -186,7 +186,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
             <div className={styles.container}>
                 <div className={styles.dalamkontainer} style={Lfilter ? { margin: '30px 0', padding: '0 30px' } : { margin: 0 }}>
                     {pathname == '/product' || pathname == '/shop' && <JudulPencarian judul={decodeURIComponent(m)} />}
-                    {q && <JudulPencarian judul={Unslugify(q)} />}
+                    {/* {q && <JudulPencarian judul={Unslugify(q)} />} */}
                     {/* {tag && <JudulPencarian judul={decodeURIComponent(tag)} />} */}
                     <div className={styles.bawah} >
                         {Lfilter &&
@@ -227,8 +227,26 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                             </div>
                         }
                         <div className={styles.listproduct}>
-                            <span className={styles.angkatotal}>Menampilkan {baseCategory === '/category/' && res?.totalProduct >= res?.data?._count?.listProducts ? baseCategory === '/category/' && res?.data?._count?.listProducts : baseCategory === '/category/' && res?.totalProduct}{pathname === '/search' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/search' && res?.totalMaxProduct : pathname === '/search' && res?.totalProduct}{pathname === '/product' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/product' && res?.totalMaxProduct : pathname === '/product' && res?.totalProduct} dari {baseCategory == '/category/' && res?.data?._count?.listProducts || pathname == '/product' && res?.totalMaxProduct || pathname == '/search' && res?.totalMaxProduct}
-                            </span>
+                            <div className={styles.searchInfo}>
+                                {res.suggest[0] ? (
+                                    <>
+                                        tidak dapat menemukan hasil untuk{" "}
+                                        <b className={styles.keyword}>"{Unslugify(q)}"</b>.
+                                        <br />
+                                        Menampilkan hasil untuk{" "}
+                                        <b className={styles.suggest}>"<h1 className={styles.inlineH1}> {res.suggest[0]}</h1>" </b>
+                                        {baseCategory === '/category/' && res?.totalProduct >= res?.data?._count?.listProducts ? baseCategory === '/category/' && res?.data?._count?.listProducts : baseCategory === '/category/' && res?.totalProduct}{pathname === '/search' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/search' && res?.totalMaxProduct : pathname === '/search' && res?.totalProduct}{pathname === '/product' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/product' && res?.totalMaxProduct : pathname === '/product' && res?.totalProduct} dari {baseCategory == '/category/' && res?.data?._count?.listProducts || pathname == '/product' && res?.totalMaxProduct || pathname == '/search' && res?.totalMaxProduct}
+                                    </>
+                                ) : (
+                                    <>
+                                        Menampilkan hasil untuk{" "}
+                                        <b className={styles.keyword}>"<h1 className={styles.inlineH1}>{Unslugify(q) }</h1>"</b> {baseCategory === '/category/' && res?.totalProduct >= res?.data?._count?.listProducts ? baseCategory === '/category/' && res?.data?._count?.listProducts : baseCategory === '/category/' && res?.totalProduct}{pathname === '/search' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/search' && res?.totalMaxProduct : pathname === '/search' && res?.totalProduct}{pathname === '/product' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/product' && res?.totalMaxProduct : pathname === '/product' && res?.totalProduct} dari {baseCategory == '/category/' && res?.data?._count?.listProducts || pathname == '/product' && res?.totalMaxProduct || pathname == '/search' && res?.totalMaxProduct}
+                                    </>
+                                )}
+                            </div>
+
+                            {/* <span className={styles.angkatotal}>Menampilkan 
+                            </span> */}
                             <div className={styles.grid}>
                                 {data?.length ?
                                     data?.map((data, i) => {
