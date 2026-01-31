@@ -195,7 +195,7 @@ export async function middleware(request) {
         // kalau ada salah satu (q atau tag atau m) → cek API
         if (q || m) {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/elasticSearch/elasticSearchUser?page=${t ? t : 1}&limit=${7}&m=${m ? m : 'undefined'}&query=${searchParams.get("q") ? searchParams.get("q") : ''}`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/elasticSearch/elasticSearchUser?page=${1}&limit=${1}&m=${m ? m : 'undefined'}&query=${searchParams.get("q") ? searchParams.get("q") : ''}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
