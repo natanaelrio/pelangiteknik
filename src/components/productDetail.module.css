@@ -1,0 +1,92 @@
+.deskripsiNew {
+    all: revert !important;
+    font-size: var(--font1) !important;
+    line-height: 1.7 !important;
+    color: #1f2937 !important;
+}
+
+/* Reset semua child */
+.deskripsiNew * {
+    all: revert !important;
+    box-sizing: border-box !important;
+}
+
+/* Paragraf */
+.deskripsiNew p {
+    margin: 0 0 12px !important;
+}
+
+/* Heading */
+.deskripsiNew h1,
+.deskripsiNew h2,
+.deskripsiNew h3,
+.deskripsiNew h4,
+.deskripsiNew h5,
+.deskripsiNew h6 {
+    font-weight: 600 !important;
+    margin: 18px 0 10px !important;
+    line-height: 1.4 !important;
+}
+
+/* List */
+.deskripsiNew ul,
+.deskripsiNew ol {
+    padding-left: 20px !important;
+    margin: 12px 0 !important;
+}
+
+.deskripsiNew li {
+    margin-bottom: 6px !important;
+}
+
+/* Link */
+.deskripsiNew a {
+    color: #2563eb !important;
+    text-decoration: underline !important;
+    word-break: break-word !important;
+}
+
+.deskripsiNew a:hover {
+    color: #1d4ed8 !important;
+}
+
+/* Image */
+.deskripsiNew img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    margin: 12px 0 !important;
+}
+
+/* Table */
+.deskripsiNew table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 16px 0 !important;
+    font-size: 14px !important;
+}
+
+.deskripsiNew th,
+.deskripsiNew td {
+    border: 1px solid #e5e7eb !important;
+    padding: 8px !important;
+    text-align: left !important;
+}
+
+/* Quote */
+.deskripsiNew blockquote {
+    border-left: 4px solid #e5e7eb !important;
+    padding-left: 12px !important;
+    color: #374151 !important;
+    margin: 12px 0 !important;
+}
+
+/* Code */
+.deskripsiNew pre,
+.deskripsiNew code {
+    background: #f3f4f6 !important;
+    padding: 6px 8px !important;
+    border-radius: 4px !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+    font-size: 13px !important;
+}

@@ -416,22 +416,16 @@ export default function Product({ data, season }) {
                             </h2>
 
                             <div className={styles.tags}>
-                                tags:&nbsp;
-                                {/* <span className={styles.tag}>
-                                    <Link href={`/search?sub=${data?.subKategoriProduct}`}>
-                                        {data?.subKategoriProduct}
+                                <h3 className={styles.tag}>
+                                    <Link href={`/search?q=${data?.productType}`}>
+                                        #{data?.productType}
                                     </Link>
-                                </span> */}
-                                {/* <span className={styles.tag}>
-                                    <Link href={`/search?type=${data?.productType}`}>
-                                        {data?.productType}
-                                    </Link>
-                                </span> */}
+                                </h3>
                                 {data?.tagProduct.split(",").map((item, index) => {
                                     return (
                                         <Link href={`/search?q=${Slugify(item)}`}>
                                             <h3 className={styles.tag} key={item}>
-                                                {CapitalizeWords(item)}
+                                                #{CapitalizeWords(item)}
                                             </h3>
                                         </Link>
                                     )
