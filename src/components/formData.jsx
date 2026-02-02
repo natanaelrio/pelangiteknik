@@ -24,6 +24,7 @@ import { RxCross2 } from "react-icons/rx";
 import { FadeLoader } from 'react-spinners';
 import * as Yup from 'yup';
 import HandleKonversiWA from '@/utils/HandleKonversiWA';
+import HandleKonversiWAPenawaran from '@/utils/HandleKonversiWAPenawaran';
 const MapPicker = dynamic(() => import("@/components/MapPicker"), {
     ssr: false, // <--- penting!
 });
@@ -341,7 +342,7 @@ export default function FormData({ data, dataBank, email, idCart, cities, provin
     const handleWhatsapp = async () => {
         try {
             setIsLoadingWA(true)
-            const waUrl = await HandleKonversiWA({ fromDataVoucher: true });
+            const waUrl = await HandleKonversiWAPenawaran({ fromDataVoucher: true });
             setIsLoadingWA(false)
             window.open(waUrl, "_blank");
         } catch (e) {
