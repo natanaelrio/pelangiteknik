@@ -30,6 +30,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
     const router = useRouter()
     const m = searchParams.get('m')
     const kondisiLebar = width <= 1000
+    const zonaProduct = pathname == '/product'
 
     const match = pathname.match(/^\/category\//);
     const baseCategory = match ? match[0] : "";
@@ -237,10 +238,12 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                                 <b className={styles.keyword}>"{Unslugify(q)}"</b>.
                                                 <br />
                                                 Menampilkan hasil untuk{" "}
-                                                <b className={styles.suggest}>"<h1 className={styles.inlineH1}> {res?.suggest[0]}</h1>" </b>
+                                                <b className={styles.suggest}>"<h1 className={styles.inlineH1}>{res?.suggest[0]}</h1>" </b>
                                                 {baseCategory === '/category/' && res?.totalProduct >= res?.data?._count?.listProducts ? baseCategory === '/category/' && res?.data?._count?.listProducts : baseCategory === '/category/' && res?.totalProduct}{pathname === '/search' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/search' && res?.totalMaxProduct : pathname === '/search' && res?.totalProduct}{pathname === '/product' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/product' && res?.totalMaxProduct : pathname === '/product' && res?.totalProduct} dari {baseCategory == '/category/' && res?.data?._count?.listProducts || pathname == '/product' && res?.totalMaxProduct || pathname == '/search' && res?.totalMaxProduct}
                                             </>
                                         ) : (
+
+                                            !zonaProduct &&
                                             <>
                                                 Menampilkan hasil untuk{" "}
                                                 <b className={styles.suggest}>"<h1 className={styles.inlineH1}>{Unslugify(q)}</h1>"</b> {baseCategory === '/category/' && res?.totalProduct >= res?.data?._count?.listProducts ? baseCategory === '/category/' && res?.data?._count?.listProducts : baseCategory === '/category/' && res?.totalProduct}{pathname === '/search' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/search' && res?.totalMaxProduct : pathname === '/search' && res?.totalProduct}{pathname === '/product' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/product' && res?.totalMaxProduct : pathname === '/product' && res?.totalProduct} dari {baseCategory == '/category/' && res?.data?._count?.listProducts || pathname == '/product' && res?.totalMaxProduct || pathname == '/search' && res?.totalMaxProduct}
@@ -248,6 +251,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                         )}
                                     </div>
                                 </> :
+
                                 <span className={styles.angkatotal}>Menampilkan {baseCategory === '/category/' && res?.totalProduct >= res?.data?._count?.listProducts ? baseCategory === '/category/' && res?.data?._count?.listProducts : baseCategory === '/category/' && res?.totalProduct}{pathname === '/search' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/search' && res?.totalMaxProduct : pathname === '/search' && res?.totalProduct}{pathname === '/product' && res?.totalProduct >= res?.totalMaxProduct ? pathname === '/product' && res?.totalMaxProduct : pathname === '/product' && res?.totalProduct} dari {baseCategory == '/category/' && res?.data?._count?.listProducts || pathname == '/product' && res?.totalMaxProduct || pathname == '/search' && res?.totalMaxProduct}
                                 </span>
                             }
@@ -277,9 +281,15 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                                             {
                                                                 <>
                                                                     <div className={styles.typemerek}>
-                                                                        <span className={`${styles.fMerek} ${merekClass[namaMerek?.toLowerCase()] || ''
+                                                                        <span className={`${styles.fMerek} 
                                                                             }`}
-                                                                        >{typeMerek}</span>
+                                                                            dangerouslySetInnerHTML={{
+                                                                                __html: data?.highlight?.productType || typeMerek
+                                                                            }}
+                                                                        >
+                                                                            {/* {typeMerek} */}
+
+                                                                        </span>
                                                                         {/* <span className={styles.type}>{typeMerek}</span> */}
                                                                     </div>
                                                                 </>
