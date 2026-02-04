@@ -49,7 +49,7 @@ export default async function Home() {
   return (
     <>
       {/* <BannerMain data={dataKategori} /> */}
-      <Banner data={dataKategori} sumView={dataSumView?._sum?.viewProduct ?? 0} />
+      <Banner data={dataKategori} sumView={dataSumView?.totalView ?? 0} />
       <Hpo />
 
       <Judul judul="Best Product" />
