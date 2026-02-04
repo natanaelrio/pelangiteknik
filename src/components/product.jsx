@@ -265,7 +265,8 @@ export default function Product({ data, season }) {
         "it.pt.pelangiteknikindonesia@gmail.com",
         "pelangiteknik06@gmail.com",
         "Belanjamesinonline168@gmail.com",
-        "sales01pelangiteknikindonesia@gmail.com"
+        "sales01pelangiteknikindonesia@gmail.com",
+        "sales01@tsuzumijapan.com"
     ]
 
     const isAdmin = ADMIN_EMAILS.includes(
