@@ -419,7 +419,7 @@ export default function FormData({ data, dataBank, email, idCart, cities, provin
 
         const FormItemDetailPaperID = [...data?.items?.map((e) => ({
             // id: Number(nanoidFrom()),
-            name: e?.product?.productName.slice(0, 50),
+            name: e?.product?.productName.slice(0, 150),
             description: e.product?.descMetaProduct,
             quantity: Number(e?.quantity),
             price: Number(e?.product?.productPriceFinal),
