@@ -5,6 +5,7 @@ import { RedisSatuHari } from "@/utils/RedisSatuHari";
 import { Unslugify } from "@/utils/unSlugify";
 import { UnslugifyMerek } from "@/utils/unSlugifyMerek";
 import NotFoundSearch from "@/components/notFoundSearch";
+import { GetSearchRedis } from "@/controllers/redis";
 export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params, searchParams }, parent) {
@@ -27,8 +28,9 @@ export async function generateMetadata({ params, searchParams }, parent) {
         ?.map((item) => item?.imageProductUtama?.secure_url || item?.imageProductUtama)
         ?.filter(Boolean) || [];
 
-    const title = `Jual ${Unslugify(aw?.suggest[0] ? aw?.suggest[0] : q)}${m ? ' ' + Unslugify(m) : ''} - Kualitas Terbaik, Harga Spesial ${currentMonth} ${currentYear} & Garansi Resmi - Pelangi Teknik`;
-    const description = `Temukan berbagai pilihan ${Unslugify(aw?.suggest[0] ? aw?.suggest[0] : q)} di Pelangi Teknik. Kami menyediakan berbagai produk dan layanan terbaik sesuai kebutuhan Anda.`;
+
+    const title = aw.data.data.length ? `Jual ${Unslugify(aw?.suggest[0] ? aw?.suggest[0] : q)}${m ? ' ' + Unslugify(m) : ''} - Kualitas Terbaik, Harga Spesial ${currentMonth} ${currentYear} & Garansi Resmi - Pelangi Teknik` : 'Halaman Rekomendasi Pencarian Pelangiteknik';
+    const description = aw.data.data.length ? `Temukan berbagai pilihan ${Unslugify(aw?.suggest[0] ? aw?.suggest[0] : q)} di Pelangi Teknik. Kami menyediakan berbagai produk dan layanan terbaik sesuai kebutuhan Anda.` : 'Halaman Rekomendasi Pencarian Pelangiteknik';
 
     return {
         title,
@@ -58,6 +60,7 @@ export default async function Page({ params, searchParams }) {
     const q = searchParams.q;
     const t = Number(searchParams.t) || 1;
     const m = UnslugifyMerek(searchParams.m);
+    const ListSearch = await GetSearchRedis()
 
     const res = await GetSearchServerElasticSearch(t, 7, m, q);
 
@@ -113,6 +116,9 @@ export default async function Page({ params, searchParams }) {
                     Lfilter={true}
                 />
             </>
-            : <NotFoundSearch q={q} />
+            : <NotFoundSearch
+                q={q}
+                suggest={res.suggest}
+                ListSearch={ListSearch} />
     );
 }

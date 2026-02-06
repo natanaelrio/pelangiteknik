@@ -4,9 +4,11 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { Slugify } from "@/utils/slugify";
+import { Unslugify } from "@/utils/unSlugify";
 import styles from '@/components/notFoundSearch.module.css'
+import Link from 'next/link';
 
-export default function NotFoundSearch({ q }) {
+export default function NotFoundSearch({ q, suggest, ListSearch }) {
     const router = useRouter()
     const [cari, setCari] = useState('')
 
@@ -26,11 +28,46 @@ export default function NotFoundSearch({ q }) {
 
     return (
         <section className={styles.notfoundContainer}>
-            <h1 className={styles.notfoundTitle}>Hasil <span className={styles.query}>{q}</span>Tidak Ditemukan 😢</h1>
+            <h1 className={styles.notfoundTitle}>
+                Hasil <span className={styles.query}>{Unslugify(q)}</span> Tidak Ditemukan 😢
+            </h1>
+
             <p className={styles.notfoundText}>
-                Maaf, kami tidak menemukan apa pun yang cocok dengan pencarian Anda.
-                Coba ketik ulang kata kunci di bawah ini.
+                Maaf, kami tidak menemukan produk yang sesuai dengan pencarian Anda.
+                Silakan periksa kembali kata kunci atau coba alternatif di bawah ini.
             </p>
+
+            {/* 👉 SUGGESTION */}
+            <div className={styles.notfoundSuggestion}>
+                <ul>
+                    {
+                        !suggest[0] ?
+                            <>
+                                <p>Rekomendasi dari kami:</p>
+                                {ListSearch.map((data, i) => {
+                                    return (
+                                        <li key={i}>
+                                            <Link href={`/search?q=${data}`}>{data}</Link>
+                                        </li>
+                                    )
+                                })}
+
+                            </>
+                            :
+
+                            <>
+                                <p>Mungkin yang Anda cari:</p>
+                                {suggest.map((suggest, i) => {
+                                    return (
+                                        <li key={i}>
+                                            <Link href={`/search?q=${suggest}`}>{suggest}</Link>
+                                        </li>
+                                    )
+                                })}
+                            </>
+                    }
+                </ul>
+            </div>
 
             <form onSubmit={handleSubmit} className={styles.notfoundForm}>
                 <input
@@ -45,5 +82,6 @@ export default function NotFoundSearch({ q }) {
                 </button>
             </form>
         </section>
+
     )
 }
