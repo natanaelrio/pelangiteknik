@@ -145,15 +145,15 @@ export default function Search({ ListSearch }) {
     return (
         <div className={styles.searchWrapper} onClick={handleWrapperClick} ref={navRefMobilePencarian}>
             <form onSubmit={handleSubmit} className={styles.form} >
-                <button type="submit" className={styles.icon}>
-                    <IoSearchOutline size={22} />
-                </button>
                 <input
                     type="text"
                     value={cari}
                     onChange={handleChange}
                     placeholder={placeholder}
                 />
+                <button type="submit" className={styles.icon}>
+                    <IoSearchOutline size={22} />
+                </button>
                 <button className={styles.mobile} type="submit">
                     <FaSearch />
                 </button>

@@ -207,9 +207,9 @@ export default function Header({ data, tombolwa, ListSearch }) {
               {!session ? (
                 status === 'loading' ? (
                   <>
-                    <Skeleton width={50} height={40} borderRadius={24} customHighlightBackground="white" baseColor="white" />
-                    <Skeleton width={50} height={40} borderRadius={24} customHighlightBackground="white" baseColor="white" />
-                    <Skeleton width={100} height={40} borderRadius={24} customHighlightBackground="white" baseColor="white" />
+                    <Skeleton width={40} height={34} borderRadius={24} customHighlightBackground="white" baseColor="white" />
+                    <Skeleton width={40} height={34} borderRadius={24} customHighlightBackground="white" baseColor="white" />
+                    <Skeleton width={100} height={34} borderRadius={24} customHighlightBackground="white" baseColor="white" />
                   </>
                 ) : (
                   <>
