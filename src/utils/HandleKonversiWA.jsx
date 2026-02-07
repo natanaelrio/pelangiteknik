@@ -7,8 +7,8 @@ import { Unslugify } from './unSlugify';
 import GetRandomPhoneNumber from './getRandomPhoneNumber';
 
 export default async function HandleKonversiWA({ productDetail, fromDataVoucher, Header }) {
-    // const NumberSales = await GetNumberSalesWA();
-    const NumberSales = await GetRandomPhoneNumber()
+    const NumberSales = await GetNumberSalesWA();
+    // const NumberSales = await GetRandomPhoneNumber()
     const now = new Date();
 
     const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };

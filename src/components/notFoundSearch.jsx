@@ -1,28 +1,32 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import toast from 'react-hot-toast'
-import { Slugify } from "@/utils/slugify";
-import { Unslugify } from "@/utils/unSlugify";
+import { Unslugify } from "@/utils/unSlugify"
 import styles from '@/components/notFoundSearch.module.css'
-import Link from 'next/link';
+import Link from 'next/link'
+import { HandleKonversiWA } from '@/utils/handleKonversiWA'
 
 export default function NotFoundSearch({ q, suggest, ListSearch }) {
-    const router = useRouter()
-    const [cari, setCari] = useState('')
+    const pathName = usePathname()
+    const [isLoadingWA, setIsLoadingWA] = useState(false)
 
-    const handleChange = (event) => {
-        setCari(Slugify(event.target.value))
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        if (cari.length >= 2) {
-            router.push(`/search?q=${cari}`)
-            toast.success('Sedang mencari hasil yang sesuai...')
-        } else {
-            toast.error('Minimal 2 karakter untuk pencarian.')
+    const handleWhatsapp = async () => {
+        try {
+            setIsLoadingWA(true)
+            const waUrl = await HandleKonversiWA({
+                Header: {
+                    q: q,
+                    pathName: pathName
+                }
+            })
+            setIsLoadingWA(false)
+            window.open(waUrl, "_blank")
+        } catch (e) {
+            console.log(e)
+            toast.error('Gagal membuka WhatsApp. Silakan coba lagi.')
+            setIsLoadingWA(false)
         }
     }
 
@@ -33,55 +37,49 @@ export default function NotFoundSearch({ q, suggest, ListSearch }) {
             </h1>
 
             <p className={styles.notfoundText}>
-                Maaf, kami tidak menemukan produk yang sesuai dengan pencarian Anda.
-                Silakan periksa kembali kata kunci atau coba alternatif di bawah ini.
+                Produk yang Anda cari belum tersedia.
+                Jangan khawatir — tim kami siap bantu mencarikannya untuk Anda.
             </p>
 
             {/* 👉 SUGGESTION */}
             <div className={styles.notfoundSuggestion}>
                 <ul>
                     {
-                        !suggest[0] ?
+                        !suggest[0] ? (
                             <>
                                 <p>Rekomendasi dari kami:</p>
-                                {ListSearch.map((data, i) => {
-                                    return (
-                                        <li key={i}>
-                                            <Link href={`/search?q=${data}`}>{data}</Link>
-                                        </li>
-                                    )
-                                })}
-
+                                {ListSearch.map((data, i) => (
+                                    <li key={i}>
+                                        <Link href={`/search?q=${data}`}>{data}</Link>
+                                    </li>
+                                ))}
                             </>
-                            :
-
+                        ) : (
                             <>
                                 <p>Mungkin yang Anda cari:</p>
-                                {suggest.map((suggest, i) => {
-                                    return (
-                                        <li key={i}>
-                                            <Link href={`/search?q=${suggest}`}>{suggest}</Link>
-                                        </li>
-                                    )
-                                })}
+                                {suggest.map((item, i) => (
+                                    <li key={i}>
+                                        <Link href={`/search?q=${item}`}>{item}</Link>
+                                    </li>
+                                ))}
                             </>
+                        )
                     }
                 </ul>
             </div>
 
-            <form onSubmit={handleSubmit} className={styles.notfoundForm}>
-                <input
-                    type="text"
-                    placeholder="Cari produk, kategori, atau merek..."
-                    value={cari}
-                    onChange={handleChange}
-                    className={styles.notfoundInput}
-                />
-                <button type="submit" className={styles.notfoundButton}>
-                    Cari Lagi 🔍
+            {/* 👉 CTA WHATSAPP */}
+            <div className={styles.notfoundCTA}>
+                <button
+                    onClick={handleWhatsapp}
+                    disabled={isLoadingWA}
+                    className={styles.notfoundButton}
+                >
+                    {isLoadingWA
+                        ? 'Menghubungkan ke WhatsApp...'
+                        : '💬 Tanya Produk via WhatsApp'}
                 </button>
-            </form>
+            </div>
         </section>
-
     )
 }
