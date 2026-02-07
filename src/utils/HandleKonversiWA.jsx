@@ -1,3 +1,5 @@
+'use client'
+
 import { sendGAEventL } from '@/lib/ga';
 import { sendGTMEventt } from '@/lib/gtm';
 import { HandleNotifikasiPerson, HandleNotifikasiWA } from '@/service/handleNotifikasiWA';
