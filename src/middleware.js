@@ -195,22 +195,36 @@ export async function middleware(request) {
         // kalau ada salah satu (q atau tag atau m) → cek API
         if (q || m) {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/elasticSearch/elasticSearchUser?page=${1}&limit=${1}&m=${m ? m : 'undefined'}&query=${searchParams.get("q") ? searchParams.get("q") : ''}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `${process.env.NEXT_PUBLIC_SECREET}`
-                    },
-                    next: {
-                        revalidate: 0
+                const res = await fetch(
+                    `${process.env.NEXT_PUBLIC_URL_API}/api/elasticSearch/elasticSearchUser?page=1&limit=1&m=${m ?? 'undefined'}&query=${searchParams.get("q") ?? ''}`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': process.env.NEXT_PUBLIC_SECREET
+                        },
+                        next: { revalidate: 0 }
                     }
-                });
-                const data = await res.json();
-                const kategori = data?.data?.data || [];
+                )
 
-                if (kategori.length === 0) {
-                    return NextResponse.redirect(new URL('/contact', request.url));
+                const data = await res.json()
+
+                const suggestLength = data?.suggest?.[0]?.length || 0
+                const kategori = data?.data?.data || []
+
+
+                // 🚫 JANGAN redirect kalau ada suggest
+                if (suggestLength > 0) {
+                    return
                 }
+
+                // ✅ redirect hanya kalau:
+                // - suggest kosong
+                // - kategori kosong
+                if (kategori.length === 0) {
+                    return NextResponse.redirect(new URL('/contact', request.url))
+                }
+
             } catch (err) {
                 console.error("Gagal ambil kategori:", err);
             }
