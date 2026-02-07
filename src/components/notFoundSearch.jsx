@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import { Unslugify } from "@/utils/unSlugify"
 import styles from '@/components/notFoundSearch.module.css'
 import Link from 'next/link'
-import { HandleKonversiWA } from '@/utils/handleKonversiWA'
+import HandleKonversiWA from '@/utils/handleKonversiWA'
 
 export default function NotFoundSearch({ q, suggest, ListSearch }) {
     const pathName = usePathname()
