@@ -354,9 +354,9 @@ export default function Product({ data, season }) {
 
                                             <IoIosArrowForward /> */}
                                 </ul>
-                                <div className={styles.bagikan} onClick={setIsShare}>
-                                    <FaShareAlt size={20} />
-                                </div>
+                                    {/* <div className={styles.bagikan} onClick={setIsShare}>
+                                        <FaShareAlt size={20} />
+                                    </div> */}
                             </div>
                             <h1 className={styles.judul}>
                                 {data?.productName}
