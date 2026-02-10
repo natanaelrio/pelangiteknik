@@ -201,7 +201,111 @@
     margin-right: 10px;
     /* display: flex;
     gap: 20px; */
+    border-radius: 999px;
 }
+
+.review .slide1 button {
+    border-radius: 999px;
+}
+
+.slide2 {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+/* target langsung semua button di slide2 */
+
+
+.slide2 button {
+    background: transparent;
+    color: var(--colorthrid);
+    /* text-text */
+    border: 1px solid #ddd;
+    /* stroke-text */
+
+    font-size: 16px;
+    /* text-buttonLarge */
+    font-weight: 700;
+    /* font-buttonLarge */
+
+    gap: 5px;
+
+    padding: 12px;
+    /* p-space-12 */
+    border-radius: 999px;
+    /* rounded-radius-max */
+
+    width: 100%;
+    position: relative;
+
+    transition: all 0.2s ease;
+
+}
+
+.slide2 .buttonOutlined1 {
+    background-color: rgb(237, 190, 20) !important;
+}
+
+.slide2 .buttonOutlined1:hover {
+    background-color: rgba(237, 190, 20, 0.741) !important;
+}
+
+.slide2 .buttonOutlined2 {
+    background-color: rgb(25, 20, 1) !important;
+    color: var(--colorsekunder);
+}
+
+.slide2 .buttonOutlined2:hover {
+    background-color: rgba(25, 20, 1, 0.741) !important;
+}
+
+/* hover */
+.slide2 button:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* focus */
+.slide2 button:focus-visible {
+    outline: none;
+    box-shadow:
+        0 0 0 2px #3b82f6,
+        /* ring */
+        0 0 0 4px #ffffff;
+    /* ring-offset-2 */
+}
+
+/* active */
+.slide2 button:active {
+    transform: scale(0.99);
+}
+
+/* tombol kiri */
+.primary {
+    background: #eeeeee;
+    color: #000;
+}
+
+.slide2 button.primary:hover {
+    background: #e0e0e0;
+}
+
+/* tombol kanan */
+.secondary {
+    background: #ffffff;
+    color: #000;
+    border: 1px solid #e5e5e5;
+}
+
+.slide2 button.secondary:hover {
+    background: #f7f7f7;
+}
+
+/* icon */
+.slide2 button svg {
+    font-size: 16px;
+}
+
 
 .review .buu .stock {
     text-align: right;
@@ -414,16 +518,17 @@
     flex-direction: column;
     gap: 8px;
     font-family: sans-serif;
+    font-size: clamp(14px, 1.2vw, 20px);
 }
 
 .qty .boxqty {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 .qty .label {
-    font-size: clamp(14px, 1.2vw, 20px);
+
     font-weight: 600;
 }
 
@@ -431,9 +536,9 @@
     display: flex;
     align-items: center;
     /* gap: 20px; */
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    /* padding: 10px 16px; */
+    border: 1px solid var(--colorthrid);
+    border-radius: 999px;
+    padding: 1px 6px;
     width: fit-content;
 }
 
@@ -447,10 +552,12 @@
     user-select: none;
     width: 60px;
     /* height: 40px; */
+    /* font-size: 14px; */
+    height: 40px !important;
 }
 
 .qty .btn button {
-    padding: 0 20px;
+    padding: 20px;
 }
 
 .qty button {
@@ -463,13 +570,14 @@
 }
 
 .qty .value {
-    width: 50px;
+    width: 24px;
     text-align: center;
-    font-size: clamp(16px, 1.5vw, 20px);
+    font-size: clamp(14px, 1.5vw, 20px);
     border: none;
     outline: none;
     background: transparent;
     padding: 0;
+    /* font-size: 14px; */
 }
 
 /* Hilangkan spinner Chrome */

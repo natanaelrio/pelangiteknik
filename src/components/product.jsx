@@ -17,7 +17,7 @@ import { useRouter } from 'nextjs-toploader/app';
 import Link from 'next/link';
 import Bagikan from '@/components/bagikan'
 import { FaShareAlt } from "react-icons/fa";
-import { MdOutlineSimCardDownload } from "react-icons/md";
+import { MdOutlineIosShare, MdOutlineSimCardDownload } from "react-icons/md";
 import { CapitalizeWords } from '@/utils/CapitalizeWords';
 import { Slugify } from '@/utils/slugify';
 import { sendGAEventL } from '@/lib/ga';
@@ -354,7 +354,7 @@ export default function Product({ data, season }) {
 
                                             <IoIosArrowForward /> */}
                                 </ul>
-                                    {/* <div className={styles.bagikan} onClick={setIsShare}>
+                                {/* <div className={styles.bagikan} onClick={setIsShare}>
                                         <FaShareAlt size={20} />
                                     </div> */}
                             </div>
@@ -393,16 +393,25 @@ export default function Product({ data, season }) {
 
                             <div className={styles.buu}>
                                 <div className={styles.slide1}>
-
                                     {season ? <button disabled={isLoading} onClick={handleBeliSekarang}>
                                         {isLoading ? <BeatLoader color='white' /> : 'Tambah Keranjang'}
                                     </button> : <button disabled={isLoading} onClick={handleBeliSekarangLogin}>
                                         {isLoading ? <BeatLoader color='white' /> : 'Beli Sekarang'}
                                     </button>}
-                                    <button onClick={() => HandlePenawaran(data)} className={styles.penawaran}>
-                                        <MdOutlineSimCardDownload /> &nbsp; Surat Penawaran
+                                </div>
+
+                                <div className={styles.slide2}>
+                                    <button onClick={() => HandlePenawaran(data)} className={styles.buttonOutlined1}>
+                                        <MdOutlineSimCardDownload />
+                                        Surat Penawaran
+                                    </button>
+
+                                    <button onClick={setIsShare} className={styles.buttonOutlined2}>
+                                        <MdOutlineIosShare />
+                                        Bagikan Produk
                                     </button>
                                 </div>
+
 
                                 {/* <div className={styles.waandpenawaran}>
                                     <button id="whatsapp-button" disabled={isLoadingWA} onClick={handleWhatsapp} className={styles.whatsapp}>

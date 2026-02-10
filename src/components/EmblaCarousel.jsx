@@ -144,7 +144,7 @@ const EmblaCarousel = ({ productName, e, yt, type, fMerek }) => {
                                         {type && fMerek &&
                                             <>
                                                 <div className={styles.typemerek}>
-                                                    <span className={`${styles.fMerek} ${merekClass[fMerek[0]?.name?.toLowerCase()] || ''
+                                                    <span className={`${styles.fMerek}
                                                         }`}
                                                     >{fMerek[0]?.name.toUpperCase()}</span>
                                                     <span className={styles.type}>{type.toUpperCase()}</span>
