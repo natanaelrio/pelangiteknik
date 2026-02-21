@@ -29,8 +29,8 @@ export async function generateMetadata({ params, searchParams }, parent) {
         ?.filter(Boolean) || [];
 
 
-    const title = aw.data.data.length ? `Jual ${Unslugify(aw?.suggest[0] ? aw?.suggest[0] : q)}${m ? ' ' + Unslugify(m) : ''} - Kualitas Terbaik, Harga Spesial ${currentMonth} ${currentYear} & Garansi Resmi - Pelangi Teknik` : 'Halaman Rekomendasi Pencarian Pelangiteknik';
-    const description = aw.data.data.length ? `Temukan berbagai pilihan ${Unslugify(aw?.suggest[0] ? aw?.suggest[0] : q)} di Pelangi Teknik. Kami menyediakan berbagai produk dan layanan terbaik sesuai kebutuhan Anda.` : 'Halaman Rekomendasi Pencarian Pelangiteknik';
+    const title = aw?.data?.data?.length ? `Jual ${Unslugify(aw?.suggest[0] ? aw?.suggest[0] : q)}${m ? ' ' + Unslugify(m) : ''} - Kualitas Terbaik, Harga Spesial ${currentMonth} ${currentYear} & Garansi Resmi - Pelangi Teknik` : 'Halaman Rekomendasi Pencarian Pelangiteknik';
+    const description = aw?.data?.data?.length ? `Temukan berbagai pilihan ${Unslugify(aw?.suggest[0] ? aw?.suggest[0] : q)} di Pelangi Teknik. Kami menyediakan berbagai produk dan layanan terbaik sesuai kebutuhan Anda.` : 'Halaman Rekomendasi Pencarian Pelangiteknik';
 
     return {
         title,
@@ -118,7 +118,7 @@ export default async function Page({ params, searchParams }) {
             </>
             : <NotFoundSearch
                 q={q}
-                suggest={res.suggest}
+                suggest={res?.suggest}
                 ListSearch={ListSearch} />
     );
 }
