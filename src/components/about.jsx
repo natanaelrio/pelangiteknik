@@ -1,37 +1,94 @@
+'use client'
+
+import { useState } from 'react'
 import styles from '@/components/about.module.css'
 import Image from 'next/image'
-import Link from 'next/link';
-import { IoMdDownload } from "react-icons/io";
+import Link from 'next/link'
+import { IoMdDownload } from "react-icons/io"
+
 export default function About() {
+
+    const [lang, setLang] = useState('id')
+
+    const content = {
+        id: {
+            tentang: "Tentang Kami",
+            deskripsi: `PT Pelangi Teknik Indonesia berdiri sejak tahun 2013,
+memproduksi dan mendistribusikan berbagai kebutuhan mesin untuk sektor pertanian,
+konstruksi, industri, hingga genset untuk pabrik dan rumahan.
+
+Produk dengan merek Tsuzumi Japan menjadi salah satu pilihan terlaris di pasaran.
+Kepuasan pelanggan adalah prioritas utama dengan menghadirkan kualitas terbaik dan layanan profesional.`,
+            visiTitle: "Visi",
+            visi: "Menjadi perusahaan terkemuka dalam penjualan alat teknik di Indonesia yang berorientasi pada kepuasan pelanggan.",
+            misiTitle: "Misi",
+            misi1: "Memberikan produk terbaik serta layanan purna jual yang profesional.",
+            misi2: "Mengelola perusahaan dengan prinsip good corporate governance dan SDM profesional.",
+            portfolio: "PORTOFOLIO",
+            download: "Surat Tanda Pendaftaran Distributor/Agen"
+        },
+        en: {
+            tentang: "About Us",
+            deskripsi: `PT Pelangi Teknik Indonesia was established in 2013,
+manufacturing and distributing machinery for agriculture,
+construction, industrial sectors, and generators for factories and residential use.
+
+Products under the Tsuzumi Japan brand are among the best-selling in the market.
+Customer satisfaction is our top priority by delivering quality products and professional service.`,
+            visiTitle: "Vision",
+            visi: "To become a leading company in technical equipment sales in Indonesia with a strong focus on customer satisfaction.",
+            misiTitle: "Mission",
+            misi1: "Deliver high-quality products with professional after-sales service.",
+            misi2: "Manage the company with good corporate governance supported by professional human resources.",
+            portfolio: "PORTFOLIO",
+            download: "Distributor/Agent Registration Certificate"
+        }
+    }
+
     return (
         <>
+            {/* LANGUAGE SWITCH */}
+            <div className={styles.langSwitcher}>
+                <button
+                    onClick={() => setLang('id')}
+                    className={`${styles.langButton} ${lang === 'id' ? styles.active : ''}`}
+                >
+                    <span className={styles.flag}>🌐</span>
+                    ID
+                </button>
+
+                <button
+                    onClick={() => setLang('en')}
+                    className={`${styles.langButton} ${lang === 'en' ? styles.active : ''}`}
+                >
+                    <span className={styles.flag}>🌐</span>
+                    EN
+                </button>
+            </div>
+
+            {/* HERO SECTION */}
             <div className={styles.container}>
                 <div className={styles.gambar}>
                     <div className={styles.gambarasli}>
-                        <Image src={`${process.env.NEXT_PUBLIC_URL}/1.jpg`}
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_URL}/1.jpg`}
                             width={4080}
-                            height={3072}>
-                        </Image>
+                            height={3072}
+                            alt="company"
+                        />
                         <div className={styles.gradient}></div>
                     </div>
                     <div className={styles.mask}></div>
                     <div className={styles.tulisan}>
                         <div className={styles.isi}>
-                            <div className={styles.judul}>Tentang Kami</div>
-                            <div className={styles.desc}> PT Pelangi Teknik Indonesia berdiri sejak tahun 2013,
-                                memproduksi dan mendistribusikan berbagai keperluan
-                                mesin-mesin untuk berbagai sektor mulai dari proyek-
-                                proyek pertanian, konstruksi, pabrik hingga kebutuhan
-                                mesin genset untuk pabrik dan rumahan.
-                                <br />
-                                <br />
-                                Produk-produk dengan merk Tsuzumi Japan menjadi
-                                salah satu pilihan paling laris di pasaran. Kepuasan
-                                pelanggan adalah kunci utama keberhasilan kami
-                                dengan mengedepankan kualitas dan servis yang baik.
+                            <div className={styles.judul}>
+                                {content[lang].tentang}
+                            </div>
+                            <div className={styles.desc}>
+                                {content[lang].deskripsi}
                                 <div className={styles.download}>
                                     <Link href={'/SURAT-TANDA-PENDAFTARAN-DISTRIBUTOR-ATAU-AGEN-PELANGITEKNIKINDONESIA.pdf'}>
-                                        Surat Tanda Pendaftaran Distributor/Agen &nbsp;<IoMdDownload />
+                                        {content[lang].download} <IoMdDownload />
                                     </Link>
                                 </div>
                             </div>
@@ -39,42 +96,44 @@ export default function About() {
                     </div>
                 </div>
             </div>
+
+            {/* VISI MISI */}
             <div className={styles.container}>
                 <div className={styles.containerbawah}>
                     <div className={styles.gambarbawah}>
-                        <Image src={`${process.env.NEXT_PUBLIC_URL}/2.png`}
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_URL}/2.png`}
                             width={1080}
                             height={1072}
-                            alt='gambar1'
-                        >
-                        </Image>
+                            alt="vision"
+                        />
                     </div>
                     <div className={styles.text}>
                         <div>
-                            <div className={styles.judul}>Visi :</div>
+                            <div className={styles.judul}>
+                                {content[lang].visiTitle}
+                            </div>
                             <div className={styles.desc}>
-                                Menjadi Perusahaan terkemuka dalam penjualan alat-alat Teknik di Indonesia yang berorientasi pada kepuasan pelanggan.
+                                {content[lang].visi}
                             </div>
                         </div>
+
                         <div>
-                            <div className={styles.judul}>Misi :</div>
+                            <div className={styles.judul}>
+                                {content[lang].misiTitle}
+                            </div>
                             <div className={styles.desc}>
                                 <ol>
-                                    <li>
-                                        Menyenangkan Pelanggan dengan
-                                        memberikan produk-produk terbaik dan
-                                        layanan Purna Jual yang profesional.
-                                    </li>
-                                    <li>
-                                        Mengelola perusahaan secara good corporate
-                                        governance didukung SDM profesional, jujur,
-                                        disiplin, bertanggung jawab, good team work.</li>
+                                    <li>{content[lang].misi1}</li>
+                                    <li>{content[lang].misi2}</li>
                                 </ol>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* PORTFOLIO */}
             <div className={styles.container}>
                 <div className={styles.containerprotofolio}>
                     <div className={styles.judul} style={{ textAlign: 'center', padding: '30px 0px' }}>PORTOFOLIO</div>
@@ -252,6 +311,5 @@ export default function About() {
                 </div>
             </div>
         </>
-
     )
 }
