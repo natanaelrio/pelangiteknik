@@ -80,7 +80,7 @@ export default async function RootLayout({ children }) {
         <Toaster />
         <NextTopLoader
           color="#2299DD"
-          height={3}
+          height={1}
           crawl
           showSpinner={false}
           shadow="0 0 10px #2299DD,0 0 5px #2299DD"
