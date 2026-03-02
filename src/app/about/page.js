@@ -5,6 +5,7 @@ import Rating from "@/components/rating";
 import { GetListKategori, GetGoogleMap } from "@/controllers/userNew";
 import redis from "@/lib/redis";
 import { RedisSatuHari } from "@/utils/RedisSatuHari";
+import { secondsUntilMidnight } from "@/utils/secondsUntilMidnight";
 
 export const metadata = {
     title: "Halaman Tentang dan Portofolio | Pelangi Teknik",
@@ -13,6 +14,7 @@ export const metadata = {
 };
 
 export default async function Page() {
+
     try {
         // 🔍 Ambil dari Redis (paralel)
         const [cachedKategori, cachedMap] = await Promise.all([
@@ -29,7 +31,7 @@ export default async function Page() {
         // 💾 Simpan ulang data baru ke Redis (TTL berbeda)
         await Promise.allSettled([
             redis.set("data:kategori", JSON.stringify(dataKategori), "EX", RedisSatuHari()), // 1 hari
-            redis.set("data:googleMap", JSON.stringify(dataGoogleMap), "EX", 604800), // 7 hari
+            redis.set("data:googleMap", JSON.stringify(dataGoogleMap), "EX", secondsUntilMidnight()), // 7 hari
         ]);
 
         // ✅ Render halaman

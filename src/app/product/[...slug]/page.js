@@ -9,6 +9,7 @@ import redis from "@/lib/redis";
 import { notFound } from "next/navigation";
 import { RedisSatuHari } from "@/utils/RedisSatuHari";
 import ProductSchema from "@/utils/ProductSchemaProduct";
+import { secondsUntilMidnight } from "@/utils/secondsUntilMidnight";
 
 export const dynamic = "force-dynamic";
 
@@ -103,7 +104,7 @@ export default async function Page({ params }) {
             : Promise.resolve(),
 
         dataGoogleMap
-            ? redis.set("data:googleMap", JSON.stringify(dataGoogleMap), "EX", 604800) // 7 hari
+            ? redis.set("data:googleMap", JSON.stringify(dataGoogleMap), "EX", secondsUntilMidnight()) // 7 hari
             : Promise.resolve(),
     ]);
 

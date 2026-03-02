@@ -7,6 +7,7 @@ import Rating from "@/components/rating";
 import Banner from "@/components/Banner";
 import redis from "@/lib/redis";
 import { RedisSatuHari } from "@/utils/RedisSatuHari";
+import { secondsUntilMidnight } from "@/utils/secondsUntilMidnight";
 
 export const metadata = {
   title: "Pelangi Teknik | Pusat Pembelian Peralatan Genset NO 1",
@@ -40,7 +41,7 @@ export default async function Home() {
     redis.set("data:kategori", JSON.stringify(dataKategori), "EX", RedisSatuHari()), // 7 hari = 604800 detik
     redis.set("data:productBest", JSON.stringify(dataListProductBest), "EX", RedisSatuHari()), // 7 hari
     redis.set("data:productList", JSON.stringify(dataListProduct), "EX", 3600), // 1 jam = 3600 detik
-    redis.set("data:googleMap", JSON.stringify(dataGoogleMap), "EX", 604800), // 7 hari
+    redis.set("data:googleMap", JSON.stringify(dataGoogleMap), "EX", secondsUntilMidnight()), // 7 hari
   ]);
 
   // ✅ Render komponen
