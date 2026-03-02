@@ -381,7 +381,7 @@ export const GetGoogleMap = async (id) => {
     const apiKey = "AIzaSyAD2Xe_OgJBHLBbvCW78ohZzWMPv1-jEFQ";
 
     try {
-        const response = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=review&key=${apiKey}&language=id  `, {
+        const response = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&reviews_sort=newest&language=id&key=${apiKey}  `, {
             // Tidak ada opsi tambahan yang diperlukan
             next: {
                 revalidate: 0
