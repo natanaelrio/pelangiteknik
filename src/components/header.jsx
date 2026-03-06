@@ -195,7 +195,7 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
             </div> */}
           </div>
         ),
-        { duration: 4800 }
+        { duration: 5500 }
       );
 
       setIndex((prev) => (prev + 1) % dataPesanan.length);

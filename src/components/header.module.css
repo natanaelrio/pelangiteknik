@@ -553,60 +553,67 @@
     flex-direction: column;
     gap: 10px;
     z-index: 9999;
-    font-size: 14px;
 }
 
 .toast {
-    max-width: 420px;
+    max-width: 380px;
     width: 100%;
-    background: #fff;
-    border-radius: 10px;
-    display: flex;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background: #ffffff;
+    border-radius: 12px;
     border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
     overflow: hidden;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
 }
 
 .toastContent {
-    flex: 1;
-    padding: 16px;
+    padding: 14px 16px;
 }
 
 .toastBody {
     display: flex;
     align-items: flex-start;
+    gap: 12px;
 }
 
-.toastAvatar img {
-    width: 40px;
-    height: 40px;
+.toastAvatar {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
     border-radius: 50%;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4b5563;
+}
+
+.toastAvatar svg {
+    width: 18px;
+    height: 18px;
 }
 
 .toastText {
-    margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.4;
 }
 
 .toastTitle {
     font-size: 14px;
     font-weight: 600;
+    color: #111827;
+    margin: 0;
 }
 
 .toastMessage {
-    font-size: 14px;
-    margin-top: 4px;
-    color: #6b7280;
+    font-size: 13px;
+    color: #4b5563;
+    margin-top: 2px;
 }
 
-.toastAction {
-    border-left: 1px solid #eee;
-    display: flex;
-    align-items: center;
-}
-
-.toastAction button {
-    padding: 16px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
+.toastInfo {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 3px;
 }
