@@ -198,7 +198,7 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
         { duration: 4800 }
       );
 
-      setIndex((prev) => (prev + 1) % pembelian.length);
+      setIndex((prev) => (prev + 1) % dataPesanan.length);
     }, 5000);
 
     return () => clearInterval(interval);
