@@ -177,12 +177,12 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
                   </svg>
                 </div>
                 <div className={styles.toastText}>
-                  <p className={styles.toastTitle}>{data.nama_lengkap_user}</p>
+                  <p className={styles.toastTitle}>{data?.nama_lengkap_user}</p>
                   <p className={styles.toastMessage}>
-                    membeli {data.dataPesananItems[0].productName}
+                    membeli {data?.dataPesananItems[0]?.productName}
                   </p>
                   <p className={styles.toastInfo}>
-                    {data.dataPesananItems[0].quantity} unit • {formatRupiah(data.dataPesananItems[0].price)} • {FormatJamIndonesia(data.dataPesananItems[0].start)}
+                    {data?.dataPesananItems[0]?.quantity} unit • {formatRupiah(data?.dataPesananItems[0]?.price)} • {FormatJamIndonesia(data?.dataPesananItems[0]?.start)}
                   </p>
                 </div>
               </div>
