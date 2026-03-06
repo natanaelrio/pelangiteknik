@@ -63,6 +63,12 @@
 .header {
     width: 100%;
     background: var(--colormain);
+    background-image: url("/ramadhan.webp");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    /* mirip object-fit: contain */
+
     position: sticky;
     top: 0;
     z-index: 100;
@@ -515,4 +521,92 @@
     .banner {
         display: none
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.toastWrapper {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+    font-size: 14px;
+}
+
+.toast {
+    max-width: 420px;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.toastContent {
+    flex: 1;
+    padding: 16px;
+}
+
+.toastBody {
+    display: flex;
+    align-items: flex-start;
+}
+
+.toastAvatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.toastText {
+    margin-left: 12px;
+}
+
+.toastTitle {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.toastMessage {
+    font-size: 14px;
+    margin-top: 4px;
+    color: #6b7280;
+}
+
+.toastAction {
+    border-left: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.toastAction button {
+    padding: 16px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
 }

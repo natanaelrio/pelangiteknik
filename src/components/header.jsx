@@ -17,8 +17,9 @@ import TanggalGA from "@/utils/TanggalGA"
 import HandleKonversiWA from "@/utils/HandleKonversiWA"
 import toast from "react-hot-toast"
 import { useRouter } from 'nextjs-toploader/app';
+import { FormatJamIndonesia } from "@/utils/FormatJamIndonesia"
 
-export default function Header({ data, tombolwa, ListSearch }) {
+export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
   const setIsLogin = useStore((state) => state.setIsLogin)
   const { data: session, status } = useSession()
 
@@ -136,6 +137,74 @@ export default function Header({ data, tombolwa, ListSearch }) {
       behavior: 'smooth',
     })
   }
+
+  const [index, setIndex] = useState(0);
+
+  const formatRupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0
+    }).format(number);
+  };
+
+  useEffect(() => {
+
+    // jika layar <= 768px (mobile) tidak dijalankan
+    if (window.innerWidth <= 768) return;
+
+    const interval = setInterval(() => {
+      const data = dataPesanan[index];
+
+      toast.custom(
+        (t) => (
+          <div
+            className={`${styles.toast} ${t.visible ? styles.toastEnter : styles.toastLeave
+              }`}
+          >
+            <div className={styles.toastContent}>
+              <div className={styles.toastBody}>
+
+                <div className={styles.toastAvatar}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-4.3 0-8 2.2-8 5v1h16v-1c0-2.8-3.7-5-8-5z" />
+                  </svg>
+                </div>
+                <div className={styles.toastText}>
+                  <p className={styles.toastTitle}>{data.nama_lengkap_user}</p>
+                  <p className={styles.toastMessage}>
+                    membeli {data.dataPesananItems[0].productName}
+                  </p>
+                  <p className={styles.toastInfo}>
+                    {data.dataPesananItems[0].quantity} unit • {formatRupiah(data.dataPesananItems[0].price)} • {FormatJamIndonesia(data.dataPesananItems[0].start)}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* <div className={styles.toastAction}>
+              <button onClick={() => toast.dismiss(t.id)}>
+                Close
+              </button>
+            </div> */}
+          </div>
+        ),
+        { duration: 4800 }
+      );
+
+      setIndex((prev) => (prev + 1) % pembelian.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+
+  }, [index]);
+
   return (
     <header className={styles.header}>
 
@@ -264,6 +333,7 @@ export default function Header({ data, tombolwa, ListSearch }) {
             </button>
           </div>
         </div>
+
 
 
         {/* MENU MOBILE */}

@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 import Provider from "@/lib/provider";
 import HeaderFooter from "@/components/layout/headerFooter";
 import redis from "@/lib/redis";
-import { GetListKategori } from "@/controllers/userNew"; // ✅ Tambahkan import ini
+import { GetDataPesanan, GetListKategori } from "@/controllers/userNew"; // ✅ Tambahkan import ini
 import { RedisSatuHari } from "@/utils/RedisSatuHari";
 import { GetSearchRedis } from "@/controllers/redis";
 
@@ -26,35 +26,56 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  let dataKategori = null;
-  let ListSearch = await GetSearchRedis()
+  let dataKategori = [];
+  let dataPesanan = [];
+  let ListSearch = await GetSearchRedis();
 
   try {
 
-    // const ListSearchtry = await redis.zrevrange("search:index", 0, 10);
-    // ListSearch = ListSearchtry
+    // 🔍 ambil cache kategori
+    const cachedKategori = await redis.get("data:kategori");
+    const cachedPesanan = await redis.get("data:pesanan");
 
-    // 🔍 Coba ambil dari Redis
-    const cached = await redis.get("data:kategori");
-
-    if (cached) {
-      dataKategori = JSON.parse(cached);
+    if (cachedKategori) {
+      dataKategori = JSON.parse(cachedKategori);
     } else {
-      // 🗄️ Ambil dari API jika cache kosong
-      const fresh = await GetListKategori();
+      const freshKategori = await GetListKategori();
 
-      // ✅ Simpan hanya jika data valid
-      if (fresh && Array.isArray(fresh) && fresh.length > 0) {
-        await redis.set("data:kategori", JSON.stringify(fresh), "EX", RedisSatuHari()); // TTL 1 hari
+      if (freshKategori && Array.isArray(freshKategori) && freshKategori.length > 0) {
+        await redis.set(
+          "data:kategori",
+          JSON.stringify(freshKategori),
+          "EX",
+          RedisSatuHari()
+        );
       }
 
-      dataKategori = fresh;
+      dataKategori = freshKategori || [];
     }
+
+    // 🔍 ambil cache pesanan
+    if (cachedPesanan) {
+      dataPesanan = JSON.parse(cachedPesanan);
+    } else {
+      const freshDataPesanan = await GetDataPesanan();
+
+      if (freshDataPesanan && Array.isArray(freshDataPesanan)) {
+        await redis.set(
+          "data:pesanan",
+          JSON.stringify(freshDataPesanan),
+          "EX",
+          60 // cache 1 menit (karena pesanan biasanya realtime)
+        );
+      }
+
+      dataPesanan = freshDataPesanan || [];
+    }
+
   } catch (error) {
-    console.error("⚠️ Redis or GetListKategori error:", error);
-    // fallback kosong biar tidak crash
+    console.error("⚠️ Redis or API error:", error);
+
     dataKategori = [];
-    // ListSearch = []
+    dataPesanan = [];
   }
 
   return (
@@ -77,7 +98,7 @@ export default async function RootLayout({ children }) {
         {/* <GoogleTagManager gtmId="GTM-MB2V66M2" /> */}
 
         {/* ⚙️ UI Utilities */}
-        <Toaster />
+        <Toaster position="bottom-left" />
         <NextTopLoader
           color="#2299DD"
           height={1}
@@ -89,7 +110,11 @@ export default async function RootLayout({ children }) {
 
         {/* 🧱 Layout utama */}
         <Provider>
-          <HeaderFooter data={dataKategori || []} ListSearch={ListSearch} tombolwa={true}>
+          <HeaderFooter
+            dataPesanan={dataPesanan || []}
+            data={dataKategori || []}
+            ListSearch={ListSearch}
+            tombolwa={true}>
             {children}
           </HeaderFooter>
         </Provider>

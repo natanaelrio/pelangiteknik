@@ -10,7 +10,7 @@ import Penawaran from "@/components/Penawaran";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
-export default function HeaderFooter({ children, data, ListSearch }) {
+export default function HeaderFooter({ children, data, ListSearch, dataPesanan }) {
   const openFormData = useStore((state) => state.openFormData)
   const isLogin = useStore((state) => state.isLogin)
   const isPenawaran = useStore((state) => state.isPenawaran)
@@ -26,6 +26,7 @@ export default function HeaderFooter({ children, data, ListSearch }) {
       <main className={styles.container} >
         <Suspense fallback={<div>Loading header...</div>}>
           <Header
+            dataPesanan={dataPesanan || []}
             data={data}
             tombolwa={!whatsapp}
             ListSearch={ListSearch}
