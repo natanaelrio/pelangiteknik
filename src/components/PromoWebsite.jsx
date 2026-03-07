@@ -43,7 +43,7 @@ export default function PromoWebsite({ onShop }) {
 
                     <button
                         className={styles.button}
-                        onClick={onShop}
+                        onClick={() => setShow(false)}
                     >
                         Mengerti
                     </button>
