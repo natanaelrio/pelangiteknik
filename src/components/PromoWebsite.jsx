@@ -1,7 +1,7 @@
 'use client'
 import styles from '@/components/PromoWebsite.module.css'
 import { useState } from "react";
-
+import Image from "next/image";
 export default function PromoWebsite({ onShop }) {
     const [show, setShow] = useState(true);
 
@@ -22,7 +22,9 @@ export default function PromoWebsite({ onShop }) {
                 </button>
 
                 <div className={styles.imageWrapper}>
-                    <img
+                    <Image
+                        width={500}
+                        height={260}
                         src="/emoney3.jpg"
                         alt="Promo Belanja Website"
                     />
