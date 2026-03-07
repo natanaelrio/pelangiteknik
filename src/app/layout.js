@@ -66,7 +66,7 @@ export default async function RootLayout({ children }) {
           "data:pesanan",
           JSON.stringify(freshDataPesanan),
           "EX",
-          60 // cache 1 menit (karena pesanan biasanya realtime)
+          RedisSatuHari()
         );
       }
 
