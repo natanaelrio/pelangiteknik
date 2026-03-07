@@ -26,6 +26,8 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
+
+  // const pathName = typeof window !== "undefined" ? window.location.pathname : "";
   let dataKategori = [];
   let dataPesanan = [];
   let ListSearch = await GetSearchRedis();

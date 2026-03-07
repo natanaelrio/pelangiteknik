@@ -18,6 +18,7 @@ import HandleKonversiWA from "@/utils/HandleKonversiWA"
 import toast from "react-hot-toast"
 import { useRouter } from 'nextjs-toploader/app';
 import { FormatJamIndonesia } from "@/utils/FormatJamIndonesia"
+import PromoWebsite from "@/components/PromoWebsite";
 
 export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
   const setIsLogin = useStore((state) => state.setIsLogin)
@@ -148,10 +149,22 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
     }).format(number);
   };
 
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    setIsActive(!pathName.startsWith("/cart"));
+  }, [pathName]);
+
+
   useEffect(() => {
 
     // jika layar <= 768px (mobile) tidak dijalankan
     if (window.innerWidth <= 768) return;
+
+    // // jika halaman cart tidak dijalankan
+    // if (pathName === "/cart") return;
+
+    if (!isActive) return
 
     const interval = setInterval(() => {
       const data = dataPesanan[index];
@@ -195,7 +208,7 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
             </div> */}
           </div>
         ),
-        { duration: 5500 }
+        { duration: 1000 }
       );
 
       setIndex((prev) => (prev + 1) % dataPesanan.length);
@@ -205,47 +218,50 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
 
   }, [index]);
 
+
   return (
-    <header className={styles.header}>
+    <>
+      {isActive && <PromoWebsite />}
+      <header className={styles.header}>
 
-      {Boolean(tombolwa) && (
+        {Boolean(tombolwa) && (
 
-        <button
-          disabled={isLoadingWA}
-          className={styles.tombolwa}
-          id="whatsapp-button"
-          onClick={handleWhatsapp}>
-          <div className={styles.tombolwadalam}>
-            <Image src={`${process.env.NEXT_PUBLIC_URL}/whatsapp.webp`} height={25} width={25} alt="logo" />
-            <div className={styles.wakuy}>
-              <span className={styles.wadiskon}>Diskon 3%</span>
-              <span>{isLoadingWA ? 'Loading...' : 'WhatsApp'}</span>
+          <button
+            disabled={isLoadingWA}
+            className={styles.tombolwa}
+            id="whatsapp-button"
+            onClick={handleWhatsapp}>
+            <div className={styles.tombolwadalam}>
+              <Image src={`${process.env.NEXT_PUBLIC_URL}/whatsapp.webp`} height={25} width={25} alt="logo" />
+              <div className={styles.wakuy}>
+                <span className={styles.wadiskon}>Diskon 3%</span>
+                <span>{isLoadingWA ? 'Loading...' : 'WhatsApp'}</span>
+              </div>
             </div>
-          </div>
-        </button>
-      )}
+          </button>
+        )}
 
-      <div className={styles.atas}>
-        <div className={styles.container}>
-          {/* MOBILE MENU ICON */}
-          <div className={styles.mobileMenuIcon} onClick={() => { setIsMobileMenuOpen(!isMobileMenuOpen) }}>
-            {isMobileMenuOpen ? <FaTimes size={27} /> : <FaBars size={27} />}
-          </div>
-          {/* LOGO */}
-          <div className={styles.logomobile}>
-            <Link href={'/'}>
-              <div className={styles.gambar}>
-                <Image src={`${process.env.NEXT_PUBLIC_URL}/logo2.svg`} height={80} width={200} alt="logo" />
-              </div>
-            </Link>
-          </div>
-          <div className={styles.kirideskop}>
-            <Link href={'/'}>
-              <div className={styles.gambar}>
-                <Image src={`${process.env.NEXT_PUBLIC_URL}/logo2.svg`} height={80} width={180} alt="logo" />
-              </div>
-            </Link>
-            {/* <Link href="/product" className={styles.text3}>
+        <div className={styles.atas}>
+          <div className={styles.container}>
+            {/* MOBILE MENU ICON */}
+            <div className={styles.mobileMenuIcon} onClick={() => { setIsMobileMenuOpen(!isMobileMenuOpen) }}>
+              {isMobileMenuOpen ? <FaTimes size={27} /> : <FaBars size={27} />}
+            </div>
+            {/* LOGO */}
+            <div className={styles.logomobile}>
+              <Link href={'/'}>
+                <div className={styles.gambar}>
+                  <Image src={`${process.env.NEXT_PUBLIC_URL}/logo2.svg`} height={80} width={200} alt="logo" />
+                </div>
+              </Link>
+            </div>
+            <div className={styles.kirideskop}>
+              <Link href={'/'}>
+                <div className={styles.gambar}>
+                  <Image src={`${process.env.NEXT_PUBLIC_URL}/logo2.svg`} height={80} width={180} alt="logo" />
+                </div>
+              </Link>
+              {/* <Link href="/product" className={styles.text3}>
               <div className={styles.about}>List Product</div>
             </Link>
 
@@ -254,170 +270,172 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
                 Kategori
               </Link>
             </div> */}
-            {/* 
+              {/* 
             <Link href="/blog" className={styles.text1}><div className={styles.about}>Blog</div></Link>
             <Link href="/about" className={styles.text3}><div className={styles.about}>Tentang Kami</div></Link> */}
-          </div>
-          {/* 🔎 Input pencarian */}
-          <div className={styles.pencariandeskop}>
-            <Search ListSearch={ListSearch} />
-          </div>
+            </div>
+            {/* 🔎 Input pencarian */}
+            <div className={styles.pencariandeskop}>
+              <Search ListSearch={ListSearch} />
+            </div>
 
-          {/* DESKTOP MENU */}
-          <div className={styles.desktopMenu}>
+            {/* DESKTOP MENU */}
+            <div className={styles.desktopMenu}>
 
 
 
-            {/* ICON GROUP */}
-            <div className={styles.iconGroup}>
-              {session && <Link href="/cart"><FaShoppingCart size={24} /></Link>}
-              {session && <Link href="/order"><PiNotepadBold size={24} /></Link>}
+              {/* ICON GROUP */}
+              <div className={styles.iconGroup}>
+                {session && <Link href="/cart"><FaShoppingCart size={24} /></Link>}
+                {session && <Link href="/order"><PiNotepadBold size={24} /></Link>}
 
-              {!session ? (
-                status === 'loading' ? (
-                  <>
-                    <Skeleton width={40} height={34} borderRadius={24} customHighlightBackground="white" baseColor="white" />
-                    <Skeleton width={40} height={34} borderRadius={24} customHighlightBackground="white" baseColor="white" />
-                    <Skeleton width={100} height={34} borderRadius={24} customHighlightBackground="white" baseColor="white" />
-                  </>
+                {!session ? (
+                  status === 'loading' ? (
+                    <>
+                      <Skeleton width={40} height={34} borderRadius={24} customHighlightBackground="white" baseColor="white" />
+                      <Skeleton width={40} height={34} borderRadius={24} customHighlightBackground="white" baseColor="white" />
+                      <Skeleton width={100} height={34} borderRadius={24} customHighlightBackground="white" baseColor="white" />
+                    </>
+                  ) : (
+                    <>
+                      <FaShoppingCart onClick={handleBeliSekarangLogin} size={24} />
+                      <PiNotepadBold onClick={handleBeliSekarangLogin} size={24} />
+                      <button className={styles.loginBtn} onClick={handleBeliSekarangLogin}>Login</button>
+                    </>
+                  )
                 ) : (
                   <>
-                    <FaShoppingCart onClick={handleBeliSekarangLogin} size={24} />
-                    <PiNotepadBold onClick={handleBeliSekarangLogin} size={24} />
-                    <button className={styles.loginBtn} onClick={handleBeliSekarangLogin}>Login</button>
-                  </>
-                )
-              ) : (
-                <>
-                  <Link href="/order">
-                    <Image src={session?.user?.image} alt="profil" width={27} height={27} />
-                  </Link>
-                  <span onClick={() => signOut({ callbackUrl: pathName })} className={styles.loginBtn}>Logout</span>
-                </>
-              )}
-            </div>
-          </div>
-
-          {/* MOBILE MENU ICON */}
-          <div className={styles.mobileMenuIconPencarian} onClick={() => setIsMobileMenuOpenPencarian(!isMobileMenuOpenPencarian)}>
-            {isMobileMenuOpenPencarian ? <FaTimes size={27} /> : <FaSearch size={27} />}
-          </div>
-        </div>
-
-
-        <div className={styles.header2}>
-          <div className={styles.containerlayangan}>
-            <button
-              className={`${styles.arrow} ${styles.left}`}
-              onClick={() => scroll('left')}
-            >
-              ‹
-            </button>
-
-            <div ref={scrollRef} className={styles.layangan}>
-              {data?.map((item, i) => (
-                <button
-                  key={i}
-                  onClick={() => router.push(`/category/${item?.slugCategory}`)}
-                >
-                  {item?.category}
-                </button>
-              ))}
-            </div>
-
-            <button
-              className={`${styles.arrow} ${styles.right}`}
-              onClick={() => scroll('right')}
-            >
-              ›
-            </button>
-          </div>
-        </div>
-
-
-
-        {/* MENU MOBILE */}
-        {isMobileMenuOpen && (
-          <div className={styles.mobileMenu} ref={navRefMobile}>
-            <Link onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} href="/product" className={styles.mobileItem}>LIST PRODUK</Link>
-            <Link onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} href="/category"><div className={styles.mobileItem} >KATEGORI</div></Link>
-            <Link onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} href="/blog" className={styles.mobileItem}>BLOG</Link>
-            <Link onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} href="/about" className={styles.mobileItem}>TENTANG KAMI</Link>
-            {!session ? null : (
-              <>
-                <div className={styles.mobileItem} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}><Link href="/cart"><FaShoppingCart size={20} /> Keranjang</Link></div>
-                <div className={styles.mobileItem} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}><Link href="/order"><PiNotepadBold size={20} /> Pesanan</Link></div>
-              </>
-            )}
-
-            <div className={styles.mobileItem}>
-              {!session ? (
-                status === 'loading' ? (
-                  <Skeleton width={27} height={27} borderRadius={50} />
-                ) : (
-                  <div onClick={() => { handleBeliSekarangLogin(); setIsMobileMenuOpen(!isMobileMenuOpen) }}><FaUser size={20} /> Login</div>
-                )
-              ) : (
-                <div onClick={() => { signOut({ callbackUrl: pathName }); setIsMobileMenuOpen(!isMobileMenuOpen) }} className={styles.userWrap}>
-                  <Image src={session?.user?.image} alt="profil" width={27} height={27} />
-                  <span>Logout</span>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-        {/* MENU MOBILE PENCARIAN*/}
-        {isMobileMenuOpenPencarian && (
-          <div className={styles.mobileMenu} ref={navRefMobilePencarian}>
-            <div className={styles.mobileItem}>
-              <Search />
-              <div className={styles.rekomendasiWrap}>
-                <h4 className={styles.rekomendasiTitle}>🔥 Pencarian Populer</h4>
-                <div className={styles.rekomendasiList}>
-                  {ListSearch?.map((item, idx) => (
-                    <Link
-                      key={idx}
-                      onClick={() => setIsMobileMenuOpenPencarian(false)}
-                      href={`/search?q=${Slugify(item)}`}
-                      className={styles.rekomendasiItem}
-                    >
-                      {item}
+                    <Link href="/order">
+                      <Image src={session?.user?.image} alt="profil" width={27} height={27} />
                     </Link>
-                  ))}
-                </div>
+                    <span onClick={() => signOut({ callbackUrl: pathName })} className={styles.loginBtn}>Logout</span>
+                  </>
+                )}
               </div>
             </div>
 
-            {/* {!session ? null : (
+            {/* MOBILE MENU ICON */}
+            <div className={styles.mobileMenuIconPencarian} onClick={() => setIsMobileMenuOpenPencarian(!isMobileMenuOpenPencarian)}>
+              {isMobileMenuOpenPencarian ? <FaTimes size={27} /> : <FaSearch size={27} />}
+            </div>
+          </div>
+
+
+          <div className={styles.header2}>
+            <div className={styles.containerlayangan}>
+              <button
+                className={`${styles.arrow} ${styles.left}`}
+                onClick={() => scroll('left')}
+              >
+                ‹
+              </button>
+
+              <div ref={scrollRef} className={styles.layangan}>
+                {data?.map((item, i) => (
+                  <button
+                    key={i}
+                    onClick={() => router.push(`/category/${item?.slugCategory}`)}
+                  >
+                    {item?.category}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                className={`${styles.arrow} ${styles.right}`}
+                onClick={() => scroll('right')}
+              >
+                ›
+              </button>
+            </div>
+          </div>
+
+
+
+          {/* MENU MOBILE */}
+          {isMobileMenuOpen && (
+            <div className={styles.mobileMenu} ref={navRefMobile}>
+              <Link onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} href="/product" className={styles.mobileItem}>LIST PRODUK</Link>
+              <Link onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} href="/category"><div className={styles.mobileItem} >KATEGORI</div></Link>
+              <Link onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} href="/blog" className={styles.mobileItem}>BLOG</Link>
+              <Link onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} href="/about" className={styles.mobileItem}>TENTANG KAMI</Link>
+              {!session ? null : (
+                <>
+                  <div className={styles.mobileItem} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}><Link href="/cart"><FaShoppingCart size={20} /> Keranjang</Link></div>
+                  <div className={styles.mobileItem} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}><Link href="/order"><PiNotepadBold size={20} /> Pesanan</Link></div>
+                </>
+              )}
+
+              <div className={styles.mobileItem}>
+                {!session ? (
+                  status === 'loading' ? (
+                    <Skeleton width={27} height={27} borderRadius={50} />
+                  ) : (
+                    <div onClick={() => { handleBeliSekarangLogin(); setIsMobileMenuOpen(!isMobileMenuOpen) }}><FaUser size={20} /> Login</div>
+                  )
+                ) : (
+                  <div onClick={() => { signOut({ callbackUrl: pathName }); setIsMobileMenuOpen(!isMobileMenuOpen) }} className={styles.userWrap}>
+                    <Image src={session?.user?.image} alt="profil" width={27} height={27} />
+                    <span>Logout</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+          {/* MENU MOBILE PENCARIAN*/}
+          {isMobileMenuOpenPencarian && (
+            <div className={styles.mobileMenu} ref={navRefMobilePencarian}>
+              <div className={styles.mobileItem}>
+                <Search />
+                <div className={styles.rekomendasiWrap}>
+                  <h4 className={styles.rekomendasiTitle}>🔥 Pencarian Populer</h4>
+                  <div className={styles.rekomendasiList}>
+                    {ListSearch?.map((item, idx) => (
+                      <Link
+                        key={idx}
+                        onClick={() => setIsMobileMenuOpenPencarian(false)}
+                        href={`/search?q=${Slugify(item)}`}
+                        className={styles.rekomendasiItem}
+                      >
+                        {item}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* {!session ? null : (
               <>
                 <div onClick={() => setIsMobileMenuOpenPencarian(false)} className={styles.mobileItem}><Link href="/cart"><FaShoppingCart size={20} /> Keranjang</Link></div>
                 <div onClick={() => setIsMobileMenuOpenPencarian(false)} className={styles.mobileItem}><Link href="/order"><PiNotepadBold size={20} /> Pesanan</Link></div>
               </>
             )} */}
 
-            {!isMobileMenuOpenPencarian &&
-              <div className={styles.mobileItem}>
-                {!session ? (
-                  status === 'loading' ? (
-                    <Skeleton width={27} height={27} borderRadius={50} />
+              {!isMobileMenuOpenPencarian &&
+                <div className={styles.mobileItem}>
+                  {!session ? (
+                    status === 'loading' ? (
+                      <Skeleton width={27} height={27} borderRadius={50} />
+                    ) : (
+                      <div onClick={handleBeliSekarangLogin}><FaUser size={20} /> Login</div>
+                    )
                   ) : (
-                    <div onClick={handleBeliSekarangLogin}><FaUser size={20} /> Login</div>
-                  )
-                ) : (
-                  <div onClick={() => signOut({ callbackUrl: pathName })} className={styles.userWrap}>
-                    <Image src={session?.user?.image} alt="profil" width={27} height={27} />
-                    <span>Logout</span>
-                  </div>
-                )}
-              </div>}
-          </div>
+                    <div onClick={() => signOut({ callbackUrl: pathName })} className={styles.userWrap}>
+                      <Image src={session?.user?.image} alt="profil" width={27} height={27} />
+                      <span>Logout</span>
+                    </div>
+                  )}
+                </div>}
+            </div>
 
-        )}
+          )}
 
-        {productMelayangHeader && <ProductHeaderMelayang data={data} />}
-      </div>
+          {productMelayangHeader && <ProductHeaderMelayang data={data} />}
+        </div>
 
 
-    </header >
+      </header >
+    </>
+
   )
 }
