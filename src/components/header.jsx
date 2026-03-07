@@ -155,6 +155,8 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
     setIsActive(!pathName.startsWith("/cart"));
   }, [pathName]);
 
+  const isCartPage = pathName.startsWith("/cart");
+
 
   useEffect(() => {
 
@@ -164,7 +166,7 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
     // // jika halaman cart tidak dijalankan
     // if (pathName === "/cart") return;
 
-    if (!isActive) return
+    if (pisCartPage) return
 
     const interval = setInterval(() => {
       const data = dataPesanan[index];
@@ -221,7 +223,7 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
 
   return (
     <>
-      {isActive && <PromoWebsite />}
+      {!isCartPage && <PromoWebsite />}
       <header className={styles.header}>
 
         {Boolean(tombolwa) && (
