@@ -166,7 +166,7 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
     // // jika halaman cart tidak dijalankan
     // if (pathName === "/cart") return;
 
-    if (pisCartPage) return
+    if (isCartPage) return
 
     const interval = setInterval(() => {
       const data = dataPesanan[index];
