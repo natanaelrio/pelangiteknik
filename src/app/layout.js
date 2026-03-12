@@ -14,8 +14,8 @@ import { GetSearchRedis } from "@/controllers/redis";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Pelangi Teknik Indonesia",
-  description: "Pelangi Teknik Indonesia",
+  // title: "Pelangi Teknik Indonesia",
+  // description: "Pelangi Teknik Indonesia",
   verification: {
     google: "Ox3ZUbaizkQC5onzknoa0XtYTvmj6rRFGhNs__Lq2gE",
   }

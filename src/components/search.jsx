@@ -21,12 +21,12 @@ export default function Search({ ListSearch }) {
     const [showRecommendations, setShowRecommendations] = useState(false);
 
     // Data dummy rekomendasi
-    const recommendations = ListSearch || [
-        "kompressor",
-        "genset",
+    const recommendations = [
+        "kompresor",
+        "genset 10 kva",
         "pompa air",
         "mesin las",
-        "air less",
+        "airless",
         "tsuzumi japan",
         "genset silent",
     ];
