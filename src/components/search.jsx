@@ -21,15 +21,15 @@ export default function Search({ recommendations }) {
     const [showRecommendations, setShowRecommendations] = useState(false);
 
     // Data dummy rekomendasi
-    const recommendations = [
-        "kompresor",
-        "genset 10 kva",
-        "pompa air",
-        "mesin las",
-        "airless",
-        "tsuzumi japan",
-        "genset silent",
-    ];
+    // const recommendations = [
+    //     "kompresor",
+    //     "genset 10 kva",
+    //     "pompa air",
+    //     "mesin las",
+    //     "airless",
+    //     "tsuzumi japan",
+    //     "genset silent",
+    // ];
 
     const [placeholder, setPlaceholder] = useState("");
 
