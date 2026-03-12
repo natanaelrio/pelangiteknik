@@ -220,6 +220,15 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
 
   }, [index]);
 
+  const recommendations = [
+    "kompresor",
+    "genset 10 kva",
+    "pompa air",
+    "mesin las",
+    "airless",
+    "tsuzumi japan",
+    "genset silent",
+  ];
 
   return (
     <>
@@ -278,7 +287,7 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
             </div>
             {/* 🔎 Input pencarian */}
             <div className={styles.pencariandeskop}>
-              <Search ListSearch={ListSearch} />
+              <Search recommendations={recommendations} />
             </div>
 
             {/* DESKTOP MENU */}
@@ -392,7 +401,7 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
                 <div className={styles.rekomendasiWrap}>
                   <h4 className={styles.rekomendasiTitle}>🔥 Pencarian Populer</h4>
                   <div className={styles.rekomendasiList}>
-                    {ListSearch?.map((item, idx) => (
+                    {recommendations?.map((item, idx) => (
                       <Link
                         key={idx}
                         onClick={() => setIsMobileMenuOpenPencarian(false)}

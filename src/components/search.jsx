@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 import { IoSearchOutline } from "react-icons/io5";
 import { useEffect } from "react";
 
-export default function Search({ ListSearch }) {
+export default function Search({ recommendations }) {
 
     const router = useRouter();
     const router2 = useRouter2();
