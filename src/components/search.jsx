@@ -37,56 +37,56 @@ export default function Search({ recommendations }) {
     const charIndex = useRef(0);
     const isDeleting = useRef(false);
 
-    useEffect(() => {
-        let interval;
-        let timeout;
+    // useEffect(() => {
+    //     let interval;
+    //     let timeout;
 
-        const startTyping = () => {
-            const current = recommendations[recIndex.current];
-            if (!current) return;
+    //     const startTyping = () => {
+    //         const current = recommendations[recIndex?.current || 0];
+    //         if (!current) return;
 
-            interval = setInterval(() => {
-                if (!isDeleting.current) {
-                    // proses mengetik
-                    setPlaceholder(current.slice(0, charIndex.current + 1));
-                    charIndex.current++;
+    //         interval = setInterval(() => {
+    //             if (!isDeleting.current) {
+    //                 // proses mengetik
+    //                 setPlaceholder(current.slice(0, charIndex.current + 1));
+    //                 charIndex.current++;
 
-                    // selesai mengetik
-                    if (charIndex.current === current.length) {
-                        clearInterval(interval);
+    //                 // selesai mengetik
+    //                 if (charIndex.current === current.length) {
+    //                     clearInterval(interval);
 
-                        timeout = setTimeout(() => {
-                            isDeleting.current = true;
-                            startTyping();
-                        }, 1000);
-                    }
-                } else {
-                    // proses menghapus
-                    setPlaceholder(current.slice(0, charIndex.current - 1));
-                    charIndex.current--;
+    //                     timeout = setTimeout(() => {
+    //                         isDeleting.current = true;
+    //                         startTyping();
+    //                     }, 1000);
+    //                 }
+    //             } else {
+    //                 // proses menghapus
+    //                 setPlaceholder(current.slice(0, charIndex.current - 1));
+    //                 charIndex.current--;
 
-                    // selesai hapus → ganti item
-                    if (charIndex.current === 0) {
-                        isDeleting.current = false;
-                        recIndex.current = (recIndex.current + 1) % recommendations.length;
-                        clearInterval(interval);
+    //                 // selesai hapus → ganti item
+    //                 if (charIndex.current === 0) {
+    //                     isDeleting.current = false;
+    //                     recIndex.current = (recIndex.current + 1) % recommendations.length;
+    //                     clearInterval(interval);
 
-                        timeout = setTimeout(() => {
-                            startTyping();
-                        }, 300);
-                    }
-                }
-            }, isDeleting.current ? 40 : 80);
-        };
+    //                     timeout = setTimeout(() => {
+    //                         startTyping();
+    //                     }, 300);
+    //                 }
+    //             }
+    //         }, isDeleting.current ? 40 : 80);
+    //     };
 
-        startTyping();
+    //     startTyping();
 
-        // CLEANUP — sangat penting!
-        return () => {
-            clearInterval(interval);
-            clearTimeout(timeout);
-        };
-    }, [recommendations]);
+    //     // CLEANUP — sangat penting!
+    //     return () => {
+    //         clearInterval(interval);
+    //         clearTimeout(timeout);
+    //     };
+    // }, [recommendations]);
 
 
     const handleChange = (event) => {
@@ -149,7 +149,7 @@ export default function Search({ recommendations }) {
                     type="text"
                     value={cari}
                     onChange={handleChange}
-                    placeholder={placeholder}
+                    placeholder={'Cari Produk, Merk, atau Kategori'}
                 />
                 <button type="submit" className={styles.icon}>
                     <IoSearchOutline size={22} />
