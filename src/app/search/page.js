@@ -1,17 +1,20 @@
 import { GetSearchServer, GetSearchServerElasticSearch } from "@/controllers/userNew";
 import ListProductUser from "@/components/listProductUser";
 import redis from "@/lib/redis";
-// import { RedisSatuHari } from "@/utils/RedisSatuHari";
+import { RedisSatuHari } from "@/utils/RedisSatuHari";
 import { Unslugify } from "@/utils/unSlugify";
 import { UnslugifyMerek } from "@/utils/unSlugifyMerek";
 import NotFoundSearch from "@/components/notFoundSearch";
 import { GetSearchRedis } from "@/controllers/redis";
-// export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params, searchParams }, parent) {
     const q = searchParams.q;
+    const t = Number(searchParams.t) || 1;
     const m = searchParams.m;
     const canonicalUrl = `${process.env.NEXT_PUBLIC_URL}/search?q=${q}`;
+
+    const aw = await GetSearchServerElasticSearch(t, 7, m, q);
 
     const date = new Date();
     const months = [
@@ -21,12 +24,34 @@ export async function generateMetadata({ params, searchParams }, parent) {
     const currentMonth = months[date.getMonth()];
     const currentYear = date.getFullYear();
 
-    const title = `Jual ${Unslugify(q)}${m ? ' ' + Unslugify(m) : ''} - Kualitas Terbaik, Harga Spesial ${currentMonth} ${currentYear} & Garansi Resmi - Pelangi Teknik`
-    const description = `Temukan berbagai pilihan ${Unslugify(q)} di Pelangi Teknik. Kami menyediakan berbagai produk dan layanan terbaik sesuai kebutuhan Anda.`
+    const images = aw?.data.data
+        ?.map((item) => item?.imageProductUtama?.secure_url || item?.imageProductUtama)
+        ?.filter(Boolean) || [];
+
+
+    const title = aw?.data?.data?.length ? `Jual ${Unslugify(aw?.suggest[0] ? aw?.suggest[0] : q)}${m ? ' ' + Unslugify(m) : ''} - Kualitas Terbaik, Harga Spesial ${currentMonth} ${currentYear} & Garansi Resmi - Pelangi Teknik` : 'Halaman Rekomendasi Pencarian Pelangiteknik';
+    const description = aw?.data?.data?.length ? `Temukan berbagai pilihan ${Unslugify(aw?.suggest[0] ? aw?.suggest[0] : q)} di Pelangi Teknik. Kami menyediakan berbagai produk dan layanan terbaik sesuai kebutuhan Anda.` : 'Halaman Rekomendasi Pencarian Pelangiteknik';
 
     return {
         title,
         description,
+        openGraph: {
+            images: images.length
+                ? images.map((url) => ({
+                    url,
+                    width: 1200,
+                    height: 630,
+                    alt: `Jual ${Unslugify(q)} - Harga Spesial ${currentMonth} ${currentYear} - Pelangi Teknik`,
+                }))
+                : [
+                    {
+                        url: "https://pelangiteknik.com/default-og.jpg", // fallback gambar default
+                        width: 1200,
+                        height: 630,
+                        alt: "Pelangi Teknik - Toko Resmi Genset & Peralatan Teknik",
+                    },
+                ],
+        },
         alternates: { canonical: canonicalUrl },
     };
 }
@@ -39,11 +64,11 @@ export default async function Page({ params, searchParams }) {
 
     const res = await GetSearchServerElasticSearch(t, 7, m, q);
 
-    // res?.data?.data?.length && await redis
-    //     .multi()
-    //     .zadd("search:index", Date.now(), Unslugify(q))
-    //     .expire("search:index", RedisSatuHari())
-    //     .exec();
+    res?.data?.data?.length && await redis
+        .multi()
+        .zadd("search:index", Date.now(), Unslugify(q))
+        .expire("search:index", RedisSatuHari())
+        .exec();
 
     const date = new Date();
     const months = [
@@ -68,7 +93,6 @@ export default async function Page({ params, searchParams }) {
                             __html: JSON.stringify({
                                 "@context": "https://schema.org",
                                 "@type": "Product",
-                                "title": title,
                                 "name": title,
                                 "image": image,
                                 "description": description,
@@ -79,13 +103,6 @@ export default async function Page({ params, searchParams }) {
                                 //     "ratingValue": "5",
                                 //     "reviewCount": String(res?.totalMaxProduct || 17),  // wajib ada, minimal 1
                                 // },
-                                // "offers": {
-                                //     "@type": "Offer",
-                                //     "priceCurrency": "IDR",
-                                //     "price": String(res.data.data[0].productPrice),
-                                //     "availability": "https://schema.org/InStock",
-                                //     "url": canonicalUrl
-                                // }
                             }),
                         }}
                     />
