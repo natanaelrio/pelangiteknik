@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter as useRouterv2 } from 'nextjs-toploader/app'
-import styles from '@/components/Banner2.module.css'
+import styles from '@/components/Bannerv2.module.css'
 
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
