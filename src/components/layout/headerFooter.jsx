@@ -21,21 +21,23 @@ export default function HeaderFooter({ children, data, ListSearch, dataPesanan }
     pathname.startsWith("/cart/") || pathname.startsWith("/cart")
   console.log('Dev: @natanaelriowijaya');
 
+  const pathName = usePathname();
+
   return (
     <>
       <main className={styles.container} >
         <Suspense fallback={<div>Loading header...</div>}>
-          <Header
+          {pathName !== "/" && <Header
             dataPesanan={dataPesanan || []}
             data={data}
             tombolwa={!whatsapp}
             ListSearch={ListSearch}
-          />
+          />}
         </Suspense>
         <div className={styles.main}>
           {children}
         </div>
-        <Footer data={data} />
+        {pathName !== "/" && <Footer data={data} />}
         {isLogin && <LoginGoogle />}
         {isPenawaran && <Penawaran data={DataPenawaran} />}
       </main>

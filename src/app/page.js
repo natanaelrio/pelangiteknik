@@ -8,6 +8,8 @@ import Banner from "@/components/Banner";
 import redis from "@/lib/redis";
 import { RedisSatuHari } from "@/utils/RedisSatuHari";
 import { secondsUntilMidnight } from "@/utils/secondsUntilMidnight";
+import Bannerv2 from "@/components/Bannerv2";
+import FooterV2 from "@/components/Footerv2";
 
 export const metadata = {
   title: "Pelangi Teknik | Pusat Pembelian Peralatan Genset NO 1",
@@ -50,8 +52,10 @@ export default async function Home() {
   return (
     <>
       {/* <BannerMain data={dataKategori} /> */}
-      <Banner data={dataKategori} sumView={dataSumView?.totalView ?? 0} />
-      <Hpo />
+      {/* <Banner data={dataKategori} sumView={dataSumView?.totalView ?? 0} /> */}
+      <Bannerv2 data={dataKategori} />
+      <FooterV2 data={dataKategori} />
+      {/* <Hpo />
 
       <Judul judul="Best Product" />
       <ListProduct bestProduk={true} Listdata={dataListProductBest} Lfilter={false} angka={true} />
@@ -67,7 +71,7 @@ export default async function Home() {
       <Category data={dataKategori} />
 
       <Judul judul="Trusted by brands serious about realtime" />
-      <Rating data={dataGoogleMap?.result} />
+      <Rating data={dataGoogleMap?.result} /> */}
     </>
   );
 }
