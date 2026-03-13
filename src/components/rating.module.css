@@ -5,6 +5,8 @@
             #e2e8f0);
 }
 
+/* HEADER */
+
 .header {
     text-align: center;
     margin-bottom: 60px;
@@ -21,6 +23,8 @@
     color: #64748b;
     font-size: 18px;
 }
+
+/* GRID */
 
 .grid {
     display: grid;
@@ -54,6 +58,8 @@
     margin-bottom: 16px;
 }
 
+/* TEXT */
+
 .reviewText {
     font-size: 18px;
     line-height: 1.7;
@@ -82,6 +88,8 @@
     font-size: 16px;
 }
 
+/* RATING */
+
 .rating {
     display: flex;
     align-items: center;
@@ -98,4 +106,67 @@
 .time {
     font-size: 13px;
     color: #64748b;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width:1000px) {
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .header h2 {
+        font-size: 34px;
+    }
+
+    .reviewText {
+        font-size: 17px;
+    }
+
+}
+
+@media (max-width:600px) {
+
+    .container {
+        padding: 80px 6%;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .card {
+        padding: 24px;
+    }
+
+    .header h2 {
+        font-size: 28px;
+    }
+
+    .header p {
+        font-size: 15px;
+    }
+
+    .reviewText {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .avatar img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .name {
+        font-size: 15px;
+    }
+
+    .rating {
+        font-size: 13px;
+    }
+
 }
