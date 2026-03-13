@@ -1,45 +1,43 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from "next/navigation"
-import { useRouter as useRouterv2 } from 'nextjs-toploader/app';
+import { useRouter as useRouterv2 } from 'nextjs-toploader/app'
 import styles from '@/components/Banner2.module.css'
 
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
+
 import { signOut, useSession } from "next-auth/react"
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { FaShoppingCart, FaUser } from "react-icons/fa"
+import { FaShoppingCart, FaUser, FaBars, FaSearch } from "react-icons/fa"
 import { PiNotepadBold } from "react-icons/pi"
 
 import { Slugify } from "@/utils/slugify"
-import { useStore } from "@/zustand/zustand";
-import LoginGoogle from "@/components/loginGoogle";
+import { useStore } from "@/zustand/zustand"
+import LoginGoogle from "@/components/loginGoogle"
 
 export default function Bannerv2({ data, pathName }) {
-    const { data: session, status } = useSession()
+
+    const { data: session } = useSession()
     const router = useRouterv2()
+
     const isLogin = useStore((state) => state.isLogin)
     const setIsLogin = useStore((state) => state.setIsLogin)
 
-
-    const handleBeliSekarangLogin = async () => {
-        setIsLogin()
-    }
-
     const [index, setIndex] = useState(0)
+    const [menuOpen, setMenuOpen] = useState(false)
 
     const [search, setSearch] = useState("")
-    const [result, setResult] = useState([])
 
     const [emblaRef, emblaApi] = useEmblaCarousel(
         { loop: true },
         [Autoplay({ delay: 3500, stopOnInteraction: false })]
     )
 
-    /* EMBLA SELECT */
+
+    /* EMBLA */
 
     useEffect(() => {
 
@@ -55,13 +53,23 @@ export default function Bannerv2({ data, pathName }) {
     }, [emblaApi])
 
 
-    /* ENTER SEARCH */
+    /* SEARCH */
 
     const handleSearch = () => {
 
         if (!search.trim()) return
 
         router.push(`/search?q=${Slugify(search)}`)
+
+        setMenuOpen(false)
+
+    }
+
+
+    /* LOGIN */
+
+    const handleLogin = () => {
+        setIsLogin()
     }
 
 
@@ -73,6 +81,9 @@ export default function Bannerv2({ data, pathName }) {
                 {/* NAVBAR */}
 
                 <div className={styles.navbar}>
+
+
+                    {/* LOGO */}
 
                     <Link href="/" className={styles.logo}>
 
@@ -86,51 +97,91 @@ export default function Bannerv2({ data, pathName }) {
                     </Link>
 
 
+
+                    {/* SEARCH DESKTOP */}
+
+                    <div className={styles.navSearch}>
+
+                        <input
+                            type="text"
+                            placeholder="Cari genset, merek, atau kategori..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                            className={styles.navSearchInput}
+                        />
+
+                    </div>
+
+
+
+                    {/* RIGHT */}
+
                     <div className={styles.navRight}>
 
-                        {!session ? null : (
 
-                            <>
-                                <Link href="/cart" className={styles.navItem}>
-                                    <FaShoppingCart size={18} /> Keranjang
-                                </Link>
+                        {/* DESKTOP MENU */}
 
-                                <Link href="/order" className={styles.navItem}>
-                                    <PiNotepadBold size={18} /> Pesanan
-                                </Link>
-                            </>
+                        <div className={styles.desktopMenu}>
 
-                        )}
+                            {session && (
+
+                                <>
+                                    <Link href="/cart" className={styles.navItem}>
+                                        <FaShoppingCart size={18} /> Keranjang
+                                    </Link>
+
+                                    <Link href="/order" className={styles.navItem}>
+                                        <PiNotepadBold size={18} /> Pesanan
+                                    </Link>
+
+                                </>
+
+                            )}
 
 
-                        {!session ? (
+                            {!session ? (
 
-                            <div
-                                className={styles.navItem}
-                                onClick={handleBeliSekarangLogin}
-                            >
-                                <FaUser size={18} /> Login
-                            </div>
+                                <div
+                                    className={styles.navItem}
+                                    onClick={handleLogin}
+                                >
+                                    <FaUser size={18} /> Login
+                                </div>
 
-                        ) : (
+                            ) : (
 
-                            <div
-                                className={styles.userWrap}
-                                onClick={() => signOut({ callbackUrl: pathName })}
-                            >
+                                <div
+                                    className={styles.userWrap}
+                                    onClick={() => signOut({ callbackUrl: pathName })}
+                                >
 
-                                <Image
-                                    src={session?.user?.image}
-                                    width={27}
-                                    height={27}
-                                    alt="profil"
-                                />
+                                    <Image
+                                        src={session?.user?.image}
+                                        width={28}
+                                        height={28}
+                                        alt="profil"
+                                    />
 
-                                Logout
+                                    Logout
 
-                            </div>
+                                </div>
 
-                        )}
+                            )}
+
+                        </div>
+
+
+
+                        {/* HAMBURGER */}
+
+                        <div
+                            className={styles.hamburger}
+                            onClick={() => setMenuOpen(!menuOpen)}
+                        >
+                            <FaBars size={22} />
+                        </div>
+
 
                     </div>
 
@@ -138,9 +189,79 @@ export default function Bannerv2({ data, pathName }) {
 
 
 
-                {/* HERO */}
+                {/* MOBILE MENU */}
+
+                {menuOpen && (
+
+                    <div className={styles.mobileMenu}>
+
+
+                        {/* SEARCH */}
+
+                        <div className={styles.mobileSearch}>
+
+                            <input
+                                type="text"
+                                placeholder="Cari genset..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                            />
+
+                            <button onClick={handleSearch}>
+                                <FaSearch />
+                            </button>
+
+                        </div>
+
+
+
+                        {session && (
+
+                            <>
+                                <Link href="/cart" className={styles.mobileItem}>
+                                    <FaShoppingCart /> Keranjang
+                                </Link>
+
+                                <Link href="/order" className={styles.mobileItem}>
+                                    <PiNotepadBold /> Pesanan
+                                </Link>
+                            </>
+
+                        )}
+
+
+
+                        {!session ? (
+
+                            <div
+                                className={styles.mobileItem}
+                                onClick={handleLogin}
+                            >
+                                <FaUser /> Login
+                            </div>
+
+                        ) : (
+
+                            <div
+                                className={styles.mobileItem}
+                                onClick={() => signOut({ callbackUrl: pathName })}
+                            >
+                                <FaUser /> Logout
+                            </div>
+
+                        )}
+
+                    </div>
+
+                )}
+
+
+
+                {/* HERO CONTENT */}
 
                 <div className={styles.heroContent}>
+
 
 
                     {/* LEFT */}
@@ -151,64 +272,22 @@ export default function Bannerv2({ data, pathName }) {
                             FEATURED GENERATOR
                         </div>
 
-
                         <h1 className={styles.heroTitle}>
                             {data[index]?.title}
                         </h1>
 
-
                         <p className={styles.heroDesc}>
-                            Katalog mesin terlengkap dengan harga bersaing
-                            dan kualitas terbaik untuk mendukung bisnis
-                            dan proyek Anda.
+                            Katalog mesin generator terlengkap dengan harga
+                            bersaing dan kualitas terbaik untuk kebutuhan
+                            bisnis dan proyek Anda.
                         </p>
 
-
-                        {/* SEARCH */}
-
-                        <div className={styles.searchBox}>
-
-                            <input
-                                type="text"
-                                placeholder="Cari produk, merek, atau kategori..."
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                                className={styles.searchInput}
-                            />
-
-
-                            {result.length > 0 && (
-
-                                <div className={styles.searchResult}>
-
-                                    {result.map((item, i) => (
-
-                                        <div
-                                            key={i}
-                                            className={styles.searchItem}
-                                            onClick={() =>
-                                                router.push(`/search?q=${Slugify(item.title)}`)
-                                            }
-                                        >
-
-                                            <img
-                                                src={item.icon}
-                                                className={styles.searchImg}
-                                                alt={item.title}
-                                            />
-
-                                            <span>{item.title}</span>
-
-                                        </div>
-
-                                    ))}
-
-                                </div>
-
-                            )}
-
-                        </div>
+                        <button
+                            className={styles.heroBtn}
+                            onClick={() => router.push("/category")}
+                        >
+                            Lihat Produk →
+                        </button>
 
                     </div>
 
@@ -229,6 +308,8 @@ export default function Bannerv2({ data, pathName }) {
                             </div>
 
 
+                            {/* EMBLA */}
+
                             <div className={styles.embla} ref={emblaRef}>
 
                                 <div className={styles.emblaContainer}>
@@ -239,11 +320,17 @@ export default function Bannerv2({ data, pathName }) {
 
                                             <Link href={`/category/${item.slugCategory}`}>
 
-                                                <img
-                                                    src={item.icon}
-                                                    className={styles.productImg}
-                                                    alt={item.title}
-                                                />
+                                                <div className={styles.productImg}>
+
+                                                    <Image
+                                                        src={item.icon}
+                                                        width={420}
+                                                        height={280}
+                                                        alt={item.title}
+                                                        priority={i === 0}
+                                                    />
+
+                                                </div>
 
                                             </Link>
 
@@ -259,11 +346,12 @@ export default function Bannerv2({ data, pathName }) {
 
                     </div>
 
-
                 </div>
 
             </section>
+
             {isLogin && <LoginGoogle />}
+
         </>
     )
 }

@@ -1,127 +1,167 @@
 .footer {
     background: #0b0f19;
     color: #cbd5f5;
-    padding: 80px 8% 30px;
+    padding: 110px 8% 40px;
 }
+
+/* CONTAINER */
 
 .container {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 60px;
+    gap: 70px;
 }
+
 
 /* BRAND */
 
 .logo {
-    font-size: 32px;
-    font-weight: 700;
+    font-size: 38px;
+    font-weight: 800;
     color: white;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
 }
 
 .desc {
-    margin-bottom: 25px;
-    line-height: 1.6;
+    margin-bottom: 30px;
+    line-height: 1.7;
+    font-size: 18px;
     color: #94a3b8;
 }
+
 
 /* CONTACT */
 
 .contact {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 25px;
+    gap: 12px;
+    margin-bottom: 30px;
 }
 
 .contactItem {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    font-size: 17px;
 }
+
 
 /* BUTTON */
 
 .buttons {
     display: flex;
-    gap: 14px;
+    gap: 16px;
 }
 
 .primaryBtn {
     background: linear-gradient(90deg, #6366f1, #3b82f6);
-    padding: 12px 20px;
+    padding: 14px 26px;
     border-radius: 40px;
     color: white;
+    font-weight: 600;
+    font-size: 16px;
+    transition: .25s;
+}
+
+.primaryBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, .4);
 }
 
 .secondaryBtn {
     border: 1px solid #334155;
-    padding: 12px 20px;
+    padding: 14px 26px;
     border-radius: 40px;
+    font-size: 16px;
+    transition: .25s;
 }
+
+.secondaryBtn:hover {
+    border-color: #60a5fa;
+    color: white;
+}
+
 
 /* LINKS */
 
 .links {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .links h3 {
     color: white;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .links a {
     color: #94a3b8;
+    font-size: 16px;
     transition: .2s;
 }
 
 .links a:hover {
-    color: white;
+    color: #60a5fa;
 }
+
 
 /* SOCIAL */
 
 .social h3 {
     color: white;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .icons {
     display: flex;
-    gap: 16px;
-    font-size: 20px;
+    gap: 18px;
+    font-size: 22px;
 }
 
 .icons a {
     color: #94a3b8;
+    transition: .25s;
 }
 
 .icons a:hover {
-    color: white;
+    color: #60a5fa;
+    transform: translateY(-2px);
 }
+
 
 /* BOTTOM */
 
 .bottom {
-    margin-top: 60px;
+    margin-top: 70px;
     border-top: 1px solid #1e293b;
-    padding-top: 20px;
+    padding-top: 26px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 15px;
 }
 
 .policy {
     display: flex;
-    gap: 20px;
+    gap: 24px;
 }
 
 .policy a {
     color: #94a3b8;
+    transition: .2s;
 }
+
+.policy a:hover {
+    color: white;
+}
+
 
 /* RESPONSIVE */
 
@@ -129,12 +169,13 @@
 
     .container {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 50px;
     }
 
     .bottom {
         flex-direction: column;
-        gap: 10px;
+        gap: 14px;
+        text-align: center;
     }
 
 }

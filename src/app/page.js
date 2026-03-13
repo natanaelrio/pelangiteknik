@@ -10,6 +10,7 @@ import { RedisSatuHari } from "@/utils/RedisSatuHari";
 import { secondsUntilMidnight } from "@/utils/secondsUntilMidnight";
 import Bannerv2 from "@/components/Bannerv2";
 import FooterV2 from "@/components/Footerv2";
+import PopularProducts from "@/components/PopularProducts";
 
 export const metadata = {
   title: "Pelangi Teknik | Pusat Pembelian Peralatan Genset NO 1",
@@ -54,7 +55,9 @@ export default async function Home() {
       {/* <BannerMain data={dataKategori} /> */}
       {/* <Banner data={dataKategori} sumView={dataSumView?.totalView ?? 0} /> */}
       <Bannerv2 data={dataKategori} />
+      <PopularProducts data={dataListProductBest} />
       <FooterV2 data={dataKategori} />
+
       {/* <Hpo />
 
       <Judul judul="Best Product" />
