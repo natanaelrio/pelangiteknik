@@ -40,7 +40,7 @@ export default async function Page() {
                 <About />
                 <Judul judul="Categories" />
                 <Category data={dataKategori} />
-                <Judul judul="Trusted by brands serious about realtime" />
+                {/* <Judul judul="Trusted by brands serious about realtime" /> */}
                 <Rating data={dataGoogleMap?.result} />
             </>
         );
@@ -58,7 +58,7 @@ export default async function Page() {
                 <About />
                 <Judul judul="Categories" />
                 <Category data={dataKategori} />
-                <Judul judul="Trusted by brands serious about realtime" />
+                {/* <Judul judul="Trusted by brands serious about realtime" /> */}
                 <Rating data={dataGoogleMap?.result} />
             </>
         );

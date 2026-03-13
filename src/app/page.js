@@ -56,6 +56,7 @@ export default async function Home() {
       {/* <Banner data={dataKategori} sumView={dataSumView?.totalView ?? 0} /> */}
       <Bannerv2 data={dataKategori} />
       <PopularProducts data={dataListProductBest} />
+      <Rating data={dataGoogleMap?.result} />
       <FooterV2 data={dataKategori} />
 
       {/* <Hpo />
@@ -75,6 +76,7 @@ export default async function Home() {
 
       <Judul judul="Trusted by brands serious about realtime" />
       <Rating data={dataGoogleMap?.result} /> */}
+
     </>
   );
 }

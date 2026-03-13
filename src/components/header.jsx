@@ -19,6 +19,7 @@ import toast from "react-hot-toast"
 import { useRouter } from 'nextjs-toploader/app';
 import { FormatJamIndonesia } from "@/utils/FormatJamIndonesia"
 import PromoWebsite from "@/components/PromoWebsite";
+import TombolWA from "./TombolWA"
 
 export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
   const setIsLogin = useStore((state) => state.setIsLogin)
@@ -49,23 +50,6 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
     setIsMobileMenuOpenPencarian(false)
   }
 
-  const handleWhatsapp = async () => {
-    try {
-      setIsLoadingWA(true)
-      const waUrl = await HandleKonversiWA({
-        Header: {
-          q: q,
-          pathName: pathName
-        }
-      });
-      setIsLoadingWA(false)
-      window.open(waUrl, "_blank");
-    } catch (e) {
-      console.log(e);
-      toast.error('Gagal membuka WhatsApp. Silakan coba lagi.')
-      setIsLoadingWA(false)
-    }
-  };
   const handleWhatsappVoucher = async () => {
     try {
       setIsLoadingWA(true)
@@ -236,20 +220,7 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
       <header className={styles.header}>
 
         {Boolean(tombolwa) && (
-
-          <button
-            disabled={isLoadingWA}
-            className={styles.tombolwa}
-            id="whatsapp-button"
-            onClick={handleWhatsapp}>
-            <div className={styles.tombolwadalam}>
-              <Image src={`${process.env.NEXT_PUBLIC_URL}/whatsapp.webp`} height={25} width={25} alt="logo" />
-              <div className={styles.wakuy}>
-                <span className={styles.wadiskon}>Diskon 3%</span>
-                <span>{isLoadingWA ? 'Loading...' : 'WhatsApp'}</span>
-              </div>
-            </div>
-          </button>
+          <TombolWA />
         )}
 
         <div className={styles.atas}>

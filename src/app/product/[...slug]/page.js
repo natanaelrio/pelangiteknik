@@ -120,7 +120,7 @@ export default async function Page({ params }) {
                 <Judul judul="Best Product" />
                 <ListProduct Listdata={dataListProduct} Lfilter={false} />
 
-                <Judul judul="Trusted by brands serious about realtime" />
+                {/* <Judul judul="Trusted by brands serious about realtime" /> */}
                 <Rating data={dataGoogleMap?.result} />
             </> :
             notFound()

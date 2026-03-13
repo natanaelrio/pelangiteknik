@@ -470,53 +470,6 @@
     }
 }
 
-/* Tombol WhatsApp */
-.tombolwa {
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    z-index: 10000;
-    cursor: pointer;
-    background-color: transparent;
-}
-
-.wakuy {
-    display: flex;
-    flex-direction: column;
-}
-
-.wadiskon {
-    position: absolute;
-    top: -8px;
-    right: -6px;
-    background-color: #e53935;
-    color: #ffffff;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 6px;
-    border-radius: 6px;
-    z-index: 2;
-}
-
-.tombolwadalam {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background-color: #0A939E;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 700;
-    border-radius: 8px;
-    padding: 0 16px;
-    height: 48px;
-    box-shadow: 0 8px 16px rgba(10, 147, 158, 0.24);
-    transition: all 0.3s ease;
-}
-
-.tombolwadalam:hover {
-    background-color: #087078;
-}
-
 @media only screen and (max-width: 480px) {
     .banner {
         display: none
