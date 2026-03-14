@@ -205,6 +205,7 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
   }, [index]);
 
   const recommendations = [
+    "power station",
     "kompresor",
     "genset 10 kva",
     "pompa air",

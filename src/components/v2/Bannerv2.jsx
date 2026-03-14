@@ -348,6 +348,10 @@ export default function Bannerv2({ data, pathName }) {
 
                 </div>
 
+
+                {/* <div className={styles.textoverflay}>
+                    {data[index]?.title}
+                </div> */}
             </section>
 
             {isLogin && <LoginGoogle />}

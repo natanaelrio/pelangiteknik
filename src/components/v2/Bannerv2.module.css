@@ -292,6 +292,48 @@
 }
 
 
+.textoverflay {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-size: 8vw;
+    font-weight: 900;
+    text-align: center;
+    line-height: 1;
+
+    background: linear-gradient(90deg, #c0c0c0, #808080);
+    /* gradient teks silver → abu */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    white-space: nowrap;
+    z-index: 50;
+
+    /* shadow standar tipis supaya terlihat sedikit depth */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* gradient transparan naik dari bawah ke atas */
+.textoverflay::after {
+    content: attr(data-text);
+    /* ambil teks sama dengan overlay */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
+    /* bottom ke top */
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    pointer-events: none;
+    /* supaya tidak mengganggu klik */
+}
 
 /* TABLET */
 
