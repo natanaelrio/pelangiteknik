@@ -54,7 +54,7 @@ export default async function Home() {
     <>
       {/* <BannerMain data={dataKategori} /> */}
       {/* <Banner data={dataKategori} sumView={dataSumView?.totalView ?? 0} /> */}
-      <Bannerv2 data={dataKategori} />
+      <Bannerv2 data={dataKategori} sumView={dataSumView?.totalView ?? 0} />
       {/* <PopularProducts data={dataListProductBest} />
       <Rating data={dataGoogleMap?.result} /> */}
       <FooterV2 data={dataKategori} />

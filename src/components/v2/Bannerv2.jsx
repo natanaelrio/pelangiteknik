@@ -18,7 +18,7 @@ import { Slugify } from "@/utils/slugify"
 import { useStore } from "@/zustand/zustand"
 import LoginGoogle from "@/components/loginGoogle"
 
-export default function Bannerv2({ data, pathName }) {
+export default function Bannerv2({ data, pathName, sumView }) {
 
     const { data: session } = useSession()
     const router = useRouterv2()
@@ -70,6 +70,15 @@ export default function Bannerv2({ data, pathName }) {
 
     const handleLogin = () => {
         setIsLogin()
+    }
+
+
+    function ekorAngka(n) {
+        if (n >= 1000000) return "jutaan";
+        if (n >= 1000) return "ribu";
+        if (n >= 100) return "ratusan";
+        if (n >= 10) return "puluhan";
+        return "satuan";
     }
 
 
@@ -269,7 +278,9 @@ export default function Bannerv2({ data, pathName }) {
                     <div className={styles.heroLeft}>
 
                         <div className={styles.heroBadge}>
-                            FEATURED GENERATOR
+                            <div className={styles.statNumber}>
+                                {sumView.toLocaleString('id-ID')} <span className={styles.statSuffix}>{ekorAngka(sumView)}+ Pengunjung</span>
+                            </div>
                         </div>
 
                         <h1 className={styles.heroTitle}>
