@@ -1,5 +1,6 @@
 import Judul from "@/components/judul";
 import ProductHeaderMelayang from "@/components/productHeaderMelayang";
+import { GetListKategori } from "@/controllers/userNew";
 import redis from "@/lib/redis";
 
 export default async function Page() {
