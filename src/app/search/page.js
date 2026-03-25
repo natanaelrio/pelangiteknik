@@ -4,11 +4,20 @@ import { Unslugify } from "@/utils/unSlugify";
 import { UnslugifyMerek } from "@/utils/unSlugifyMerek";
 import NotFoundSearch from "@/components/notFoundSearch";
 import { GetSearchRedis } from "@/controllers/redis";
+import { cache } from "react";
 
-export async function generateMetadata({ params, searchParams }, parent) {
+// ✅ cache biar tidak double fetch
+const getSearchCached = cache(async (t, limit, m, q) => {
+    return await GetSearchServerElasticSearch(t, limit, m, q);
+});
+
+export async function generateMetadata({ searchParams }) {
     const q = searchParams.q;
     const m = searchParams.m;
-    const canonicalUrl = `${process.env.NEXT_PUBLIC_URL}/search?q=${q}`;
+
+    const mUnslug = UnslugifyMerek(m);
+
+    const res = await getSearchCached(1, 1, mUnslug, q);
 
     const date = new Date();
     const months = [
@@ -18,13 +27,51 @@ export async function generateMetadata({ params, searchParams }, parent) {
     const currentMonth = months[date.getMonth()];
     const currentYear = date.getFullYear();
 
-    const title = `Jual ${Unslugify(q)}${m ? ' ' + Unslugify(m) : ''} - Kualitas Terbaik, Harga Spesial ${currentMonth} ${currentYear} & Garansi Resmi - Pelangi Teknik`
-    const description = `Temukan berbagai pilihan ${Unslugify(q)} di Pelangi Teknik. Kami menyediakan berbagai produk dan layanan terbaik sesuai kebutuhan Anda.`
+    const keyword = Unslugify(res?.suggest?.[0] || q);
+
+    const title = `Jual ${keyword}${mUnslug ? ' ' + mUnslug : ''} - Kualitas Terbaik, Harga Spesial ${currentMonth} ${currentYear} & Garansi Resmi - Pelangi Teknik`;
+
+    const description = `Temukan berbagai pilihan ${keyword} di Pelangi Teknik. Kami menyediakan berbagai produk dan layanan terbaik sesuai kebutuhan Anda.`;
+
+    const rawImage = res?.data?.data?.[0]?.imageProductUtama;
+    const image = rawImage
+        ? `${rawImage}`
+        : `${process.env.NEXT_PUBLIC_URL}/logo2026.png`;
+
+    const canonicalUrl = `${process.env.NEXT_PUBLIC_URL}/search?q=${q}`;
 
     return {
         title,
         description,
-        alternates: { canonical: canonicalUrl },
+
+        // ✅ canonical
+        alternates: {
+            canonical: canonicalUrl,
+        },
+
+        // ✅ Open Graph
+        openGraph: {
+            title,
+            description,
+            url: canonicalUrl,
+            type: "website",
+            images: [
+                {
+                    url: image,
+                    width: 1200,
+                    height: 630,
+                    alt: title,
+                },
+            ],
+        },
+
+        // ✅ Twitter Card
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+            images: [image],
+        },
     };
 }
 
@@ -34,7 +81,10 @@ export default async function Page({ params, searchParams }) {
     const m = UnslugifyMerek(searchParams.m);
     const ListSearch = await GetSearchRedis()
 
-    const res = await GetSearchServerElasticSearch(t, 7, m, q);
+    // const res = await GetSearchServerElasticSearch(t, 7, m, q);
+    // ✅ pakai cache yang sama → tidak fetch ulang
+    const res = await getSearchCached(t, 7, m, q);
+
 
     // res?.data?.data?.length && await redis
     //     .multi()
@@ -58,15 +108,6 @@ export default async function Page({ params, searchParams }) {
         res?.data?.data?.length ?
             <>
                 <head>
-                    <meta property="og:image" content={image?.[0]} />
-                    <meta property="og:title" content={title} />
-                    <meta property="og:description" content={description} />
-                    <meta property="og:image:width" content="1200" />
-                    <meta property="og:image:height" content="630" />
-                    <meta property="og:image:alt" content={title} />
-                    <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/search?q=${q}`} />
-                    <meta property="og:type" content="website" />
-
                     <script
                         id="product-schema"
                         type="application/ld+json"
