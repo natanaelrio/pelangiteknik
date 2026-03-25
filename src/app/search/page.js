@@ -58,6 +58,9 @@ export default async function Page({ params, searchParams }) {
         res?.data?.data?.length ?
             <>
                 <head>
+                    <meta property="og:image" content={image} />
+                    <meta property="og:title" content={title} />
+                    <meta property="og:description" content={description} />
                     <script
                         id="product-schema"
                         type="application/ld+json"
