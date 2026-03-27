@@ -1,7 +1,3 @@
-import Category from "@/components/category";
-import Hpo from "@/components/hpo";
-import Judul from "@/components/judul";
-import ListProduct from "@/components/listProduct";
 import { GetListKategori, GetProductBestProduct, GetListProduct, GetGoogleMap, GetSumView } from "@/controllers/userNew";
 import Rating from "@/components/rating";
 import Banner from "@/components/Banner";
@@ -10,7 +6,7 @@ import { RedisSatuHari } from "@/utils/RedisSatuHari";
 import { secondsUntilMidnight } from "@/utils/secondsUntilMidnight";
 import Bannerv2 from "@/components/v2/Bannerv2";
 import FooterV2 from "@/components/v2/Footerv2";
-import PopularProducts from "@/components/v2/PopularProducts";
+import ListProducts from "@/components/v2/ListProducts";
 
 export const metadata = {
   title: "Pelangi Teknik | Pusat Pembelian Peralatan Genset NO 1",
@@ -34,7 +30,7 @@ export default async function Home() {
   const [dataKategori, dataListProductBest, dataListProduct, dataGoogleMap, dataSumView] = await Promise.all([
     cachedKategori ? JSON.parse(cachedKategori) : GetListKategori(),
     cachedBest ? JSON.parse(cachedBest) : GetProductBestProduct(),
-    cachedList ? JSON.parse(cachedList) : GetListProduct(1, 9),
+    cachedList ? JSON.parse(cachedList) : GetListProduct(1, 8),
     cachedMap ? JSON.parse(cachedMap) : GetGoogleMap(),
     GetSumView(), // ⚠️ tidak pakai Redis
   ]);
@@ -49,14 +45,14 @@ export default async function Home() {
 
   // ✅ Render komponen
 
-
   return (
     <>
       {/* <BannerMain data={dataKategori} /> */}
       {/* <Banner data={dataKategori} sumView={dataSumView?.totalView ?? 0} /> */}
       <Bannerv2 data={dataKategori} sumView={dataSumView?.totalView ?? 0} />
-      {/* <PopularProducts data={dataListProductBest} />
-      <Rating data={dataGoogleMap?.result} /> */}
+      <ListProducts data={dataListProductBest} title="Produk Terpopuler" />
+      <ListProducts data={dataListProduct.data} title="Produk Terbaru" />
+      <Rating data={dataGoogleMap?.result} />
       <FooterV2 data={dataKategori} />
 
       {/* <Hpo />

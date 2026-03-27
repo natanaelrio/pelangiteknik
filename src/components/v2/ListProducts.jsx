@@ -1,6 +1,6 @@
 'use client'
 
-import styles from "@/components/v2/PopularProducts.module.css"
+import styles from "@/components/v2/ListProducts.module.css"
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
@@ -8,8 +8,8 @@ import { GetProductClient } from '@/controllers/userClient'
 import { toast } from "react-hot-toast"
 import { useStore } from "@/zustand/zustand";
 
-export default function PopularProducts({
-    data,
+export default function ListProducts({
+    data, title
 }) {
     const setIsPenawaran = useStore((state) => state.setIsPenawaran)
     const setDataPenawaran = useStore((state) => state.setDataPenawaran)
@@ -75,7 +75,7 @@ export default function PopularProducts({
             <div className={styles.header}>
 
                 <h2 className={styles.title}>
-                    Produk Genset Populer
+                    {title || "Produk Terpopuler"}
                 </h2>
 
                 <p className={styles.desc}>
