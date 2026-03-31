@@ -1,257 +1,324 @@
 .section {
     position: relative;
-    padding: 110px 8%;
-    background: linear-gradient(180deg,
-            #f5f7fb 0%,
-            #eef2f8 40%,
-            #e5ecf6 70%,
-            #dbe6f5 100%);
+    padding: 100px 8%;
+    background: linear-gradient(180deg, #f8fafc 0%, #eef2f8 50%, #e5ecf6 100%);
     color: #020617;
     overflow: hidden;
 }
 
-/* BLUE GLOW */
-
 .section::before {
     content: "";
     position: absolute;
-    width: 650px;
-    height: 650px;
-    background: radial-gradient(circle,
-            rgba(21, 47, 102, .25),
-            transparent);
-    top: -200px;
-    right: -200px;
-    filter: blur(120px);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(21, 47, 102, 0.2), transparent 70%);
+    top: -180px;
+    right: -180px;
+    filter: blur(100px);
     pointer-events: none;
 }
 
-/* HEADER */
-
 .header {
     text-align: center;
-    margin-bottom: 70px;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 1;
 }
 
 .title {
-    font-size: 48px;
+    font-size: 44px;
     font-weight: 800;
     letter-spacing: -0.5px;
-
-    background: linear-gradient(90deg,
-            #152f66,
-            #2563eb,
-            #38bdf8);
-
+    background: linear-gradient(135deg, #152f66 0%, #2563eb 50%, #38bdf8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 14px 0;
 }
 
 .desc {
     color: #64748b;
-    margin-top: 14px;
-    font-size: 19px;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1.6;
+    max-width: 560px;
+    margin: 0 auto;
 }
-
-
-/* GRID */
 
 .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    gap: 28px;
+    position: relative;
+    z-index: 1;
 }
 
-
-/* CARD */
-
 .card {
-    position: relative;
     background: #ffffff;
-    border-radius: 18px;
-    padding: 26px;
-    transition: all .25s ease;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
 }
 
 .card:hover {
     transform: translateY(-8px);
     border-color: #2563eb;
-
-    box-shadow:
-        0 20px 50px rgba(0, 0, 0, .08),
-        0 0 0 1px rgba(37, 99, 235, .15),
-        0 0 40px rgba(21, 47, 102, .18);
+    box-shadow: 0 20px 50px -12px rgba(37, 99, 235, 0.2);
 }
 
-
-/* BADGE */
-
-.badge {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    font-size: 12px;
-    font-weight: 600;
-    background: #152f66;
-    color: white;
-    padding: 5px 12px;
-    border-radius: 20px;
+.cardLink {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
-
-
-/* IMAGE */
 
 .imageWrap {
-    height: 170px;
+    position: relative;
+    width: 100%;
+    height: 180px;
+    padding: 20px;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .image {
-    max-width: 100%;
-    max-height: 150px;
-    object-fit: contain;
-    transition: transform .35s ease;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card:hover .image {
-    transform: scale(1.05);
+    transform: scale(1.06);
 }
 
-
-/* INFO */
+.badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-size: 11px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #152f66 0%, #1d4ed8 100%);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
 
 .info {
-    margin-top: 18px;
+    padding: 18px 20px 14px;
+    flex: 1;
 }
 
 .name {
-    font-size: 19px;
+    font-size: 16px;
     font-weight: 700;
-    line-height: 1.3;
-}
-
-.category {
-    font-size: 15px;
-    color: #64748b;
-    margin-top: 6px;
+    line-height: 1.4;
+    color: #1e293b;
+    margin: 0 0 10px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .price {
-    margin-top: 12px;
     font-weight: 800;
-    font-size: 22px;
-    color: #152f66;
+    font-size: 20px;
+    background: linear-gradient(135deg, #152f66 0%, #2563eb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
+.penawaranBtn {
+    margin: 0 16px 16px;
+    padding: 13px 16px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #152f66 0%, #1d4ed8 100%);
+    color: white;
+    transition: all 0.25s ease;
+}
 
-/* VIEW MORE */
+.detailBtn {
+    margin: 0 16px 0;
+    padding: 11px 16px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    color: #64748b;
+    border: 1.5px solid #e2e8f0;
+    transition: all 0.25s ease;
+    text-decoration: none;
+}
+
+.detailBtn:hover {
+    border-color: #2563eb;
+    color: #2563eb;
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.detailBtn + .penawaranBtn {
+    margin-top: 10px;
+}
+
+.penawaranBtn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.4);
+}
+
+.penawaranBtn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.penawaranBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
 
 .moreWrap {
     text-align: center;
-    margin-top: 60px;
+    margin-top: 56px;
+    position: relative;
+    z-index: 1;
 }
 
 .viewMore {
-    background: linear-gradient(90deg,
-            #152f66,
-            #2563eb,
-            #38bdf8);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #152f66 0%, #2563eb 100%);
     color: white;
     padding: 16px 36px;
-    border-radius: 40px;
+    border-radius: 50px;
     font-weight: 700;
-    font-size: 17px;
-    cursor: pointer;
-    transition: .25s;
+    font-size: 16px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 16px -4px rgba(37, 99, 235, 0.35);
 }
 
 .viewMore:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(21, 47, 102, .35);
+    box-shadow: 0 12px 30px -6px rgba(37, 99, 235, 0.45);
 }
 
-
-.penawaranBtn {
-    margin-top: 14px;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-
-    background: linear-gradient(90deg,
-            #152f66,
-            #2563eb);
-
-    color: white;
-    transition: .25s;
+@media (max-width: 1100px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
-.penawaranBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(21, 47, 102, .35);
-}
-
-/* RESPONSIVE */
-
-@media (max-width:1000px) {
-
+@media (max-width: 900px) {
     .grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-@media (max-width:600px) {
-
-    .section {
-        padding: 80px 6%;
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-    }
-
-    .card {
-        padding: 18px;
-    }
-
-    /* GAMBAR LEBIH BESAR */
-
-    .imageWrap {
-        height: 180px;
-    }
-
-    .image {
-        max-height: 200px;
-        /* width: auto; */
+        gap: 20px;
     }
 
     .title {
-        font-size: 32px;
+        font-size: 36px;
     }
 
     .desc {
         font-size: 16px;
     }
+}
 
-    .name {
-        font-size: 17px;
+@media (max-width: 600px) {
+    .section {
+        padding: 70px 5%;
     }
 
-    .price {
-        font-size: 19px;
+    .header {
+        margin-bottom: 40px;
     }
 
-    .penawaranBtn {
-        padding: 12px;
+    .title {
+        font-size: 30px;
+    }
+
+    .desc {
         font-size: 15px;
     }
 
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .card {
+        flex-direction: row;
+        border-radius: 16px;
+    }
+
+    .cardLink {
+        flex-direction: row;
+    }
+
+    .imageWrap {
+        width: 140px;
+        height: 140px;
+        flex-shrink: 0;
+    }
+
+    .info {
+        flex: 1;
+        padding: 16px 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .name {
+        font-size: 15px;
+        -webkit-line-clamp: 3;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+
+    .penawaranBtn {
+        margin: 12px 14px 14px;
+        padding: 12px;
+        font-size: 12px;
+    }
+
+    .detailBtn {
+        margin: 14px 14px 0;
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .detailBtn + .penawaranBtn {
+        margin-top: 0;
+    }
+
+    .moreWrap {
+        margin-top: 40px;
+    }
+
+    .viewMore {
+        padding: 14px 28px;
+        font-size: 14px;
+    }
 }
