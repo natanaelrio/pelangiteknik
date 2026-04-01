@@ -1,23 +1,21 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { useSearchParams, usePathname } from 'next/navigation'
 import { useRouter } from 'nextjs-toploader/app'
 import { CiFilter } from 'react-icons/ci'
 import { IoIosArrowDropright } from 'react-icons/io'
-import { MdOutlineSimCardDownload } from 'react-icons/md'
 import toast from 'react-hot-toast'
 
 // Components
 import LoadingList from '@/components/skleton/loadingList'
 import JudulPencarian from '@/components/judulPencarian'
+import ProductCard from '@/components/ProductCard'
 
 // Controllers
 import { GetProductClient } from '@/controllers/userClient'
 
 // Utils
-import convertToRupiah from '@/utils/ConvertRupiah'
 import useWindowDimensions from '@/utils/getWindowDimensions'
 import { Slugify } from '@/utils/slugify'
 import { UnslugifyMerek } from '@/utils/unSlugifyMerek'
@@ -61,75 +59,6 @@ function getTotalCount(res, pathname, baseCategory) {
         return res?.totalMaxProduct || 0
     }
     return res?.totalProduct || 0
-}
-
-/**
- * ProductCard Component - Renders individual product card
- */
-function ProductCard({ product, index, angka, loadingSlug, onPenawaran }) {
-    const productType = product?.productType?.toUpperCase() || ''
-    const isThisLoading = loadingSlug === product?.slugProduct
-
-    return (
-        <div className={styles.kotak}>
-            <div>
-                <Link href={`/product/${product?.slugProduct}`}>
-                    <div className={styles.gambarbawah}>
-                        <Image
-                            src={
-                                product?.imageProductUtama?.secure_url ||
-                                product?.imageProductUtama ||
-                                `${process.env.NEXT_PUBLIC_URL}/notfoundicon.jpg`
-                            }
-                            alt={product?.productName}
-                            width={250}
-                            height={250}
-                        />
-                        <div className={styles.typemerek}>
-                            <span
-                                className={styles.fMerek}
-                                dangerouslySetInnerHTML={{
-                                    __html: product?.highlight?.productType || productType,
-                                }}
-                            />
-                        </div>
-                    </div>
-                    <div
-                        className={styles.name}
-                        dangerouslySetInnerHTML={{
-                            __html: product?.highlight?.productName || product?.productName,
-                        }}
-                    />
-                    <div className={styles.price}>
-                        {convertToRupiah(Number(product?.productPriceFinal))}
-                    </div>
-                </Link>
-            </div>
-
-            {angka && product?.length && (
-                <Link href={`/product/${product?.slugProduct}`}>
-                    <div className={styles.angka}>
-                        <span className={styles.satu}>TOP {index + 1}</span>
-                        <span className={styles.dua} />
-                    </div>
-                </Link>
-            )}
-
-            <div className={styles.bawahdetail}>
-                <button
-                    disabled={isThisLoading}
-                    className={styles.penawaran}
-                    onClick={() => onPenawaran(product)}
-                >
-                    <MdOutlineSimCardDownload /> &nbsp;
-                    {isThisLoading ? 'Loading...' : 'Surat Penawaran'}
-                </button>
-                <div className={styles.penawaran}>
-                    <Link href={`/product/${product?.slugProduct}`}>Detail Product</Link>
-                </div>
-            </div>
-        </div>
-    )
 }
 
 export default function ListProductUser({ angka, Lfilter, res, t, q }) {
@@ -276,9 +205,9 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
         const PAGE = PAGE_SIZE
         const maxLimit =
             baseCategory === '/category/' ? res?.data?._count?.listProducts :
-            isSearchPage ? res?.totalMaxProduct :
-            isProductPage ? PAGE * MAX_PRODUCT_PAGES :
-            Infinity
+                isSearchPage ? res?.totalMaxProduct :
+                    isProductPage ? PAGE * MAX_PRODUCT_PAGES :
+                        Infinity
 
         if (PAGE * t > maxLimit) return
 
@@ -297,14 +226,14 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
     const totalCount = getTotalCount(res, pathname, baseCategory)
     const shouldShowLoadMore =
         baseCategory === '/category/' ? displayCount < res?.data?._count?.listProducts :
-        isSearchPage ? displayCount < res?.totalMaxProduct :
-        isProductPage ? displayCount < PAGE_SIZE * MAX_PRODUCT_PAGES :
-        false
+            isSearchPage ? displayCount < res?.totalMaxProduct :
+                isProductPage ? displayCount < PAGE_SIZE * MAX_PRODUCT_PAGES :
+                    false
     const hasReachedEnd = PAGE_SIZE * t > (
         baseCategory === '/category/' ? res?.data?._count?.listProducts :
-        isSearchPage ? res?.totalMaxProduct :
-        isProductPage ? PAGE_SIZE * MAX_PRODUCT_PAGES :
-        Infinity
+            isSearchPage ? res?.totalMaxProduct :
+                isProductPage ? PAGE_SIZE * MAX_PRODUCT_PAGES :
+                    Infinity
     )
 
 
@@ -371,7 +300,7 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                     {/* Products Grid */}
                     <div className={styles.listproduct}>
                         {/* Search Info */}
-                        {Lfilter && (
+                        {!isProductPage && Lfilter && (
                             <div className={styles.searchInfo}>
                                 {res?.suggest?.[0] ? (
                                     <>
@@ -394,7 +323,8 @@ export default function ListProductUser({ angka, Lfilter, res, t, q }) {
                                             {displayCount} dari {totalCount}
                                         </>
                                     )
-                                )}
+                                )
+                                }
                             </div>
                         )}
 

@@ -1,114 +1,87 @@
 .container {
-    display: flex;
-    justify-content: center;
     width: 100%;
-    background-color: var(--colorsekunder);
-    color: var(--colorthrid);
+    background: linear-gradient(135deg, #152f66 0%, #0a1628 50%, #152f66 100%);
+    color: #ffffff;
+    padding: 80px 0;
 }
 
-.dalamkontainer {
-    width: 1400px;
+.inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
 }
 
-.banner {
-    display: flex;
-    gap: 30px;
-}
-
-.gambar {
-    width: 50%;
-    height: 400px;
-    position: absolute;
-    right: 0;
-    /* background-color: red; */
-}
-
-.gambar img {
-    width: 100%;
-    height: 100%;
-    /* position: absolute; */
-    /* object-fit: contain; */
-    /* height: auto; */
-    border-radius: 0 0 0 20px;
-}
-
-.banner .text {
+.content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 550px;
-    height: 400px;
-    padding: 20px;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
 }
 
-.banner .judul {
-    font-weight: 700;
-    margin-bottom: 10px;
-    font-size: 2rem;
+.badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-.banner .desc {
+.title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0;
+    background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1rem;
     font-weight: 500;
-    font-size: var(--font1)
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+    letter-spacing: 1px;
 }
 
-
-
-@media only screen and (max-width: 1000px) {
-
-    .banner {
-        display: flex;
-        flex-direction: column-reverse;
-        gap: 20px;
-    }
-
-    .banner .gambar {
-        width: 100%;
-    }
-
-    .gambar {
-        position: inherit;
-        height: auto;
-    }
-
-
-    .gambar img {
-        height: auto;
-    }
-
-    .banner .text {
-        width: 100%;
-        height: auto;
-    }
-
-    .banner .gambar img {
-        width: 100%;
-        object-position: center;
-        object-fit: contain;
-    }
-
-    .banner .judul {
-        font-size: 1.5rem;
-    }
-
-    .banner .text {
-        width: 100%;
-    }
+.description {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    max-width: 600px;
 }
 
+.decorLine {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.3));
+    border-radius: 2px;
+    margin-top: 8px;
+}
 
-@media only screen and (max-width: 480px) {
-
-    .gambar img {
-        border-radius: 0 0 0 0;
+@media only screen and (max-width: 640px) {
+    .container {
+        padding: 50px 0;
     }
 
-    .banner .judul {
+    .inner {
+        padding: 0 20px;
+    }
+
+    .badge {
+        font-size: 0.65rem;
+        padding: 6px 14px;
+    }
+
+    .description {
         font-size: 1rem;
-    }
-
-    .banner .desc {
-        font-size: var(--font1mobile);
     }
 }

@@ -62,8 +62,9 @@
 
 .header {
     width: 100%;
-    background: var(--colormain);
-    background-image: url("/ramadhan.webp");
+    /* background: var(--colormain); */
+    background: linear-gradient(135deg, var(--colormain) 0%, #020617 100%);
+    /* background-image: url("/ramadhan.webp"); */
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: cover;

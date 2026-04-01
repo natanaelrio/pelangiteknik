@@ -68,7 +68,7 @@ export default async function Page({ params }) {
     return (
         <div>
             <BannerKategori data={kategori} />
-            <Judul judul={kategori.category} />
+            {/* <Judul judul={kategori.category} /> */}
             <Category data={kategori.categoryProduct} kondisi={true} />
         </div>
     );

@@ -24,6 +24,7 @@
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -303,13 +304,14 @@
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-.bawah .filternya > div:first-child {
+.bawah .filternya>div:first-child {
     font-weight: 600;
     color: var(--colormain);
     flex: 1;
@@ -401,9 +403,9 @@
     top: 0;
 }
 
-.bawah .name {
-    font-weight: 600;
-    font-size: 14px;
+.name {
+    font-weight: 700;
+    font-size: 15px;
     color: var(--colorthrid);
     line-height: 1.4;
     display: -webkit-box;
@@ -411,16 +413,28 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     transition: color 0.3s ease;
+    letter-spacing: -0.01em;
 }
 
 .kotak:hover .name {
     color: var(--colormain);
 }
 
-.bawah .listproduct .price {
+.price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
     color: var(--colormain);
     font-weight: 800;
-    font-size: 16px;
+    font-size: 18px;
+    margin-top: auto;
+}
+
+.price::before {
+    /* content: 'Rp'; */
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.7;
 }
 
 .bawahdetail {
@@ -530,6 +544,7 @@
 
 
 .angkatotal {
+    margin-top: 20px;
     padding: 20px 24px;
     font-weight: 600;
     color: var(--colorthrid);
