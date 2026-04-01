@@ -24,6 +24,7 @@ import { sendGAEventL } from '@/lib/ga';
 import HandleKonversiWA from '@/utils/HandleKonversiWA';
 import Image from 'next/image';
 import ProductTags from './productTags';
+import { trackEvent } from '@/utils/facebookPixel';
 
 export default function Product({ data, season }) {
     // console.log(season);
