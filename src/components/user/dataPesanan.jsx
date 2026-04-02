@@ -126,7 +126,7 @@ export default function DataPesanan({ data }) {
                                     { text: "Harga Satuan", style: "tableHeader" },
                                     { text: "Diskon", style: "tableHeader" },
                                     { text: "Total Harga", style: "tableHeader" },
-                                ], 
+                                ],
                                 ...itemsData,
                                 [
                                     { text: 'TOTAL TAGIHAN', style: "tableHeader" },
@@ -221,7 +221,7 @@ export default function DataPesanan({ data }) {
                                                         src={itemData?.image || 'https://www.pelangiteknik.com/notfoundicon.jpg'}
                                                         fill
                                                         style={{ objectFit: 'cover', borderRadius: 'var(--border-radius)' }}
-                                                        alt={itemData?.productName} 
+                                                        alt={itemData?.productName}
                                                     />
                                                 </div>
                                                 <div className={styles.textDetail}>
@@ -235,7 +235,7 @@ export default function DataPesanan({ data }) {
                                                     )}
                                                 </div>
                                             </div>
-                                            
+
                                             <div className={styles.tengah}>
                                                 <div className={styles.qty}>
                                                     <PiCodesandboxLogoDuotone size={18} /> Qty: {itemData?.quantity}
