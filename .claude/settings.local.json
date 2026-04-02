@@ -3,11 +3,5 @@
     "allow": [
       "Bash(pnpm add:*)"
     ]
-  },
-  "env": {
-    "ANTHROPIC_BASE_URL": "https://openrouter.ai/api",
-    "ANTHROPIC_AUTH_TOKEN": "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",
-    "ANTHROPIC_API_KEY": "",
-    "ANTHROPIC_MODEL": "minimax/minimax-m2.5"
   }
 }
