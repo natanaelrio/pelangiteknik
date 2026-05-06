@@ -9,54 +9,71 @@ export const authOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
             authorization: {
                 params: {
-                    access_type: "offline",  // ini penting untuk dapat refresh_token
-                    prompt: "consent"        // paksa Google kasih refresh_token setiap login
+                    access_type: "offline",
+                    prompt: "consent"
                 }
             }
         }),
     ],
+
     session: {
-        strategy: "jwt", // Menggunakan JWT untuk session
+        strategy: "jwt",
     },
+
     jwt: {
-        secret: process.env.NEXTAUTH_SECRET, // Tambahkan secret untuk JWT
+        secret: process.env.NEXTAUTH_SECRET,
     },
-    // Callbacks opsional untuk mengontrol token atau session behavior
+
     callbacks: {
-        async signIn({ account, profile }) {
-            if (!profile?.email) {
-                return null
-            }
+
+        async signIn({ profile }) {
+            if (!profile?.email) return false;
 
             await UpsertUser({
-                "email": `${profile?.email}`,
-                "avatar": `${profile?.picture}`,
-                "IDCart": randomUUID(),
-                "name": `${profile?.name}`
-            })
-            return true
+                email: profile.email,
+                avatar: profile.picture,
+                IDCart: randomUUID(),
+                name: profile.name
+            });
+
+            return true;
         },
-        async jwt({ token, account, user }) {
-            // console.log(token);
-            // console.log(account);
 
-            const data = await GetIDCart(token.email)
+        async jwt({ token, account }) {
+            // ambil cart user
+            if (token?.email) {
+                const data = await GetIDCart(token.email);
+                token.id = data?.IDCart;
+            }
 
-            // Tambahkan informasi user atau account ke dalam JWT jika ada
+            // saat login pertama
             if (account) {
                 token.accessToken = account.access_token;
-                token.id = data.IDCart
+
+                // =========================
+                // AUTO EXPIRE JAM 00:00
+                // =========================
+                const now = new Date();
+
+                const midnight = new Date();
+                midnight.setHours(24, 0, 0, 0); // jam 00:00 besok
+
+                const maxAge = Math.floor((midnight - now) / 1000);
+
+                token.exp = Math.floor(Date.now() / 1000) + maxAge;
             }
+
             return token;
         },
-        async session({ session, token }) {
-            // console.log(token);
-            // console.log(session);
 
-            // Tambahkan akses token dari JWT ke dalam session
+        async session({ session, token }) {
             session.accessToken = token.accessToken;
-            session.user.id = token.id
+            session.user.id = token.id;
+
+            // kirim expiry ke frontend
+            session.exp = token.exp;
+
             return session;
         },
     }
-}
+};

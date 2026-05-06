@@ -247,18 +247,6 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
                   <Image src={`${process.env.NEXT_PUBLIC_URL}/logo2.svg`} height={80} width={180} alt="logo" />
                 </div>
               </Link>
-              {/* <Link href="/product" className={styles.text3}>
-              <div className={styles.about}>List Product</div>
-            </Link>
-
-            <div className={styles.text1}>
-              <Link href={'/category'}>
-                Kategori
-              </Link>
-            </div> */}
-              {/* 
-            <Link href="/blog" className={styles.text1}><div className={styles.about}>Blog</div></Link>
-            <Link href="/about" className={styles.text3}><div className={styles.about}>Tentang Kami</div></Link> */}
             </div>
             {/* 🔎 Input pencarian */}
             <div className={styles.pencariandeskop}>
@@ -267,8 +255,6 @@ export default function Header({ data, tombolwa, ListSearch, dataPesanan }) {
 
             {/* DESKTOP MENU */}
             <div className={styles.desktopMenu}>
-
-
 
               {/* ICON GROUP */}
               <div className={styles.iconGroup}>
