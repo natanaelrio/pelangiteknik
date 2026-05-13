@@ -23,12 +23,9 @@ const nextConfig = {
             'googleusercontent.com',
             'res.cloudinary.com',
             'cloudinary.com'
-        ], remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'www.pelangiteknik.com'
-            }
-        ]
+        ], images: {
+            unoptimized: true,
+        },
     }, async headers() {
         return [
             {
