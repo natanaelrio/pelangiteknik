@@ -25,7 +25,7 @@ const nextConfig = {
             'cloudinary.com'
         ], images: {
             unoptimized: true,
-        },
+        }
     }, async headers() {
         return [
             {
