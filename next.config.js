@@ -23,9 +23,7 @@ const nextConfig = {
             'googleusercontent.com',
             'res.cloudinary.com',
             'cloudinary.com'
-        ], images: {
-            unoptimized: true,
-        }
+        ],
     }, async headers() {
         return [
             {
