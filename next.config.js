@@ -23,7 +23,12 @@ const nextConfig = {
             'googleusercontent.com',
             'res.cloudinary.com',
             'cloudinary.com'
-        ],
+        ], remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'www.pelangiteknik.com'
+            }
+        ]
     }, async headers() {
         return [
             {
