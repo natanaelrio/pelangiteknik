@@ -17,6 +17,7 @@ import { PiNotepadBold } from "react-icons/pi"
 import { Slugify } from "@/utils/slugify"
 import { useStore } from "@/zustand/zustand"
 import LoginGoogle from "@/components/loginGoogle"
+import { initFacebookPixel } from '@/utils/facebookPixel'
 
 export default function Bannerv2({ data, pathName, sumView }) {
 
@@ -35,6 +36,10 @@ export default function Bannerv2({ data, pathName, sumView }) {
         { loop: true },
         [Autoplay({ delay: 3500, stopOnInteraction: false })]
     )
+
+    useEffect(() => {
+        initFacebookPixel()
+    }, [])
 
 
     /* EMBLA */
