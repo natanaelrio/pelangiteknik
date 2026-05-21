@@ -42,6 +42,19 @@ export default function Bannerv2({ data, pathName, sumView }) {
     }, [])
 
 
+    useEffect(() => {
+        const fetchData = async () => {
+            const { trackEvent } = await import('@/utils/facebookPixel');
+            process.env.NODE_ENV === 'production' && trackEvent("ViewProduct", {
+                content_name: 'Homepage',
+                content_category: 'Banner',
+                value: Number(sumView),
+                currency: "IDR"
+            });
+        };
+        fetchData();
+    }, []);
+
     /* EMBLA */
 
     useEffect(() => {
