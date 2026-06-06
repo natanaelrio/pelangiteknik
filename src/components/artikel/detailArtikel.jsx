@@ -90,7 +90,7 @@ export default function DetailArtikel({ data }) {
                     </div>
                 </footer>
             </article>
-            <Limited />
+            {/* <Limited /> */}
         </>
     );
 }
