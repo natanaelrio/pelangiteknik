@@ -7,6 +7,7 @@ import { secondsUntilMidnight } from "@/utils/secondsUntilMidnight";
 import Bannerv2 from "@/components/v2/Bannerv2";
 import FooterV2 from "@/components/v2/Footerv2";
 import ListProducts from "@/components/v2/ListProducts";
+import HomeV3 from "@/components/v3/homeV3";
 
 export const metadata = {
   title: "Pelangi Teknik | Pusat Pembelian Peralatan Genset NO 1",
