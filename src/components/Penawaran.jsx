@@ -194,7 +194,7 @@ ${randomPenyemangat.hashtag}`
                     sales_number: NumberSales.numberForm,
                 })
                 await HandleNotifikasiWA('120363021369281320@g.us', pesanWA)
-                await HandleNotifikasiPerson(`${NumberSales?.numberWA?.replace("+", "")}@c.us`, 'cek grup PD, ada penawaran')
+                await HandleNotifikasiPerson(`${NumberSales?.numberWA?.replace("+", "")}@c.us`, 'cek grup sales PT, ada penawaran')
             } catch (err) {
                 console.warn('Tracking error:', err)
             }
