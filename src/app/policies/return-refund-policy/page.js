@@ -1,4 +1,4 @@
-import RetrunRefundPolicy from "@/components/return-refund-policy";
+import RetrunRefundPolicy from "@/components/policies/return-refund-policy";
 
 export const metadata = {
     title: 'Kebijakan Pengembalian & Pengembalian Dana',

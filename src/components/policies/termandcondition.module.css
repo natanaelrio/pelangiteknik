@@ -6,7 +6,7 @@
 
 
 .termsConditions {
-    width: var(--max-width);
+    width: 750px;
     margin: 20px;
     line-height: 1.6;
     background-color: var(--colorsekunder);

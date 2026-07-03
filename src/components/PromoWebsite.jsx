@@ -2,6 +2,7 @@
 import styles from '@/components/PromoWebsite.module.css'
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function PromoWebsite() {
     const [show, setShow] = useState(true);
@@ -33,9 +34,16 @@ export default function PromoWebsite() {
                 <div className={styles.content}>
                     <h2>Promo Belanja Website</h2>
                     <p>
-                        Belanja melalui website dan dapatkan{' '}
+                        Belanja melalui website dan dapatkan{' '}<br />
                         <strong>Voucher 3%</strong> + <strong>E-Money Rp100.000</strong>
                     </p>
+                    {/* <p className={styles.termsText}>
+                        *S&K: Min transaksi Tsuzumi Rp 10JT (Gratis Ongkir Jabodetabek) atau Rp 15JT (Diskon 3%)
+                    </p> */}
+                    <Link target="_blank" href="/policies/promo-policy" className={styles.termsLink}>
+                        Lihat Syarat & Ketentuan
+                    </Link>
+                    <br />
                     <button className={styles.button} onClick={() => setShow(false)}>
                         Mengerti
                     </button>

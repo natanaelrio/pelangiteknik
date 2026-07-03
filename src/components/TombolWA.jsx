@@ -39,7 +39,7 @@ export default function TombolWA() {
             <div className={styles.tombolwadalam}>
                 <Image src={`${process.env.NEXT_PUBLIC_URL}/whatsapp.webp`} height={25} width={25} alt="logo" />
                 <div className={styles.wakuy}>
-                    <span className={styles.wadiskon}>Diskon 3%</span>
+                    <span className={styles.wadiskon}>Diskon 3% [SK]</span>
                     <span>{isLoadingWA ? 'Loading...' : 'WhatsApp'}</span>
                 </div>
             </div>

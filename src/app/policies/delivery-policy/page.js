@@ -1,4 +1,4 @@
-import DeliveryPolicy from "@/components/deliveryPolicy";
+import DeliveryPolicy from "@/components/policies/deliveryPolicy";
 
 export const metadata = {
     title: 'Kebijakan Pengiriman (Delivery Policy)',

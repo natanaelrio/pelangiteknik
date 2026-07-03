@@ -79,6 +79,7 @@ export default function Footer({ data }) {
                 <Link href="/policies/privacy-policy">Kebijakan Privasi</Link>
                 <Link href="/policies/return-refund-policy">Kebijakan Pengembalian & Pengembalian Dana</Link>
                 <Link href="/policies/delivery-policy">Kebijakan Pengiriman</Link>
+                <Link href="/policies/promo-policy">Kebijakan Promo</Link>
                 <Link href="/contact">Hubungi Kami</Link>
                 <div className={styles.sosmed}>
                   <FaFacebookSquare /> Facebook

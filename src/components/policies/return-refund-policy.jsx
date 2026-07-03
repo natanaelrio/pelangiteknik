@@ -1,4 +1,4 @@
-import styles from '@/components/termandcondition.module.css'
+import styles from '@/components/policies/termandcondition.module.css'
 
 export default function RetrunRefundPolicy() {
     return (

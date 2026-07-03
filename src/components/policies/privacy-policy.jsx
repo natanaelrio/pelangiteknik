@@ -1,9 +1,9 @@
-import styles from '@/components/privacy-policy.module.css'
+import styles from '@/components/policies/termandcondition.module.css'
 
 export default function PrivacyPolicy() {
     return (
         <div className={styles.container}>
-            <div className={styles.privacyPolicy}>
+            <div className={styles.termsConditions}>
                 <div className={styles.judul}>Kebijakan Privasi </div>
                 <p>Di <strong>PT. Pelangi Teknik Indonesia</strong>, kami berkomitmen untuk melindungi privasi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, mengungkapkan, dan melindungi informasi pribadi Anda saat Anda mengunjungi situs web kami dan melakukan pembelian melalui platform e-commerce kami untuk genset.</p>
 

@@ -14,7 +14,7 @@ export default function ProductBeliMobile({ data, HandlePenawaran, handleBeliSek
         <div className={styles.container}>
             <div className={styles.badge}>
                 <span className={styles.badgeIcon}>🔥</span>
-                Diskon 3%
+                Diskon 3% [SK]
             </div>
 
             <div className={styles.info}>
