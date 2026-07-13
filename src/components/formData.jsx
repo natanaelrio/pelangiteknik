@@ -402,6 +402,7 @@ export default function FormData({ data, dataBank, email, idCart, cities, provin
                 diskon: kondisiV?.diskon ? kondisiV?.diskon : 0,
                 diskon_nominal: kondisiV?.nominal ? kondisiV?.nominal : 0,
                 nota_url: resPaperID?.data?.pdf_url_short || '',
+                link_payment: resPaperID?.data?.payper_url ? 'https://' + resPaperID?.data?.payper_url : '',
             }, FormItemDetailDataBase);
 
             // process.env.NODE_ENV === 'production' && await UpserOngkosKirim({
