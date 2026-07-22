@@ -412,7 +412,6 @@ export default function FormData({ data, dataBank, email, idCart, cities, provin
             //     "quantity": 1
             // })
 
-
             setLoading(false);
             router2.refresh();
         } catch (e) {
@@ -566,7 +565,7 @@ export default function FormData({ data, dataBank, email, idCart, cities, provin
                                                         </div>
                                                     </div>
                                                     <div className={styles.radioPrice}>
-                                                        {opt.value.harga === 0 ? 'Gratis' : convertToRupiah(opt.value.harga)}
+                                                        {opt.value.harga === 0 ? '' : convertToRupiah(opt.value.harga)}
                                                     </div>
                                                 </label>
                                             ))}
